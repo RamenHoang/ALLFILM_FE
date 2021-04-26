@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './routers/Home.js';
 import GetTicket from './routers/Home.js';
+import Details from './routers/Details';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import './libs/AlertBox/style.css';
@@ -311,6 +312,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/home" component={Home}></Route>
+          <Route path="/:id/details" component={Details}></Route>
           <Route path="/getTicket" conponent={GetTicket}></Route>
           <Route
             path="/" exact

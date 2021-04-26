@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import '../css/home.css';
 import '../css/reviewFilm.css';
 import banner from '../img/banner.jpg';
@@ -77,8 +78,35 @@ const listReview = [
 const listEvent = [
   {
     name: 'Happy Day Happy Popcorn',
-    description: 'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
-    image: ''
+    description:
+      'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
+    image:
+      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
+    url: '/khuyen-mai/happy-day-happy-popcorn',
+  },
+  {
+    name: 'Happy Day Happy Popcorn',
+    description:
+      'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
+    image:
+      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
+    url: '/khuyen-mai/happy-day-happy-popcorn',
+  },
+  {
+    name: 'Happy Day Happy Popcorn',
+    description:
+      'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
+    image:
+      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
+    url: '/khuyen-mai/happy-day-happy-popcorn',
+  },
+  {
+    name: 'Happy Day Happy Popcorn',
+    description:
+      'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
+    image:
+      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
+    url: '/khuyen-mai/happy-day-happy-popcorn',
   },
 ];
 
@@ -123,7 +151,6 @@ const UserDetail = () => {
                 <img src={data.image} alt="phim"></img>
               </div>
               <div className="button"></div>
-              <div className="hover_film"></div>
               <p>{data.title}</p>
               <p className="vn">{data.subTitle}</p>
             </div>
@@ -179,7 +206,6 @@ const UserDetail = () => {
                     <img src={phim2} alt="phim"></img>
                   </div>
                 </a>
-
                 <div className="movie-thum">
                   <h5>
                     <a href="">
@@ -205,288 +231,21 @@ const UserDetail = () => {
           <div className="title-block">
             <a href="">TIN KHUYẾN MÃI</a>
           </div>
-
           <div className="flex no-space-between">
-            <div class="promotion-item-home">
-              <a href="/khuyen-mai/happy-day-happy-popcorn">
-                <img src={km1} alt="km"></img>
-                <div class="overlay">
-                  <h2>Happy Day Happy Popcorn</h2>
-                  <p>
-                    Vào thứ 3 hàng tuần – Happy Day, ngoài ưu
-                    đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01
-                    bắp sẽ được TẶNG NGAY 01 NƯỚC.
-                  </p>
-                  <a
-                    href="/khuyen-mai/happy-day-happy-popcorn"
-                    class="btn secondary-white"
-                  >
-                    chi tiết
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div class="promotion-item-home">
-              <a href="/khuyen-mai/happy-day-happy-popcorn">
-                <img src={km2} alt="km"></img>
-                <div class="overlay">
-                  <h2>Happy Day Happy Popcorn</h2>
-                  <p>
-                    <span>
-                      <span>
-                        <span>
-                          <span>
-                            Vào <strong>thứ 3 hàng tuần</strong> – Happy Day,
-                            ngoài ưu đãi giá vé <strong>CHỈ TỪ 45K</strong>, khi
-                            các Stars mua 01 bắp sẽ được{' '}
-                            <strong>TẶNG NGAY 01 NƯỚC</strong>.
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </p>
-                  <a
-                    href="/khuyen-mai/happy-day-happy-popcorn"
-                    class="btn secondary-white"
-                  >
-                    chi tiết
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div class="promotion-item-home">
-              <a href="/khuyen-mai/happy-day-happy-popcorn">
-                <img src={km3} alt="km"></img>
-                <div class="overlay">
-                  <h2>Happy Day Happy Popcorn</h2>
-                  <p>
-                    <span>
-                      <span>
-                        <span>
-                          <span>
-                            Vào <strong>thứ 3 hàng tuần</strong> – Happy Day,
-                            ngoài ưu đãi giá vé <strong>CHỈ TỪ 45K</strong>, khi
-                            các Stars mua 01 bắp sẽ được{' '}
-                            <strong>TẶNG NGAY 01 NƯỚC</strong>.
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </p>
-                  <a
-                    href="/khuyen-mai/happy-day-happy-popcorn"
-                    class="btn secondary-white"
-                  >
-                    chi tiết
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div class="promotion-item-home">
-              <a href="/khuyen-mai/happy-day-happy-popcorn">
-                <img src={km1} alt="km"></img>
-                <div class="overlay">
-                  <h2>Happy Day Happy Popcorn</h2>
-                  <p>
-                    <span>
-                      <span>
-                        <span>
-                          <span>
-                            Vào <strong>thứ 3 hàng tuần</strong> – Happy Day,
-                            ngoài ưu đãi giá vé <strong>CHỈ TỪ 45K</strong>, khi
-                            các Stars mua 01 bắp sẽ được{' '}
-                            <strong>TẶNG NGAY 01 NƯỚC</strong>.
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </p>
-                  <a
-                    href="/khuyen-mai/happy-day-happy-popcorn"
-                    class="btn secondary-white"
-                  >
-                    chi tiết
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div class="promotion-item-home">
-              <a href="/khuyen-mai/happy-day-happy-popcorn">
-                <img src={km3} alt="km"></img>
-                <div class="overlay">
-                  <h2>Happy Day Happy Popcorn</h2>
-                  <p>
-                    <span>
-                      <span>
-                        <span>
-                          <span>
-                            Vào <strong>thứ 3 hàng tuần</strong> – Happy Day,
-                            ngoài ưu đãi giá vé <strong>CHỈ TỪ 45K</strong>, khi
-                            các Stars mua 01 bắp sẽ được{' '}
-                            <strong>TẶNG NGAY 01 NƯỚC</strong>.
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </p>
-                  <a
-                    href="/khuyen-mai/happy-day-happy-popcorn"
-                    class="btn secondary-white"
-                  >
-                    chi tiết
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div class="promotion-item-home">
-              <a href="/khuyen-mai/happy-day-happy-popcorn">
-                <img src={km1} alt="km"></img>
-                <div class="overlay">
-                  <h2>Happy Day Happy Popcorn</h2>
-                  <p>
-                    <span>
-                      <span>
-                        <span>
-                          <span>
-                            Vào <strong>thứ 3 hàng tuần</strong> – Happy Day,
-                            ngoài ưu đãi giá vé <strong>CHỈ TỪ 45K</strong>, khi
-                            các Stars mua 01 bắp sẽ được{' '}
-                            <strong>TẶNG NGAY 01 NƯỚC</strong>.
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </p>
-                  <a
-                    href="/khuyen-mai/happy-day-happy-popcorn"
-                    class="btn secondary-white"
-                  >
-                    chi tiết
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div class="promotion-item-home">
-              <a href="/khuyen-mai/happy-day-happy-popcorn">
-                <img src={km3} alt="km"></img>
-                <div class="overlay">
-                  <h2>Happy Day Happy Popcorn</h2>
-                  <p>
-                    <span>
-                      <span>
-                        <span>
-                          <span>
-                            Vào <strong>thứ 3 hàng tuần</strong> – Happy Day,
-                            ngoài ưu đãi giá vé <strong>CHỈ TỪ 45K</strong>, khi
-                            các Stars mua 01 bắp sẽ được{' '}
-                            <strong>TẶNG NGAY 01 NƯỚC</strong>.
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </p>
-                  <a
-                    href="/khuyen-mai/happy-day-happy-popcorn"
-                    class="btn secondary-white"
-                  >
-                    chi tiết
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div class="promotion-item-home">
-              <a href="/khuyen-mai/happy-day-happy-popcorn">
-                <img src={km1} alt="km"></img>
-                <div class="overlay">
-                  <h2>Happy Day Happy Popcorn</h2>
-                  <p>
-                    <span>
-                      <span>
-                        <span>
-                          <span>
-                            Vào <strong>thứ 3 hàng tuần</strong> – Happy Day,
-                            ngoài ưu đãi giá vé <strong>CHỈ TỪ 45K</strong>, khi
-                            các Stars mua 01 bắp sẽ được{' '}
-                            <strong>TẶNG NGAY 01 NƯỚC</strong>.
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </p>
-                  <a
-                    href="/khuyen-mai/happy-day-happy-popcorn"
-                    class="btn secondary-white"
-                  >
-                    chi tiết
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div class="promotion-item-home">
-              <a href="/khuyen-mai/happy-day-happy-popcorn">
-                <img src={km3} alt="km"></img>
-                <div class="overlay">
-                  <h2>Happy Day Happy Popcorn</h2>
-                  <p>
-                    <span>
-                      <span>
-                        <span>
-                          <span>
-                            Vào <strong>thứ 3 hàng tuần</strong> – Happy Day,
-                            ngoài ưu đãi giá vé <strong>CHỈ TỪ 45K</strong>, khi
-                            các Stars mua 01 bắp sẽ được{' '}
-                            <strong>TẶNG NGAY 01 NƯỚC</strong>.
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </p>
-                  <a
-                    href="/khuyen-mai/happy-day-happy-popcorn"
-                    class="btn secondary-white"
-                  >
-                    chi tiết
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div class="promotion-item-home">
-              <a href="/khuyen-mai/happy-day-happy-popcorn">
-                <img src={km4} alt="km"></img>
-                <div class="overlay">
-                  <h2>Happy Day Happy Popcorn</h2>
-                  <p>
-                    <span>
-                      <span>
-                        <span>
-                          <span>
-                            Vào <strong>thứ 3 hàng tuần</strong> – Happy Day,
-                            ngoài ưu đãi giá vé <strong>CHỈ TỪ 45K</strong>, khi
-                            các Stars mua 01 bắp sẽ được{' '}
-                            <strong>TẶNG NGAY 01 NƯỚC</strong>.
-                          </span>
-                        </span>
-                      </span>
-                    </span>
-                  </p>
-                  <a
-                    href="/khuyen-mai/happy-day-happy-popcorn"
-                    class="btn secondary-white"
-                  >
-                    chi tiết
-                  </a>
-                </div>
-              </a>
-            </div>
+            {listEvent.map((data, index) => (
+              <div class="promotion-item-home">
+                <a href={data.url}>
+                  <img src={data.image} alt="km"></img>
+                  <div class="overlay">
+                    <h2>{data.name}</h2>
+                    <p>{data.description}</p>
+                    <a href={data.url} class="btn secondary-white">
+                      chi tiết
+                    </a>
+                  </div>
+                </a>
+              </div>
+            ))}
           </div>
         </div>
 
