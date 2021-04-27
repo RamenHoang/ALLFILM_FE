@@ -6,17 +6,17 @@ import {
   Button,
   Divider,
   DatePicker,
-  Select,
-  Modal,
+  Select
 } from 'antd';
 import { StarFilled, ClockCircleOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
 const info = {
   title: 'Lật mặt 24h',
   type: 'Hành động',
   country: 'VietNam',
   director: 'Lý Hải',
-  actors: 'Ốc Thanh Vân, Huỳnh Đông, Mạc Văn Khoa, Võ Thành Tâm',
+  actors: 'Ốc Thanh Vân, Huỳnh Đông, Mạc Văn Khoa, Võ Thành Tâm, Ốc Thanh Vân, Huỳnh Đông, Mạc Văn Khoa, Võ Thành Tâm',
   date: '14/4/2021',
   image:
     'https://www.galaxycine.vn/media/2021/3/4/300-lat-mat_1614842112584.jpg',
@@ -93,7 +93,7 @@ const Details = () => {
     setIsModalVisible(false);
   };
 
-  const onClickRegister = () => {};
+  const onClickRegister = () => { };
   const getDate = (date, dateString) => {
     console.log(date, dateString);
   };
@@ -127,12 +127,12 @@ const Details = () => {
       </Breadcrumb>
       <div className="content-event">
         <div className="content-section">
-          <div className="first" onClick={showModal}>
-            <div className="play-video">
+          <div className="first">
+            <div className="play-video" onClick={showModal}>
               <img
                 className="img-primary"
-                src={info.image}
-              ></img>
+                src={info.image} alt="img_film">
+              </img>
               <div className="play-bt"></div>
             </div>
 
@@ -155,11 +155,11 @@ const Details = () => {
                   <p>Thể loại</p>
                   <h3>{info.type}</h3>
                 </div>
-                <div>
+                <div className="line">
                   <p>Quốc gia</p>
                   <h3>{info.country}</h3>
                 </div>
-                <div>
+                <div className="line">
                   <p>Đạo diễn</p>
                   <h3>{info.director}</h3>
                 </div>
@@ -204,7 +204,7 @@ const Details = () => {
                   </Option>
                 ))}
               </Select>
-              <DatePicker style={{ width: '32%' }} onChange={getDate} />
+              <DatePicker value={moment} style={{ width: '32%' }} onChange={getDate} />
               <Select
                 showSearch
                 style={{ width: '32%' }}
@@ -248,7 +248,7 @@ const Details = () => {
           <Divider />
           {listMovie.map((data, index) => (
             <div key={`movie-${index}`}>
-              <img className="img" src={data.image}></img>
+              <img className="img" src={data.image} alt=""></img>
               <h3>{data.name}</h3>
             </div>
           ))}

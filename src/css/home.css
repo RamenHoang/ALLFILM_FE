@@ -1,11 +1,11 @@
 .slider_container{
-    height: 450px;
+    height: 500px;
+    position: relative;
 }
 
 .slider{
     width: 100%;
-    padding: 0 !important;
-    height: min-content;
+    height: fit-content;
     vertical-align: baseline;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .awssld {
-    --slider-height-percentage: 450px !important;
+    --slider-height-percentage: 500px !important;
 
 }
 
@@ -49,7 +49,7 @@
     background-color: rgb(196, 193, 191);
 }
 
-.chose_time a{
+.container .chose_time a{
     line-height: 35px;
     position: relative;
     color: rgb(153, 152, 152);
@@ -67,10 +67,14 @@
     background-color: chocolate;
     transform: scale(0);
     transition: 0.5s;
-
 }
 
-.chose_time a:hover:after{
+
+.container .chose_time a:hover{
+    color: rgb(39, 36, 34);
+}
+
+.container .chose_time a:hover:after{
     transform: scale(1);
 }
 
@@ -143,3 +147,98 @@ footer p{
     margin: auto;
     line-height: 65px;
 }
+
+
+.box-buy-ticket {
+    position: absolute;
+    right: 5%;
+    top: 30px;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    color: white;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px){
+    .box-buy-ticket {
+        position: initial;
+        right: 0;
+        bottom: 0;
+        background-color: #ffffff;
+        padding: 0 15px;
+    }
+}
+
+
+@media only screen and (max-width: 1280px){
+    .box-buy-ticket {
+        right: 30px;
+        top: 22px;
+    }
+}
+
+.zoomIn {
+    -webkit-animation-name: zoomIn;
+    animation-name: zoomIn;
+}
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.label-tab {
+    background-color: #f26b38;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 16px;
+    padding: 10px 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    vertical-align: baseline;
+}
+
+.box-buy-ticket .ant-tabs{
+    color: white;
+    margin-top: 45px;
+}
+
+.box-buy-ticket .ant-tabs-tab{
+    padding: 8px 12px;
+}
+
+.box-buy-ticket .ant-tabs-tab:hover{
+    color: coral;
+}
+
+.box-buy-ticket .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+    color: coral;
+}
+
+.box-buy-ticket .ant-tabs-ink-bar{
+    background: coral;
+    width:max-content;
+}
+
+.box-buy-ticket .ant-select{
+    min-width: 100%;
+    margin: 10px 5px 15px 0px;
+    display: block;
+    background-color: #a7a4a0d0;
+}
+
+.box-buy-ticket .ant-select:not(.ant-select-customize-input) .ant-select-selector{
+    background-color: rgba(122, 118, 113, 0.801);
+    border: none;
+    color: white;
+    height: 40px;
+    align-items: center;
+}
+
+.box-buy-ticket .ant-select-selection-search-input{
+    justify-content: left;
+    left: 0;
+}
+

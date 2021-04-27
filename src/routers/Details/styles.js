@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import { Modal } from 'antd';
 
 export const DetailsWrapper = styled.div`
-  margin: 20px;
+  margin: 20px auto 20px auto;
+  width: 1250px;
+  max-width: 100%;
 
   & * {
     text-align: left;
@@ -28,19 +30,21 @@ export const DetailsWrapper = styled.div`
     overflow: hidden;
     white-space: nowrap;
   }
+
   .content-event {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .first {
     display: flex;
     margin-bottom: 25px;
   }
+
   .content-section {
     ${'' /* display: flex;
     justify-content: flex-start; */}
-    max-width: 70%;
+    max-width: 65%;
 
     .description,
     .calendar {
@@ -52,7 +56,7 @@ export const DetailsWrapper = styled.div`
         margin: 10px 0;
         height: 3px;
         background: #f26b38;
-        margin: 10px 0;
+        margin: 8px 0 27px 0;
       }
       p {
         text-align: left;
@@ -79,6 +83,8 @@ export const DetailsWrapper = styled.div`
         margin: 0;
       }
 
+      
+
       .pick-time {
         border: 1px solid #00000033;
         width: 100%;
@@ -92,6 +98,28 @@ export const DetailsWrapper = styled.div`
           ${'' /* width: 25%; */}
           margin-right: 20px;
         }
+
+        .ant-btn{
+          transition: 0.3s;
+        }
+        .ant-btn:hover{
+          color: chocolate;
+          border-color: chocolate;
+        }
+      }
+    }
+
+
+    .inline{
+      .ant-select{
+        .ant-select-selector:hover{
+          border: 1px solid chocolate;
+          cusor: pointer;
+        }
+      }
+      .ant-picker:hover{
+        border: 1px solid chocolate;
+        cusor: pointer;
       }
     }
 
@@ -173,26 +201,27 @@ export const DetailsWrapper = styled.div`
 
         & > * {
           display: flex;
-          align-items: baseline;
         }
 
         p {
-          width: 90px;
+          min-width: 90px;
           font-weight: normal;
           color: #a0a4b2;
           margin-bottom: 5px;
+          display: -webkit-box;
         }
 
         h3 {
           font-weight: normal;
           margin-bottom: 5px;
+          white-space: break-spaces;
         }
       }
     }
   }
 
   .event-section {
-    width: 30%;
+    width: 32%;
     margin-left: 20px;
 
     h3 {
@@ -210,10 +239,10 @@ export const DetailsWrapper = styled.div`
     .ant-divider-horizontal {
       display: flex;
       clear: both;
-      min-width: 25%;
-      width: 25%;
+      min-width: 20%;
+      width: 20%;
       margin: 10px 0;
-      height: 3px;
+      height: 2px;
       background: #f26b38;
       margin: 10px 0;
     }
@@ -250,6 +279,10 @@ export const DetailsWrapper = styled.div`
         float: right;
         border: 0.5px solid #f26b38;
         text-align: left;
+      }
+      .ant-btn:hover{
+        background: chocolate;
+        color: white;
       }
     }
     .ant-input {

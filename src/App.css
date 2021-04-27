@@ -15,6 +15,10 @@ a{
   text-decoration: none;
 }
 
+.Router{
+  margin-top: 0;
+}
+
 .flex{
   display: flex;
   flex-wrap: wrap;
@@ -81,16 +85,16 @@ a{
 .black{
   background-color: black;
   width: 100%;
+  margin: auto;
   font-weight: 500;
 }
 
 .menu{
-  width: 1550px;
-  padding: auto;
+  width: 1450px;
   margin: auto;
 }
 
-ul{
+.menu ul{
   list-style: none;
   margin: 0;
   color: white;
