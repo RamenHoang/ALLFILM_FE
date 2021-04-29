@@ -1,26 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import '../css/home.css';
 import '../css/reviewFilm.css';
 import banner from '../img/banner.jpg';
 import banner2 from '../img/banner2.jpg';
 import phim2 from '../img/phim2.jpg';
-import km1 from '../img/km1.jpg';
-import km2 from '../img/km2.jpg';
-import km3 from '../img/km3.jpg';
-import km4 from '../img/km4.jpg';
+import BuyTicket from "../components/BuyTicketComponent";
 
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
-
-import { 
+import {
   Tabs,
-  Breadcrumb,
-  Input,
-  Button,
-  Divider,
-  DatePicker,
-  Select } from 'antd';
+  Select,
+  Carousel
+} from 'antd';
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -168,14 +159,10 @@ const listTheater = [
 
 const Home = () => {
 
-  setInterval(() => {
-    document.getElementsByClassName('awssld__next')[0].click();
-  }, 3000);
-
   return (
     <div className="Home">
       <div className="slider_container">
-        <AwesomeSlider className="slider">
+        <Carousel autoplay autoplaySpeed={3000} className="slider">
           <div tabIndex={1} key={1}>
             <img src={banner}></img>
           </div>
@@ -191,285 +178,9 @@ const Home = () => {
           <div tabIndex={5} key={5}>
             <img src={banner}></img>
           </div>
-        </AwesomeSlider>
+        </Carousel>
 
-        <div className="box-buy-ticket animated zoomIn">
-          <div className="label-tab">Mua vé nhanh</div>
-          <Tabs defaultActiveKey="1" onChange={callback}>
-            <TabPane tab="Theo phim" key="1">
-            <Select
-                showSearch
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn phim</Option>
-                {listFilm.map((data, index) => (
-                  <Option value={data.key} key={`phim-${index}`}>
-                    {data.title}
-                  </Option>
-                ))}
-              </Select>
-
-              <Select
-                showSearch
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn rạp</Option>
-                {listTheater.map((data, index) => (
-                  <Option value={data.key} key={`rap-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-
-              
-              <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn ngày</Option>
-                {listTheater.map((data, index) => (
-                  <Option value={data.key} key={`rap-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-
-              
-              <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn suất</Option>
-                {listTheater.map((data, index) => (
-                  <Option value={data.key} key={`rap-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-
-            </TabPane>
-            <TabPane tab="Theo ngày" key="2">
-            <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn phim</Option>
-                {listFilm.map((data, index) => (
-                  <Option value={data.key} key={`phim-${index}`}>
-                    {data.title}
-                  </Option>
-                ))}
-              </Select>
-
-              <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn rạp</Option>
-                {listTheater.map((data, index) => (
-                  <Option value={data.key} key={`rap-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-
-              
-              <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn ngày</Option>
-                {listTheater.map((data, index) => (
-                  <Option value={data.key} key={`rap-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-              
-              <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn suất</Option>
-                {listTheater.map((data, index) => (
-                  <Option value={data.key} key={`rap-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-            </TabPane>
-            <TabPane tab="Theo rạp" key="3">
-            <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn phim</Option>
-                {listFilm.map((data, index) => (
-                  <Option value={data.key} key={`phim-${index}`}>
-                    {data.title}
-                  </Option>
-                ))}
-              </Select>
-
-              <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn rạp</Option>
-                {listTheater.map((data, index) => (
-                  <Option value={data.key} key={`rap-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-              
-              <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn ngày</Option>
-                {listTheater.map((data, index) => (
-                  <Option value={data.key} key={`rap-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-              
-              <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Chọn suất</Option>
-                {listTheater.map((data, index) => (
-                  <Option value={data.key} key={`rap-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-            </TabPane>
-          </Tabs>
-          <a href="/" className="btn fl-right">
-            MUA VÉ
-          </a>
-        </div>
+        <BuyTicket></BuyTicket>
       </div>
 
       <div className="container">

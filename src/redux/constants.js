@@ -1,0 +1,6 @@
+export const GET_PERSONS = "GET_PERSONS";
+export const ADD_PERSON = "ADD_PERSON";
+export const EDIT_PERSON_NAME = "EDIT_PERSON_NAME";
+export const EDIT_PERSON_AGE = "EDIT_PERSON_AGE";
+export const DELETE_PERSON = "DELETE_PERSON";
+export const DELETE_MANY_PERSON = "DELETE_MANY_PERSON";
