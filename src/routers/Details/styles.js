@@ -224,14 +224,20 @@ export const DetailsWrapper = styled.div`
     width: 32%;
     margin-left: 20px;
 
-    h3 {
-      text-align: left;
-      font-size: 16px;
-      color: #43464b;
-      line-height: 20px;
-      overflow: hidden;
-      white-space: nowrap;
+    div{
+      h3 {
+        text-align: left;
+        font-size: 14px;
+        color: #43464b;
+        line-height: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-transform: uppercase;
+        margin: 8px 0 30px 0;
+      }
     }
+
+
     .img {
       width: 100%;
       height: auto;
@@ -301,6 +307,25 @@ export const DetailsWrapper = styled.div`
       text-align: left;
     }
   }
+
+  
+  @media screen and (min-width: 320px) and (max-width: 860px){
+    .content-event {
+      display: block;
+
+      .content-section{
+        width: 100%;
+        margin: auto;
+        margin-bottom: 50px;
+      }
+      .event-section{
+        width: 75%;
+        margin: auto;
+        margin-bottom: 100px;
+      }
+    }
+  }
+
 `;
 
 export const ModalWrapper = styled(Modal)`

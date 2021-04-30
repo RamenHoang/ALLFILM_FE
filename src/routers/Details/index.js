@@ -233,7 +233,7 @@ const Details = () => {
             <h2>GALAXY TÂN BÌNH</h2>
             <div className="pick-time">
               <p>2D-Phụ đề</p>
-              <Button>23:00</Button>
+              <a href="/bookTicket"><Button>23:00</Button></a>
             </div>
           </div>
         </div>
@@ -264,14 +264,13 @@ const Details = () => {
         footer={null}
         title={info.title}
       >
-        <iframe
-          width="700"
+        <iframe width="700"
           height="400"
           src={getVideo(info.url)}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        />
+        ></iframe>
       </ModalWrapper>
     </DetailsWrapper>
   );
