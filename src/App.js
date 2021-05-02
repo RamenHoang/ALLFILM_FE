@@ -318,10 +318,10 @@ function App() {
           <Route path="/bookTicket" component={BookTicket}></Route>
           <Route path="/selectTicket" component={SelectTicket}></Route>
           <Route path="/test" component={SelectFilm}></Route>
+          <Route path="/drink" component={Drink}></Route>
           <Route
             path="/" exact
             component={Home}/>
-          <Route path="/drink" component={Drink}></Route>
         </Switch>
       </Router>
       <footer>
