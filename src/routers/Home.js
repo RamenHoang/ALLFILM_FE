@@ -13,6 +13,9 @@ import {
   Carousel
 } from 'antd';
 
+
+import { StarFilled } from '@ant-design/icons';
+
 const { TabPane } = Tabs;
 const { Option } = Select;
 
@@ -68,6 +71,7 @@ const listReview = [
   {
     title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
     movieName: 'Mortal Kombat',
+    rating: '6.5',
     content:
       'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
     image:
@@ -76,6 +80,7 @@ const listReview = [
   {
     title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
     movieName: 'Mortal Kombat',
+    rating: '6.5',
     content:
       'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
     image:
@@ -84,6 +89,7 @@ const listReview = [
   {
     title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
     movieName: 'Mortal Kombat',
+    rating: '6.5',
     content:
       'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
     image:
@@ -92,6 +98,7 @@ const listReview = [
   {
     title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
     movieName: 'Mortal Kombat',
+    rating: '6.5',
     content:
       'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
     image:
@@ -230,6 +237,12 @@ const Home = () => {
                       {data.title}
                     </a>
                   </h5>
+                  <div className="rating">
+                    <StarFilled />
+                    <p className="rateNo">
+                      {data.rating}
+                    </p>/10
+                  </div>
                   <div className="blog-content hidden-xs">
                     <p>
                       <b>
