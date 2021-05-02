@@ -3,8 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './routers/Home.js';
-import GetTicket from './routers/Home.js';
 import Details from './routers/Details';
+import BookTicket from './routers/BookTicket';
+import SelectTicket from './routers/SelectTicket';
+import SelectFilm from './routers/SelectTicket';
 import Drink from './routers/Drink(tesTRedux)';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -301,7 +303,7 @@ function App() {
         <div className="black">
           <div className="menu">
             <ul className="flex">
-              <a href="/getTicket">MUA VÉ</a>|<a>PHIM</a>|<a>GÓC ĐIỆN ẢNH</a>|<a>SỰ KIỆN</a>
+              <a href="/selectTicket">MUA VÉ</a>|<a>PHIM</a>|<a>GÓC ĐIỆN ẢNH</a>|<a>SỰ KIỆN</a>
             |<a>RẠP/GIÁ VÉ</a>|<a>HỖ TRỢ</a>|<a>THÀNH VIÊN</a>
             </ul>
           </div>
@@ -313,8 +315,9 @@ function App() {
         <Switch>
           <Route path="/home" component={Home}></Route>
           <Route path="/:id/details" component={Details}></Route>
-          <Route path="/getTicket" conponent={GetTicket}></Route>
-          
+          <Route path="/bookTicket" component={BookTicket}></Route>
+          <Route path="/selectTicket" component={SelectTicket}></Route>
+          <Route path="/test" component={SelectFilm}></Route>
           <Route
             path="/" exact
             component={Home}/>

@@ -155,3 +155,22 @@ footer p{
     margin: auto;
     line-height: 65px;
 }
+
+.rating {
+    align-items: baseline;
+    color: #a0a3a7;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.rating .anticon svg path {
+    fill: #fac917;
+    align-items: baseline;
+}
+
+.rating .rateNo {
+    margin-left: 10px;
+    align-items: baseline;
+    display:inline;
+    color: black;
+}
