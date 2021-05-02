@@ -14,6 +14,7 @@ import {
   Select, DatePicker
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import Drink from './routers/Drink(tesTRedux)';
 
 function App() {
   // useEffect(() => {
@@ -317,6 +318,7 @@ function App() {
           <Route
             path="/" exact
             component={Home}/>
+          <Route path="/drink" component={Drink}></Route>
         </Switch>
       </Router>
       <footer>

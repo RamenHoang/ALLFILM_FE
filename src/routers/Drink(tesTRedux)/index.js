@@ -7,20 +7,23 @@ const Drink = () => {
 
   const dispatch = useDispatch();
   const drinks = useSelector(state => state.drink.drinks);
+  console.log("hhu", drinks)
   //mấy đoạn ni inspect ra xem 
   useEffect(() => {
     dispatch(getDrink());
-    dispatch(getCategory()).then(({payload: {data}}) =>
-      dispatch(actions.setCurrentCategory(get(data, 'data.0', {}))),
-    );
+    // dispatch(getCategory()).then(({payload: {data}}) =>
+    //   dispatch(actions.setCurrentCategory(get(data, 'data.0', {}))),
+    // );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return(
     <div>
-      {drinks.map((data, index)=> (
+      {drinks?.data?.map((data, index)=> (
+        <>
         <p>hi</p>
-        <p>{data}</p>
+        <p>{data.name}</p>
+        </>
       ))}
     </div>
   )

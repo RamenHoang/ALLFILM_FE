@@ -25,6 +25,7 @@ export const {reducer, actions} = createSlice({
     [getDrink.fulfilled]: (state, {payload}) => {
       state.drinks = payload.data.data;
       state.loading = false;
+      console.log(state.drinks);
     },
     [getDrink.rejected]: (state, {payload}) => {
       state.error = payload;
