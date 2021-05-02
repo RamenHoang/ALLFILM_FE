@@ -7,6 +7,7 @@ import Details from './routers/Details';
 import BookTicket from './routers/BookTicket';
 import SelectTicket from './routers/SelectTicket';
 import SelectFilm from './routers/SelectTicket';
+import Drink from './routers/Drink(tesTRedux)';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import './libs/AlertBox/style.css';
@@ -316,11 +317,11 @@ function App() {
           <Route path="/:id/details" component={Details}></Route>
           <Route path="/bookTicket" component={BookTicket}></Route>
           <Route path="/selectTicket" component={SelectTicket}></Route>
-          
           <Route path="/test" component={SelectFilm}></Route>
           <Route
             path="/" exact
             component={Home}/>
+          <Route path="/drink" component={Drink}></Route>
         </Switch>
       </Router>
       <footer>
