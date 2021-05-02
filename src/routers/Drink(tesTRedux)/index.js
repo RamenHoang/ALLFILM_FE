@@ -7,13 +7,13 @@ const Drink = () => {
 
   const dispatch = useDispatch();
   const drinks = useSelector(state => state.drink.drinks);
+  console.log("hhu", drinks)
   //mấy đoạn ni inspect ra xem 
   useEffect(() => {
     dispatch(getDrink());
     dispatch(getCategory()).then(({payload: {data}}) =>
       dispatch(actions.setCurrentCategory(data)),
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -21,13 +21,12 @@ const Drink = () => {
 
   return(
     <div>
-      {/* {drinks.map((data, index)=> (
-        <div>
-          <p>hi</p>
-          <p>{data}</p>
-        </div>
-      ))} */}
-      sadv
+      {drinks?.data?.map((data, index)=> (
+        <>
+        <p>hi</p>
+        <p>{data.name}</p>
+        </>
+      ))}
     </div>
   )
 };
