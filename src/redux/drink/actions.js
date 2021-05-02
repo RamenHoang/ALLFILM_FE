@@ -21,6 +21,7 @@ export const getDrink = createAsyncThunk(
       const res = await getDrinkApi(payload); //getDrink có filter
       // console.log(res);
       return res;
+
     } catch (error) {
       return thunkAPI.rejectWithValue();
     }

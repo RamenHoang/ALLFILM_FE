@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './routers/Home.js';
 import GetTicket from './routers/Home.js';
 import Details from './routers/Details';
+import Drink from './routers/Drink(test Redux)';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import './libs/AlertBox/style.css';
-import alertMessage from './libs/AlertBox/alert';
 import {
   Modal, Form, Input, Button, Checkbox, Tabs,
   Select, DatePicker
@@ -312,8 +312,11 @@ function App() {
       <Router>
         <Switch>
           <Route path="/home" component={Home}></Route>
+          <Route path="/drink" component={Drink}></Route>
           <Route path="/:id/details" component={Details}></Route>
           <Route path="/getTicket" conponent={GetTicket}></Route>
+
+          
           <Route
             path="/" exact
             component={Home}/>

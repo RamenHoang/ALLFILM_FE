@@ -11,17 +11,23 @@ const Drink = () => {
   useEffect(() => {
     dispatch(getDrink());
     dispatch(getCategory()).then(({payload: {data}}) =>
-      dispatch(actions.setCurrentCategory(get(data, 'data.0', {}))),
+      dispatch(actions.setCurrentCategory(data)),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+  console.log(" drink: "+ drinks.toString()); 
+
   return(
     <div>
-      {drinks.map((data, index)=> (
-        <p>hi</p>
-        <p>{data}</p>
-      ))}
+      {/* {drinks.map((data, index)=> (
+        <div>
+          <p>hi</p>
+          <p>{data}</p>
+        </div>
+      ))} */}
+      sadv
     </div>
   )
 };

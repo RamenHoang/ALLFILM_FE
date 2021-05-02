@@ -10,11 +10,13 @@ export const initialState = {
 export const {reducer, actions} = createSlice({
   name: 'Drink',
   initialState,
+
   reducers: { // để gọi action ko có api
     setCurrentCategory: (state, {payload}) => {
       state.currentCategory = payload;
     },
   },
+
   extraReducers: { //gọi action có api
     [getCategory.fulfilled]: (state, {payload}) => {
       state.categories = payload.data.data;
@@ -25,6 +27,7 @@ export const {reducer, actions} = createSlice({
     [getDrink.fulfilled]: (state, {payload}) => {
       state.drinks = payload.data.data;
       state.loading = false;
+      console.log(state.drinks);
     },
     [getDrink.rejected]: (state, {payload}) => {
       state.error = payload;
