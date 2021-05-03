@@ -7,7 +7,7 @@ import Details from './routers/Details';
 import BookTicket from './routers/BookTicket';
 import SelectTicket from './routers/SelectTicket';
 import SelectFilm from './routers/SelectTicket';
-import Drink from './routers/Drink(tesTRedux)';
+import Drink from './routers/Login(test)';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import './libs/AlertBox/style.css';
@@ -17,14 +17,26 @@ import {
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
+import { useDispatch, useSelector } from 'react-redux';
+//import to use state
+import { login } from './redux/token/actions'; //trong extra reducer
+import { actions } from './redux/token/slice'; // trong reducer
+
 function App() {
-  // useEffect(() => {
-  //   getDrinkApi({
-  //     keyword: 'cam'
-  //   }).then(values => console.log(values))
-  // }, [])
+
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.token.token);
+
+  useEffect(() => {
+    // dispatch(login({
+    //   username: "lieule99",
+    //   password: "Aa@12345"
+    // }))
+  }, []);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [userName, setUserName] = useState("lieule99");
+  const [password, setpassword] = useState("Aa@12345");
   const [form] = Form.useForm();
   const { TabPane } = Tabs;
 
@@ -33,13 +45,17 @@ function App() {
       {
         type: 'object',
         required: true,
-        message: 'Please select time!',
-      },
-    ],
+        message: 'Please select time!'
+      }
+    ]
   };
 
   const showModal = () => {
     setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
   };
 
   const handleOk = () => {
@@ -78,6 +94,7 @@ function App() {
       },
     },
   };
+
   const tailFormItemLayout = {
     wrapperCol: {
       xs: {
@@ -91,19 +108,6 @@ function App() {
     },
   };
 
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    </Form.Item>
-  );
-
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
   const onWebsiteChange = (value) => {
@@ -114,6 +118,26 @@ function App() {
     }
   };
 
+  const loginClick = ()=>{
+    
+    const name = document.getElementById("normal_login").username.value;
+    const pass = document.getElementById("normal_login").password.value;
+
+    dispatch(login({
+      username: name,
+      password: pass
+    }))
+
+    if(token){
+      setUserName(name);
+      if(document.getElementById("normal_login").remember){
+        setpassword(pass);
+      }
+      closeModal();
+    }
+    // console.log(userName, password)
+  }
+
   return (
     <div className="App">
       <div className="header">
@@ -123,7 +147,7 @@ function App() {
             <input className="input" defaultValue="Tìm tên phim, diễn viên"></input>
             <FontAwesomeIcon icon={faSearch} size="3px" color="gray" className="icon_abs search" />
           </div>
-          <div className="login">
+          <div className="login" style={{ display: token.access_token && 'initial' && 'none' }}>
             <label type="primary" onClick={showModal}>
               <FontAwesomeIcon icon={faUser} size="3px" className="icon_abs user" />
               Login
@@ -142,13 +166,14 @@ function App() {
                       name="username"
                       rules={[{ required: true, message: 'Please input your Username!' }]}
                     >
-                      <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                      <Input name="username" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                     </Form.Item>
                     <Form.Item
                       name="password"
                       rules={[{ required: true, message: 'Please input your Password!' }]}
                     >
                       <Input
+                        name="password"
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         placeholder="Password"
@@ -158,13 +183,13 @@ function App() {
                       <Form.Item name="remember" valuePropName="checked" noStyle>
                         <Checkbox>Remember me</Checkbox>
                       </Form.Item>
-
-                      <a className="login-form-forgot" href="">
-                        Forgot password</a>
+                      {/* <a className="login-form-forgot" href="">
+                        Forgot password</a> */}
                     </Form.Item>
 
                     <Form.Item>
-                      <Button type="primary" htmlType="submit" className="login-form-button">
+                      <Button type="primary" className="login-form-button" 
+                        onClick={loginClick}>
                         Log in
                       </Button>
                     </Form.Item>
@@ -298,6 +323,9 @@ function App() {
               </Tabs>
             </Modal>
           </div>
+          <div className='logout' style={{ display: token.access_token=== undefined && 'initial' && 'none' }}>
+            {userName+", "}logout
+          </div>
         </div>
 
         <div className="black">
@@ -318,10 +346,10 @@ function App() {
           <Route path="/bookTicket" component={BookTicket}></Route>
           <Route path="/selectTicket" component={SelectTicket}></Route>
           <Route path="/test" component={SelectFilm}></Route>
+          <Route path="/login" component={Drink}></Route>
           <Route
             path="/" exact
-            component={Home}/>
-          <Route path="/drink" component={Drink}></Route>
+            component={Home} />
         </Switch>
       </Router>
       <footer>

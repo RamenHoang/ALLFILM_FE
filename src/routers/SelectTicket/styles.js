@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const SelectTicketWrapper = styled.div`
   margin: 20px auto 20px auto;
-  width: 1250px;
+  width: 1350px;
   max-width: 100%;
 
   & * {
@@ -32,7 +32,7 @@ export const SelectTicketWrapper = styled.div`
   .flex{
     display: flex;
     .col-width{
-      width: 30%;
+      width: 31%;
     }
   }
 
