@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { SelectSectionWrapper } from './styles';
+import {
+  Button
+} from 'antd';
+
 
 const listCity = [
   {
@@ -23,11 +27,24 @@ const listTheater = [
   },
 ];
 
-function callback(key) {
-  console.log(key);
-}
 
-const SelectFilm = () => {
+const listSection = [
+  {
+    date: 'Thứ hai, 03/05/2021',
+    type: '2D -  Phụ đề',
+    time: ["09:00", "10:15", "11:11", "11:55", "09:00", "10:15", "11:11", "11:55", "09:00", "10:15", "11:11", "11:55"]
+  },
+  {
+    date: 'Thứ hai, 03/05/2021',
+    type: '2D -  Phụ đề',
+    time: ["09:00", "10:15", "11:11", "11:55", "09:00", "10:15", "11:11", "11:55", "09:00", "10:15", "11:11", "11:55"]
+  }
+];
+
+
+const SelectSection = () => {
+
+  console.log("time:  " + listSection.time);
 
   return (
     <SelectSectionWrapper>
@@ -35,15 +52,23 @@ const SelectFilm = () => {
         <h4>
           CHỌN SUẤT CHIẾU
         </h4>
-        {listTheater.map((data, index) => (
+        {listSection.map((data, index) => (
           <div className='item'>
-              <p>{data.key}</p>
-              <p>{data.value}</p>
+            <p>{data.date}</p>
+            <div className="flex">
+              <label>{data.type}</label>
+              <div className="time">
+                {data.time.map((data, index) => (
+                  <a href="/bookTicket"><Button>{data}</Button></a>
+                ))}
+              </div>
+            </div>
           </div>
         ))}
+
       </div>
     </SelectSectionWrapper>
   );
 };
 
-export default SelectFilm;
+export default SelectSection;

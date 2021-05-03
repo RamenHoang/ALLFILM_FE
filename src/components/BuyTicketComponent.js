@@ -1,11 +1,6 @@
 
 import {
     Tabs,
-    Breadcrumb,
-    Input,
-    Button,
-    Divider,
-    DatePicker,
     Select
 } from 'antd';
 
@@ -42,89 +37,7 @@ const listFilm = [
         'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim1.jpg?alt=media&token=894e1a44-65cd-4950-987d-9ffb3736df91',
     },
   ];
-  
-  const listReview = [
-    {
-      title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
-      movieName: 'Mortal Kombat',
-      content:
-        'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim2.jpg?alt=media&token=14f5caa7-49b1-4bac-980d-bb0307e71651',
-    },
-    {
-      title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
-      movieName: 'Mortal Kombat',
-      content:
-        'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim2.jpg?alt=media&token=14f5caa7-49b1-4bac-980d-bb0307e71651',
-    },
-    {
-      title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
-      movieName: 'Mortal Kombat',
-      content:
-        'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim2.jpg?alt=media&token=14f5caa7-49b1-4bac-980d-bb0307e71651',
-    },
-    {
-      title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
-      movieName: 'Mortal Kombat',
-      content:
-        'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim2.jpg?alt=media&token=14f5caa7-49b1-4bac-980d-bb0307e71651',
-    },
-  ];
-  
-  const listEvent = [
-    {
-      name: 'Happy Day Happy Popcorn',
-      description:
-        'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
-      url: '/khuyen-mai/happy-day-happy-popcorn',
-    },
-    {
-      name: 'Happy Day Happy Popcorn',
-      description:
-        'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
-      url: '/khuyen-mai/happy-day-happy-popcorn',
-    },
-    {
-      name: 'Happy Day Happy Popcorn',
-      description:
-        'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
-      url: '/khuyen-mai/happy-day-happy-popcorn',
-    },
-    {
-      name: 'Happy Day Happy Popcorn',
-      description:
-        'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
-      url: '/khuyen-mai/happy-day-happy-popcorn',
-    },
-  ];
-  
-  const listCity = [
-    {
-      key: 'daNang',
-      value: 'Đà Nẵng',
-    },
-    {
-      key: 'haNoi',
-      value: 'Hà Nội',
-    },
-  ];
-  
-  
+
   const listTheater = [
     {
       key: 'hoaKhanh',

@@ -27,23 +27,37 @@ export const SelectSectionWrapper = styled.div`
       height: fit-content;
       border: solid #dbdcdd 0.8px;
       border-top: none;
-      display: flex;
       justify-content: space-between;
       align-item: center;
       transition: 0.4s;
 
-      :hover{
-        background: #dbdcdd;
-      }
-
-      p{
+      p, label{
         width: fit-content;
-        padding: 15px;
+        padding: 10px;
         margin: 0;
         color: gray;
       }
-    }
 
+      .flex{
+        
+        .time {
+          padding: 10px 10px;
+          display: flex;
+          width: calc(100% - 100px);
+          flex-wrap: wrap;
+
+          .ant-btn{
+            transition: 0.3s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+          }
+          .ant-btn:hover{
+            color: chocolate;
+            border-color: chocolate;
+          }
+        }
+      }
+    }
   }
 
 `;
