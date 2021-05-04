@@ -16,8 +16,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/data/slice'; // trong reducer
 import { getFilm, getFilms } from '../../redux/data/actions';
 
-
-
 const info = {
   title: 'Lật mặt 24h',
   type: 'Hành động',
@@ -42,29 +40,6 @@ const listCity = [
   {
     key: 'haNoi',
     value: 'Hà Nội',
-  },
-];
-
-const listMovie = [
-  {
-    name: 'Lật mặt 24h',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim1.jpg?alt=media&token=894e1a44-65cd-4950-987d-9ffb3736df91',
-  },
-  {
-    name: 'Lật mặt 24h',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim1.jpg?alt=media&token=894e1a44-65cd-4950-987d-9ffb3736df91',
-  },
-  {
-    name: 'Lật mặt 24h',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim1.jpg?alt=media&token=894e1a44-65cd-4950-987d-9ffb3736df91',
-  },
-  {
-    name: 'Lật mặt 24h',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim1.jpg?alt=media&token=894e1a44-65cd-4950-987d-9ffb3736df91',
   },
 ];
 
@@ -265,12 +240,12 @@ const Details = () => {
           </div>
           <h1>PHIM ĐANG CHIẾU</h1>
           <Divider />
-          {/* {listFilms.map((data, index) => (
+          {listFilms.map((data, index) => (
             <div key={`movie-${index}`}>
               <img className="img" src={data.image} alt=""></img>
               <h3>{data.name}</h3>
             </div>
-          ))} */}
+          ))}
           <div className="load-more">
             <Button>XEM THÊM -></Button>
           </div>
