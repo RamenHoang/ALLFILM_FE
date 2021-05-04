@@ -73,7 +73,7 @@ a{
   transition: 0.3s;
 }
 
-.login:hover , .logout:hover{
+.login:hover>label , .logout>label:hover{
   cursor: pointer;
   color: chocolate;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DetailsWrapper, ModalWrapper } from './styles';
 import {
   Breadcrumb,
@@ -10,6 +10,13 @@ import {
 } from 'antd';
 import { StarFilled, ClockCircleOutlined } from '@ant-design/icons';
 import moment from 'moment';
+import { useParams } from 'react-router';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { actions } from '../../redux/data/slice'; // trong reducer
+import { getFilm, getFilms } from '../../redux/data/actions';
+
+
 
 const info = {
   title: 'Lật mặt 24h',
@@ -78,8 +85,20 @@ const listTheater = [
 ];
 
 const Details = () => {
+
+  const {id} = useParams();
   const { Option } = Select;
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(getFilm(id));
+  }, []);
+
+  const listFilms = useSelector(state => state.data.films);
+  const film = useSelector(state => state.data.film);
+  
+  console.log(JSON.stringify(film))
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -123,7 +142,7 @@ const Details = () => {
         <Breadcrumb.Item>
           <a href="">Đặt vé</a>
         </Breadcrumb.Item>
-        <Breadcrumb.Item>{info.title}</Breadcrumb.Item>
+        <Breadcrumb.Item>{film.title}</Breadcrumb.Item>
       </Breadcrumb>
       <div className="content-event">
         <div className="content-section">
@@ -131,45 +150,45 @@ const Details = () => {
             <div className="play-video" onClick={showModal}>
               <img
                 className="img-primary"
-                src={info.image} alt="img_film">
+                src={film.image} alt="img_film">
               </img>
               <div className="play-bt"></div>
             </div>
 
             <div className="content">
-              <h1>{info.title}</h1>
+              <h1>{film.title}</h1>
               <div className="rating">
                 <StarFilled />
                 <p className="rateNo">
-                  {info.rating}
+                  {film.rating}
                   /10
                 </p>
                 <Button>ĐÁNH GIÁ</Button>
               </div>
               <div className="time">
                 <ClockCircleOutlined />
-                <p>{info.time}</p>
+                <p>{film.time}</p>
               </div>
               <div className="overall">
                 <div className="line">
                   <p>Thể loại</p>
-                  <h3>{info.type}</h3>
+                  <h3>{film.type}</h3>
                 </div>
                 <div className="line">
                   <p>Quốc gia</p>
-                  <h3>{info.country}</h3>
+                  <h3>{film.country}</h3>
                 </div>
                 <div className="line">
                   <p>Đạo diễn</p>
-                  <h3>{info.director}</h3>
+                  <h3>{film.director}</h3>
                 </div>
                 <div>
                   <p>Diễn viên</p>
-                  <h3>{info.actors}</h3>
+                  <h3>{film.actors}</h3>
                 </div>
                 <div>
                   <p>Ngày</p>
-                  <h3>{info.date}</h3>
+                  <h3>{film.date}</h3>
                 </div>
               </div>
             </div>
@@ -246,12 +265,12 @@ const Details = () => {
           </div>
           <h1>PHIM ĐANG CHIẾU</h1>
           <Divider />
-          {listMovie.map((data, index) => (
+          {/* {listFilms.map((data, index) => (
             <div key={`movie-${index}`}>
               <img className="img" src={data.image} alt=""></img>
               <h3>{data.name}</h3>
             </div>
-          ))}
+          ))} */}
           <div className="load-more">
             <Button>XEM THÊM -></Button>
           </div>
