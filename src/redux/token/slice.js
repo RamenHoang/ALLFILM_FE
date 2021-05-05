@@ -21,7 +21,7 @@ export const {reducer, actions} = createSlice({
     [login.fulfilled]: (state, {payload}) => {
       state.token = payload
       state.loading = false
-      if(document.getElementById("normal_login").remember.checked) {
+      if(document.getElementById("normal_login")?.remember?.checked) {
         localStorage.setItem("allFilms-token", payload);
         console.log("ddax luwu")
       }

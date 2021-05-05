@@ -146,9 +146,9 @@ const Home = () => {
   const listFilms = useSelector(state => state.data.films);
 
   useEffect(() => {
+    console.log("res");
     dispatch(getFilms());
   }, []);
-  
   return (
     <div className="Home">
       <div className="slider_container">

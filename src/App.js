@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Home from './routers/Home.js';
+import Home from './routers/Home';
 import Details from './routers/Details';
 import BookTicket from './routers/BookTicket';
 import SelectTicket from './routers/SelectTicket';

@@ -58,11 +58,10 @@ const listTheater = [
     value: 'Hòa Khánh',
   },
 ];
+const { Option } = Select;
 
 const Details = () => {
-
   const {id} = useParams();
-  const { Option } = Select;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
   
@@ -107,7 +106,6 @@ const Details = () => {
   const onSearch = (val) => {
     console.log('search:', val);
   };
-
   return (
     <DetailsWrapper>
       <Breadcrumb>
@@ -198,7 +196,7 @@ const Details = () => {
                   </Option>
                 ))}
               </Select>
-              <DatePicker value={moment} style={{ width: '32%' }} onChange={getDate} />
+              <DatePicker style={{ width: '32%' }} onChange={getDate} />
               <Select
                 showSearch
                 style={{ width: '32%' }}

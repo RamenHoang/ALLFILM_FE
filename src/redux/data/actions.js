@@ -7,6 +7,7 @@ export const getFilms = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await getFilmsApi();
+      console.log("res", res);
       return res.data;
     } catch (error) {
       console.log("error");
