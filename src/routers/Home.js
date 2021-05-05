@@ -1,20 +1,24 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import '../css/home.css';
 import '../css/reviewFilm.css';
 import banner from '../img/banner.jpg';
 import banner2 from '../img/banner2.jpg';
 import phim2 from '../img/phim2.jpg';
 import BuyTicket from "../components/BuyTicketComponent";
-
 import {
   Tabs,
   Select,
   Carousel
 } from 'antd';
-
-
 import { StarFilled } from '@ant-design/icons';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../redux/token/actions'; //trong extra reducer
+import { actions } from '../redux/token/slice'; // trong reducer
+import { getFilms, getFilm } from '../redux/data/actions';
+
+
+import {Link } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -38,34 +42,6 @@ const onFocus = () => {
 const onSearch = (val) => {
   console.log('search:', val);
 };
-
-
-const listFilm = [
-  {
-    title: 'GODZILLA vs KONG',
-    subTitle: 'GODZILLA ĐẠI CHIẾN KONG',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim6.jpg?alt=media&token=21c40a0b-c0fb-4478-8a54-60d73ecf0e85',
-  },
-  {
-    title: 'THE UNHOLY',
-    subTitle: 'Ấn quỷ',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim2.jpg?alt=media&token=14f5caa7-49b1-4bac-980d-bb0307e71651',
-  },
-  {
-    title: 'Bố già',
-    subTitle: 'Bố già',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim3.jpg?alt=media&token=df0a6f6d-20b5-4be5-bccb-885337e25b3c',
-  },
-  {
-    title: 'Song song',
-    subTitle: 'Song song',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim1.jpg?alt=media&token=894e1a44-65cd-4950-987d-9ffb3736df91',
-  },
-];
 
 const listReview = [
   {
@@ -165,7 +141,14 @@ const listTheater = [
 ];
 
 const Home = () => {
+  
+  const dispatch = useDispatch();
+  const listFilms = useSelector(state => state.data.films);
 
+  useEffect(() => {
+    console.log("res");
+    dispatch(getFilms());
+  }, []);
   return (
     <div className="Home">
       <div className="slider_container">
@@ -197,16 +180,16 @@ const Home = () => {
         </div>
 
         <div className="list_films flex upper">
-          {listFilm.map((data, index) => (
+          {listFilms.map((data, index) => (
             <div className="film" key={`film-${index}`}>
-              <a href=":id/details">
+              <Link to={`/details/${data.id}`}>
                 <div className="img_film">
                   <img src={data.image} alt="phim"></img>
                 </div>
                 <div className="button"></div>
                 <p>{data.title}</p>
                 <p className="vn">{data.subTitle}</p>
-              </a>
+              </Link>
 
             </div>
           ))}

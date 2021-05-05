@@ -225,7 +225,7 @@ export const DetailsWrapper = styled.div`
     margin-left: 20px;
 
     div{
-      h3 {
+      .sub-title, h3{
         text-align: left;
         font-size: 14px;
         color: #43464b;
@@ -233,6 +233,11 @@ export const DetailsWrapper = styled.div`
         overflow: hidden;
         white-space: nowrap;
         text-transform: uppercase;
+        margin: 8px 0 8px 0;
+      }
+
+      .sub-title{
+        color: gray;
         margin: 8px 0 30px 0;
       }
     }

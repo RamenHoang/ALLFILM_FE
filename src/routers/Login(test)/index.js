@@ -10,10 +10,10 @@ const Drink = () => {
 
   //mấy đoạn ni inspect ra xem 
   useEffect(() => {
-    // dispatch(login({
-    //     username: "lieule99",
-    //     password: "Aa@12345"
-    // }))
+    dispatch(login({
+        username: "lieule99",
+        password: "Aa@12345"
+    }))
   }, []);
 
   return(

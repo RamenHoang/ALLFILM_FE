@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './routers/Home.js';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Home from './routers/Home';
 import Details from './routers/Details';
 import BookTicket from './routers/BookTicket';
 import SelectTicket from './routers/SelectTicket';
@@ -24,21 +24,34 @@ import { actions } from './redux/token/slice'; // trong reducer
 
 function App() {
 
+  // useEffect(() => {
+  //   console.log("token1: "+JSON.stringify(token));
+  // }, []);
+
   const dispatch = useDispatch();
   const token = useSelector(state => state.token.token);
-
-  useEffect(() => {
-    // dispatch(login({
-    //   username: "lieule99",
-    //   password: "Aa@12345"
-    // }))
-  }, []);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [userName, setUserName] = useState("lieule99");
   const [password, setpassword] = useState("Aa@12345");
   const [form] = Form.useForm();
   const { TabPane } = Tabs;
+
+  const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false);
+
+  const showCfModal = () => {
+    setIsModalConfirmVisible(true);
+  };
+
+  const handleCfOk = () => {
+    dispatch(actions.logout());
+    setIsModalConfirmVisible(false);
+    localStorage.removeItem("allFilms-token");
+  };
+
+  const handleCfCancel = () => {
+    setIsModalConfirmVisible(false);
+  };
 
   const config = {
     rules: [
@@ -59,10 +72,6 @@ function App() {
   };
 
   const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
     setIsModalVisible(false);
   };
 
@@ -118,41 +127,35 @@ function App() {
     }
   };
 
-  const loginClick = ()=>{
-    
+  const loginClick = () => {
+
     const name = document.getElementById("normal_login").username.value;
     const pass = document.getElementById("normal_login").password.value;
 
     dispatch(login({
       username: name,
       password: pass
-    }))
-
-    if(token){
-      setUserName(name);
-      if(document.getElementById("normal_login").remember){
-        setpassword(pass);
-      }
-      closeModal();
-    }
-    // console.log(userName, password)
+    }));
+    closeModal();
   }
 
   return (
     <div className="App">
-      <div className="header">
+      <Router>
+        <div className="header">
         <div className="head_content flex">
           <img className="logo" src={logo} alt="logo"></img>
           <div className="div_input">
             <input className="input" defaultValue="Tìm tên phim, diễn viên"></input>
             <FontAwesomeIcon icon={faSearch} size="3px" color="gray" className="icon_abs search" />
           </div>
-          <div className="login" style={{ display: token.access_token && 'initial' && 'none' }}>
+
+          <div className="login" style={{ display: (token.access_token ? 'none' : 'initial') }}>
             <label type="primary" onClick={showModal}>
               <FontAwesomeIcon icon={faUser} size="3px" className="icon_abs user" />
               Login
             </label>
-            <Modal footer={null} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <Modal footer={null} visible={isModalVisible} onOk={handleOk} onCancel={closeModal}>
 
               <Tabs defaultActiveKey="1" onChange={callback}>
                 <TabPane tab="Login" key="1">
@@ -181,14 +184,14 @@ function App() {
                     </Form.Item>
                     <Form.Item>
                       <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox>Remember me</Checkbox>
+                        <Checkbox name="remember">Remember me</Checkbox>
                       </Form.Item>
                       {/* <a className="login-form-forgot" href="">
                         Forgot password</a> */}
                     </Form.Item>
 
                     <Form.Item>
-                      <Button type="primary" className="login-form-button" 
+                      <Button type="primary" className="login-form-button"
                         onClick={loginClick}>
                         Log in
                       </Button>
@@ -323,26 +326,37 @@ function App() {
               </Tabs>
             </Modal>
           </div>
-          <div className='logout' style={{ display: token.access_token=== undefined && 'initial' && 'none' }}>
-            {userName+", "}logout
+          <div className='logout' style={{ display: (token.access_token ? 'initial' : 'none') }}>
+            {userName + " "}
+            <label
+              // onClick={()=>{
+              //   dispatch(actions.logout())
+              // }}
+              onClick={showCfModal}
+            >
+              logout
+            </label>
+
+            <Modal title="Confirm logout" visible={isModalConfirmVisible} onOk={handleCfOk} onCancel={handleCfCancel}>
+              <p>Are you sure to logout?</p>
+            </Modal>
+
           </div>
         </div>
 
         <div className="black">
           <div className="menu">
             <ul className="flex">
-              <a href="/selectTicket">MUA VÉ</a>|<a>PHIM</a>|<a>GÓC ĐIỆN ẢNH</a>|<a>SỰ KIỆN</a>
+              <Link to="/selectTicket">MUA VÉ</Link>|<a>PHIM</a>|<a>GÓC ĐIỆN ẢNH</a>|<a>SỰ KIỆN</a>
             |<a>RẠP/GIÁ VÉ</a>|<a>HỖ TRỢ</a>|<a>THÀNH VIÊN</a>
             </ul>
           </div>
         </div>
-
       </div>
+      
 
-      <Router>
         <Switch>
-          <Route path="/home" component={Home}></Route>
-          <Route path="/:id/details" component={Details}></Route>
+          <Route path="/details/:id" component={Details}></Route>
           <Route path="/bookTicket" component={BookTicket}></Route>
           <Route path="/selectTicket" component={SelectTicket}></Route>
           <Route path="/test" component={SelectFilm}></Route>
