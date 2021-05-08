@@ -13,7 +13,9 @@ import { useParams } from 'react-router';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/data/slice';
-import { getFilm, getFilms } from '../../redux/data/actions';
+import { getFilm, getFilms, getSession } from '../../redux/data/actions';
+
+import {Link } from 'react-router-dom';
 
 const info = {
   type: 'Hành động',
@@ -49,29 +51,28 @@ const listTheater = [
 const { Option } = Select;
 
 const Details = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
+    dispatch(getSession(id));
     dispatch(getFilm(id));
     dispatch(getFilms());
   }, []);
 
-  const listFilms = useSelector(state => state.data.films);
-  const film = useSelector(state => state.data.film);
-  
-  console.log(JSON.stringify(film))
+  const listFilms = useSelector(state => state.data.films)
+  const film = useSelector(state => state.data.film)
+  const session = useSelector(state => state.data.session)
 
   const getVideo = (url) => {
-    // alert(film.trailer)
     if (url.includes('youtube')) return url.replace('watch?v=', 'embed/');
     if (url.includes('youtu.be')) return url.replace('youtu.be', 'www.youtube.com/embed/');
     return url;
   };
 
   const showModal = () => {
-    document.getElementById("watch-trailer").setAttribute("src", getVideo(film.trailer))
+    document.getElementById("watch-trailer")?.setAttribute("src", getVideo(film.trailer))
     setIsModalVisible(true);
   };
 
@@ -105,6 +106,7 @@ const Details = () => {
   };
   return (
     <DetailsWrapper>
+
       <Breadcrumb>
         <Breadcrumb.Item>
           <a href="">Trang chủ</a>
@@ -114,6 +116,23 @@ const Details = () => {
         </Breadcrumb.Item>
         <Breadcrumb.Item>{film.name}</Breadcrumb.Item>
       </Breadcrumb>
+
+      <ModalWrapper
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+        title={film.name}
+      >
+        <iframe id="watch-trailer" width="700"
+          height="400"
+          src=""
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </ModalWrapper>
+      
       <div className="content-event">
         <div className="content-section">
           <div className="first">
@@ -154,7 +173,7 @@ const Details = () => {
                 </div>
                 <div>
                   <p>Diễn viên</p>
-                  <h3>{film.Actors?.map((data, index)=>(data.name)).join(", ")}</h3>
+                  <h3>{film.Actors?.map((data, index) => (data.name)).join(", ")}</h3>
                 </div>
                 <div>
                   <p>Ngày</p>
@@ -218,13 +237,24 @@ const Details = () => {
             </div>
           </div>
 
-          <div className="time2">
-            <h2>GALAXY TÂN BÌNH</h2>
-            <div className="pick-time">
-              <p>2D-Phụ đề</p>
-              <a href="/bookTicket"><Button>23:00</Button></a>
+          {session.map((data, index) => (
+            <div className="time2">
+              <h2>{data.name}</h2>
+              <div className="pick-time">
+                <p>2D-Phụ đề</p>
+                {data.Sessions.map((data, index)=>(
+                  
+                  <Link to={`/bookTicket/${data.id}`}><Button>{data.startTime}</Button></Link>
+                  // <Link to="/bookTicket">{data.startTime}</Link>
+                  ))}
+
+              </div>
             </div>
-          </div>
+
+            
+          ))}
+
+
         </div>
         <div className="event-section">
           <h1>NHẬN KHUYẾN MÃI</h1>
@@ -247,21 +277,7 @@ const Details = () => {
           </div>
         </div>
       </div>
-      <ModalWrapper
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={null}
-        title={film.name}
-      >
-        <iframe id="watch-trailer" width="700"
-          height="400"
-          src=""
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      </ModalWrapper>
+
     </DetailsWrapper>
   );
 };

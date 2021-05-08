@@ -23,7 +23,7 @@ export const {reducer, actions} = createSlice({
       state.loading = false
       if(document.getElementById("normal_login")?.remember?.checked) {
         localStorage.setItem("allFilms-token", payload);
-        console.log("ddax luwu")
+        console.log(payload)
       }
     },
     [login.pending]: state => {

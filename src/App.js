@@ -347,8 +347,7 @@ function App() {
         <div className="black">
           <div className="menu">
             <ul className="flex">
-              <Link to="/selectTicket">MUA VÉ</Link>|<a>PHIM</a>|<a>GÓC ĐIỆN ẢNH</a>|<a>SỰ KIỆN</a>
-            |<a>RẠP/GIÁ VÉ</a>|<a>HỖ TRỢ</a>|<a>THÀNH VIÊN</a>
+            <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<Link to="/#phim">PHIM</Link>|<a>GÓC ĐIỆN ẢNH</a>|<a>SỰ KIỆN</a>|<a>HỖ TRỢ</a>|<a>THÀNH VIÊN</a>
             </ul>
           </div>
         </div>
@@ -357,7 +356,7 @@ function App() {
 
         <Switch>
           <Route path="/details/:id" component={Details}></Route>
-          <Route path="/bookTicket" component={BookTicket}></Route>
+          <Route path="/bookTicket/:id" component={BookTicket}></Route>
           <Route path="/selectTicket" component={SelectTicket}></Route>
           <Route path="/test" component={SelectFilm}></Route>
           <Route path="/login" component={Drink}></Route>

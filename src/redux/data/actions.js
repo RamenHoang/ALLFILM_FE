@@ -1,13 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 // import api
-import { getFilmsApi, getFilmApi } from '../../api/data';
+import { getFilmsApi, getFilmApi, getSessionApi, getDetailSessionApi, bookingApi, getCategoryApi} from '../../api/data';
 
 export const getFilms = createAsyncThunk(
   'data/getFilms',
   async (payload, thunkAPI) => {
     try {
       const res = await getFilmsApi();
-      console.log("res", res);
       return res.data;
     } catch (error) {
       console.log("error");
@@ -28,6 +27,63 @@ export const getFilm = createAsyncThunk(
     }
   }
 );
+
+
+export const getSession = createAsyncThunk(
+  'data/getSession',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await getSessionApi(payload);
+      return res.data;
+    } catch (error) {
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+
+export const getDetailSession = createAsyncThunk(
+  'data/getDetailSession',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await getDetailSessionApi(payload);
+      return res.data;
+    } catch (error) {
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+export const booking = createAsyncThunk(
+  'data/booking',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await bookingApi(payload);
+      console.log("booking: "+ JSON.stringify(payload) )
+      return res.data;
+    } catch (error) {
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+export const getCategory = createAsyncThunk(
+  'data/getCategory',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await getCategoryApi(payload);
+      // console.log("booking: "+ JSON.stringify(payload.data) )
+      return res;
+    } catch (error) {
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
 
 
 // export const getDrink = createAsyncThunk(
