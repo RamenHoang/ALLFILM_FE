@@ -174,7 +174,7 @@ const Home = () => {
       </div>
 
       <div className="container">
-        <div className="chose_time">
+        <div className="chose_time" id="#phim">
           <a href="">PHIM ĐANG CHIẾU</a>
           <a href="">PHIM SẮP CHIẾU</a>
         </div>

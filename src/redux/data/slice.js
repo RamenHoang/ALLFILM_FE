@@ -1,11 +1,14 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {getFilms, getFilm} from './actions'
+import {getFilms, getFilm, getSession, getDetailSession, booking, getCategory} from './actions'
 
 export const initialState = {
   films: [],
   film: {},
   loading: false,
-  error: ""
+  error: "",
+  session: [],
+  detailSession: {},
+  categories: []
 }
 
 export const {reducer, actions} = createSlice({
@@ -21,7 +24,6 @@ export const {reducer, actions} = createSlice({
   extraReducers: { //gọi action có api
     [getFilms.fulfilled]: (state, {payload}) => {
       state.films = payload
-      console.log(payload)
       state.loading = false
     },
     [getFilms.pending]: state => {
@@ -33,13 +35,57 @@ export const {reducer, actions} = createSlice({
     },
     [getFilm.fulfilled]: (state, {payload}) => {
       state.film = payload
-      console.log(payload)
       state.loading = false
     },
     [getFilm.pending]: state => {
       state.loading = true;
     },
     [getFilm.rejected]: (state, {payload}) => {
+      state.error = payload
+      state.loading = false
+    },
+    [getSession.fulfilled]: (state, {payload}) => {
+      state.session = payload
+      state.loading = false
+    },
+    [getSession.pending]: state => {
+      state.loading = true;
+    },
+    [getSession.rejected]: (state, {payload}) => {
+      state.error = payload
+      state.loading = false
+    },
+    [getDetailSession.fulfilled]: (state, {payload}) => {
+      state.detailSession = payload
+      console.log("detailss-slice: "+ payload)
+      state.loading = false
+    },
+    [getDetailSession.pending]: state => {
+      state.loading = true;
+    },
+    [getDetailSession.rejected]: (state, {payload}) => {
+      state.error = payload
+      state.loading = false
+    },
+    [booking.fulfilled]: (state, {payload}) => {
+      state.detailSession = payload
+      state.loading = false
+    },
+    [booking.pending]: state => {
+      state.loading = true;
+    },
+    [booking.rejected]: (state, {payload}) => {
+      state.error = payload
+      state.loading = false
+    },
+    [getCategory.fulfilled]: (state, {payload}) => {
+      state.categories = payload.data
+      state.loading = false
+    },
+    [getCategory.pending]: state => {
+      state.loading = true;
+    },
+    [getCategory.rejected]: (state, {payload}) => {
       state.error = payload
       state.loading = false
     }

@@ -119,6 +119,14 @@ export const BookTicketWrapper = styled.div`
               background-color: white;
               border: .7px solid black;
             }
+
+            .bgRed{
+              background-color: red;
+            }
+
+            .bgGreen{
+              background-color: green;
+            }
           }
         }
 

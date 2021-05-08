@@ -101,6 +101,7 @@ export const DetailsWrapper = styled.div`
 
         .ant-btn{
           transition: 0.3s;
+          margin-right: 10px;
         }
         .ant-btn:hover{
           color: chocolate;
