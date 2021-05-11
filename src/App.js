@@ -329,9 +329,6 @@ function App() {
           <div className='logout' style={{ display: (token.access_token ? 'initial' : 'none') }}>
             {userName + " "}
             <label
-              // onClick={()=>{
-              //   dispatch(actions.logout())
-              // }}
               onClick={showCfModal}
             >
               logout

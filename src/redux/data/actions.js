@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 // import api
 import { getFilmsApi, getFilmApi, getSessionApi, getDetailSessionApi, bookingApi, getCategoryApi} from '../../api/data';
+import { bookTicketApi} from '../../api/bookTicket';
+import { Alert } from 'antd';
 
 export const getFilms = createAsyncThunk(
   'data/getFilms',
@@ -84,6 +86,22 @@ export const getCategory = createAsyncThunk(
   }
 );
 
+
+export const bookTicket = createAsyncThunk(
+  'data/bookTicket',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await bookTicketApi(payload);
+      alert("Book success")
+      console.log("booking: "+ JSON.stringify(payload.data) )
+      return res;
+    } catch (error) {
+      console.log({error});
+      alert("Book fail!!!")
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
 
 
 // export const getDrink = createAsyncThunk(
