@@ -4,47 +4,13 @@ import {
   Button
 } from 'antd';
 
-
-const listCity = [
-  {
-    key: 'daNang',
-    value: 'Đà Nẵng',
-  },
-  {
-    key: 'haNoi',
-    value: 'Hà Nội',
-  },
-];
-
-const listTheater = [
-  {
-    key: 'hoaKhanh',
-    value: 'Hòa Khánh',
-  },
-  {
-    key: 'hoaKhanh',
-    value: 'Hòa Khánh',
-  },
-];
-
-
-const listSection = [
-  {
-    date: 'Thứ hai, 03/05/2021',
-    type: '2D -  Phụ đề',
-    time: ["09:00", "10:15", "11:11", "11:55", "09:00", "10:15", "11:11", "11:55", "09:00", "10:15", "11:11", "11:55"]
-  },
-  {
-    date: 'Thứ hai, 03/05/2021',
-    type: '2D -  Phụ đề',
-    time: ["09:00", "10:15", "11:11", "11:55", "09:00", "10:15", "11:11", "11:55", "09:00", "10:15", "11:11", "11:55"]
-  }
-];
-
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 const SelectSection = () => {
 
-  console.log("time:  " + listSection.time);
+  const listSS = useSelector(state => state.data.session_baseFC)
+  console.log("list ss: " + JSON.stringify(listSS))
 
   return (
     <SelectSectionWrapper>
@@ -52,19 +18,24 @@ const SelectSection = () => {
         <h4>
           CHỌN SUẤT CHIẾU
         </h4>
-        {listSection.map((data, index) => (
-          <div className='item'>
-            <p>{data.date}</p>
-            <div className="flex">
-              <label>{data.type}</label>
-              <div className="time">
-                {data.time.map((data, index) => (
-                  <a href="/bookTicket"><Button>{data}</Button></a>
-                ))}
+
+        {
+          Object.keys(listSS)?.map(key => {
+            return (
+              <div className='item'>
+                <p>{key}</p>
+                <div className="flex">
+                  <label>2D -  Phụ đề</label>
+                  <div className="time">
+                    {listSS[key].map((data, index) => (
+                      <Link to={`/bookTicket/${data.id}`}><Button>{data.startTime.substring(11,16)}</Button></Link>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
+            )
+          })
+        }
 
       </div>
     </SelectSectionWrapper>

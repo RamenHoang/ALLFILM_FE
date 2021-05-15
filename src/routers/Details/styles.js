@@ -205,10 +205,10 @@ export const DetailsWrapper = styled.div`
         }
 
         p {
-          min-width: 90px;
+          min-width: 120px;
           font-weight: normal;
           color: #a0a4b2;
-          margin-bottom: 5px;
+          margin-bottom: 10px;
           display: -webkit-box;
         }
 

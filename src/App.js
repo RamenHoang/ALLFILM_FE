@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import PrivateRoute from './routers/PrivateRoute'
 import Home from './routers/Home';
 import Details from './routers/Details';
 import BookTicket from './routers/BookTicket';
@@ -353,7 +354,7 @@ function App() {
 
         <Switch>
           <Route path="/details/:id" component={Details}></Route>
-          <Route path="/bookTicket/:id" component={BookTicket}></Route>
+          <PrivateRoute path="/bookTicket/:id" component={BookTicket}></PrivateRoute>
           <Route path="/selectTicket" component={SelectTicket}></Route>
           <Route path="/test" component={SelectFilm}></Route>
           <Route path="/login" component={Drink}></Route>

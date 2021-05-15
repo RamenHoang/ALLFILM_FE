@@ -43,6 +43,13 @@ export const SelectTheaterWrapper = styled.div`
         color: gray;
       }
     }
+
+    .cinema_active{
+      background: #ffdea894;
+      p{
+        color: chocolate;
+      }
+    }
   }
 
 `;

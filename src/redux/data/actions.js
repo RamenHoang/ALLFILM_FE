@@ -1,8 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 // import api
-import { getFilmsApi, getFilmApi, getSessionApi, getDetailSessionApi, bookingApi, getCategoryApi} from '../../api/data';
+import { getFilmsApi, getFilmApi, getSessionApi_BaseFilm, 
+  getDetailSessionApi, bookingApi, getCategoryApi
+  ,getCinemaApi, getSessionApi_BaseFC} from '../../api/data';
 import { bookTicketApi} from '../../api/bookTicket';
 import { Alert } from 'antd';
+import { HighlightFilled } from '@ant-design/icons';
 
 export const getFilms = createAsyncThunk(
   'data/getFilms',
@@ -35,7 +38,7 @@ export const getSession = createAsyncThunk(
   'data/getSession',
   async (payload, thunkAPI) => {
     try {
-      const res = await getSessionApi(payload);
+      const res = await getSessionApi_BaseFilm(payload);
       return res.data;
     } catch (error) {
       console.log({error});
@@ -77,7 +80,6 @@ export const getCategory = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await getCategoryApi(payload);
-      // console.log("booking: "+ JSON.stringify(payload.data) )
       return res;
     } catch (error) {
       console.log({error});
@@ -98,6 +100,37 @@ export const bookTicket = createAsyncThunk(
     } catch (error) {
       console.log({error});
       alert("Book fail!!!")
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+
+export const getCinema = createAsyncThunk(
+  'data/getCinema',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await getCinemaApi();
+      return res.data;
+    } catch (error) {
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+
+
+export const getSession_BaseFC = createAsyncThunk(
+  'data/getSession_BaseFC',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await getSessionApi_BaseFC(payload);
+      return res.data;
+    } catch (error) {
+      console.log({error});
+      
+      console.log("failll")
       return thunkAPI.rejectWithValue();
     }
   }
