@@ -24,7 +24,6 @@ export const {reducer, actions} = createSlice({
       state.loading = false
       if(document.getElementById("normal_login")?.remember?.checked) {
         localStorage.setItem("allFilms-token", payload.access_token);
-        console.log(payload)
       }
     },
     [login.pending]: state => {

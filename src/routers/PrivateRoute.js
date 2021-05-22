@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 const PrivateRoute = ({ component: Component, ...rest })=>{
 
     const token = useSelector(state => state.token.token);
-    console.log(token.access_token)
 
     useEffect(() => {
         if(token.access_token === undefined) alert("Please login before book ticket")

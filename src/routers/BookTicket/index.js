@@ -12,6 +12,7 @@ import { actions } from '../../redux/data/slice';
 import { getDetailSession, getCategory, bookTicket } from '../../redux/data/actions';
 import Details from '../Details';
 import moment from 'moment';
+import { useHistory } from "react-router-dom";
 
 
 const info = {
@@ -32,22 +33,29 @@ const BookTicket = () => {
   
   const dispatch = useDispatch();
   const { id } = useParams()
+  var history = useHistory();
+  
+  const [step, setStep] = useState('1')
 
   useEffect(() => {
     dispatch(getDetailSession(id))
     dispatch(getCategory())
   }, []);
 
+
   const [sum, setSum] = useState('0')
-  const [step, setStep] = useState('1')
   const [countTicket, setCountTicket] = useState('0')
   const [foodDrinks, setFoodDrinks] = useState([])
+  
+  const [fdStr, setFdStr] = useState("")
   var seats = [];
   const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false)
   const categories = useSelector(state => state.data.categories)||[]
   const detailSession = useSelector(state => state.data.detailSession)
   const bookedSeats = detailSession.bookedSeats||""
   const token = useSelector(state => state.token.token);
+
+  console.log("session: "+ JSON.stringify(detailSession))
 
   const rows = []
   const cols = []
@@ -58,7 +66,6 @@ const BookTicket = () => {
   cols.fill(1)
 
   const changeBg = (e) => {
-    console.log("click");
     if (seats.length <= countTicket && countTicket != 0) {
       if(e.target.classList.contains("bgGreen")){
         seats = seats.filter(item => item !== e.target);
@@ -101,6 +108,7 @@ const BookTicket = () => {
 
 
     var fds = []
+    var fdstr = "  |  "
     const combos = document.getElementsByClassName("fds");
     for (var i = 0; i < combos.length; i++) {
       let id = combos[i].id
@@ -109,9 +117,12 @@ const BookTicket = () => {
           id: id.substring(id.indexOf("_")+1),
           count: combos[i].value
         })
+
+        fdstr = fdstr +"  |  " + combos[i].parentNode.parentNode.childNodes[0].id+ ":"+ combos[i].value
       }
     }
     setFoodDrinks(fds)
+    setFdStr(fdstr.substring(10))
 
     var count = 0
     for (var i = 0; i < ticketNums.length; i++) {
@@ -134,12 +145,12 @@ const BookTicket = () => {
     }
     else if (step==='2'){
       if(seats.length === countTicket) {
+
         var seatStr = []
         for(var i=0; i< seats.length; i++){
           seatStr.push(seats[i].id);
         }
         seatStr = seatStr.concat().toString()
-        console.log(seatStr)
 
         var bookingTime = moment().format('YYYY-MM-DD h:mm:ss');
         var keepingTime = moment().add(15, 'seconds').format('YYYY-MM-DD h:mm:ss');
@@ -160,6 +171,11 @@ const BookTicket = () => {
         console.log(params.data)
         console.log(params.headers)
         dispatch(bookTicket(params))
+        
+        history.push("bookSS")
+
+        setStep(3)
+        // history.push("/bookss");
       }
       else{
         alert("Please book enough tickets before going to next step!")
@@ -172,6 +188,10 @@ const BookTicket = () => {
     if(step==='2'){
       undisplayMap()
       setStep('1')
+    }
+    if(step==='3'){
+      undisplayMap()
+      setStep('2')
     }
   }
 
@@ -190,18 +210,6 @@ const BookTicket = () => {
     document.getElementById('btn-back').style.display = 'none'
 
   }
-
-  
-  const handleOk = () => {
-    setIsModalConfirmVisible(false);
-    localStorage.removeItem("allFilms-token");
-  };
-
-  
-  const handleCancel = () => {
-    setIsModalConfirmVisible(false);
-  };
-
 
   return (
     <BookTicketWrapper>
@@ -225,7 +233,7 @@ const BookTicket = () => {
             {categories.map((data, index)=>(
 
               <tr key={`typeCombo-${index}`}>
-              <td>{data.name}</td>
+              <td id={`${data.name}`}>{data.name}</td>
               <td>
                 <input className="fds" id={`fds_${data.id}`}  key={`typeCombo-${index}`} type="number" name="ticketNum" defaultValue="0" min="0" max="100" onChange={change}></input>
               </td>
@@ -275,7 +283,7 @@ const BookTicket = () => {
               <Divider></Divider>
               <p><b>Suất chiếu:</b>{detailSession.startTime}</p>
               <Divider></Divider>
-              <p><b>Combo: </b><span></span></p>
+              <p><b>Combo: </b><span>{fdStr}</span></p>
               <Divider></Divider>
               <p><b>Ghế: </b><span></span></p>
               <Divider></Divider>

@@ -95,7 +95,7 @@ export const bookTicket = createAsyncThunk(
     try {
       const res = await bookTicketApi(payload);
       alert("Book success")
-      console.log("booking: "+ JSON.stringify(payload.data) )
+      console.log("booking: "+ JSON.stringify(res.data) )
       return res;
     } catch (error) {
       console.log({error});

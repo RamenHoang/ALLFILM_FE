@@ -17,16 +17,6 @@ import { getFilm, getFilms, getSession } from '../../redux/data/actions';
 
 import {Link } from 'react-router-dom';
 
-const info = {
-  type: 'Hành động',
-  country: 'VietNam',
-  time: '110 phút',
-  rating: '8.5',
-  url: 'https://www.youtube.com/watch?v=g1nZ785I6fs',
-  description:
-    'Một gia đình bị truy đuổi giữa vùng sông nước. Cơ hội nào cho người đàn ông cứu lấy vợ con khỏi bọn xã hội đen máu mặt? Trong phần 5 này, đạo diễn Lý Hải đã “mạnh tay” mời đạo diễn Kim Jung Min từ Hàn Quốc sang Việt Nam làm cố vấn hành động cho đoàn phim. Được biết, Kim Jung Min cũng chính là đạo diễn hành động của phim hay ra mắt năm 2018 The Witch: Part 1. The Subversion. Theo nhận xét của giới chuyên môn, yếu tố hành động trong siêu phẩm này được đánh giá cao bởi sự độc đáo, mạnh mẽ và ác liệt. Và với sự thể hiện này, tại giải thưởng điện ảnh danh giá Rồng Xanh lần thứ 39, Kim Jung Min và Park Jung Ryul đã nhận được đề cử ở hạng mục Kỹ thuật cho phần chỉ đạo hành động xuất sắc nhất',
-};
-
 const listCity = [
   {
     key: 'daNang',
