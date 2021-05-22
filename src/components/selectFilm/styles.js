@@ -32,11 +32,12 @@ export const SelectFilmWrapper = styled.div`
 
       :hover{
         background: #dbdcdd;
+        cursor: pointer;
       }
-  
+      
       img{
         width: 70px;
-        height: auto;
+        height: 70px;
         margin: auto 10px;
         float: left;
       }
@@ -49,14 +50,23 @@ export const SelectFilmWrapper = styled.div`
           font-family: "Roboto", sans-serif;
           color: #43464b;
           margin: 0;
-          }
+        }
         
-          p.vn{
-            color: #a0a3a7;
-          }
+        p.vn{
+          color: #a0a3a7;
+        }
       }
-  
     }
+
+    
+    .film_active{
+      background: #ffdea894;
+      .name>p{
+        color: chocolate;
+      }
+    }
+
+
   }
 
 `;

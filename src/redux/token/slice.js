@@ -13,7 +13,8 @@ export const {reducer, actions} = createSlice({
 
   reducers: { // để gọi action ko có api
     logout: (state, {payload}) => {
-      state.token= {}
+      state.token= 
+      localStorage.getItem("allFilms-token", payload)  || {}
     },
   },
 
@@ -22,8 +23,7 @@ export const {reducer, actions} = createSlice({
       state.token = payload
       state.loading = false
       if(document.getElementById("normal_login")?.remember?.checked) {
-        localStorage.setItem("allFilms-token", payload);
-        console.log(payload)
+        localStorage.setItem("allFilms-token", payload.access_token);
       }
     },
     [login.pending]: state => {

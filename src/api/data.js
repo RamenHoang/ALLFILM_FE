@@ -6,7 +6,10 @@ export const getFilmsApi = params => axios.get('/film', {
 
 export const getFilmApi = params => axios.get(`/film/${params}`);
 
-export const getSessionApi = params => axios.get(`/session/?filmId=${params}`);
+export const getSessionApi_BaseFilm = params => axios.get(`/session/?filmId=${params}`);
+
+export const getSessionApi_BaseFC = params => axios.get(`/session`, {params});
+
 
 export const getDetailSessionApi = params => axios.get(`/session/${params}`);
 
@@ -19,3 +22,6 @@ export const bookingApi = params => axios.post(`/booking`,{
 });
 
 export const getCategoryApi = params => axios.get('/food-drink');
+
+
+export const getCinemaApi = params => axios.get(`/cinema`);

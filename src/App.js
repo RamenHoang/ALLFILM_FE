@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import PrivateRoute from './routers/PrivateRoute'
 import Home from './routers/Home';
 import Details from './routers/Details';
 import BookTicket from './routers/BookTicket';
+import BookSS from './routers/BookSS';
 import SelectTicket from './routers/SelectTicket';
 import SelectFilm from './routers/SelectTicket';
 import Drink from './routers/Login(test)';
@@ -329,9 +331,6 @@ function App() {
           <div className='logout' style={{ display: (token.access_token ? 'initial' : 'none') }}>
             {userName + " "}
             <label
-              // onClick={()=>{
-              //   dispatch(actions.logout())
-              // }}
               onClick={showCfModal}
             >
               logout
@@ -356,7 +355,8 @@ function App() {
 
         <Switch>
           <Route path="/details/:id" component={Details}></Route>
-          <Route path="/bookTicket/:id" component={BookTicket}></Route>
+          <Route path="/bookTicket/bookSS" exact component={BookSS}></Route>
+          <PrivateRoute path="/bookTicket/:id" exact component={BookTicket}></PrivateRoute>
           <Route path="/selectTicket" component={SelectTicket}></Route>
           <Route path="/test" component={SelectFilm}></Route>
           <Route path="/login" component={Drink}></Route>

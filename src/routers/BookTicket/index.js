@@ -9,8 +9,10 @@ import { useParams } from 'react-router'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/data/slice';
-import { getDetailSession, getCategory } from '../../redux/data/actions';
+import { getDetailSession, getCategory, bookTicket } from '../../redux/data/actions';
 import Details from '../Details';
+import moment from 'moment';
+import { useHistory } from "react-router-dom";
 
 
 const info = {
@@ -31,22 +33,29 @@ const BookTicket = () => {
   
   const dispatch = useDispatch();
   const { id } = useParams()
+  var history = useHistory();
+  
+  const [step, setStep] = useState('1')
 
   useEffect(() => {
     dispatch(getDetailSession(id))
     dispatch(getCategory())
   }, []);
 
+
   const [sum, setSum] = useState('0')
-  const [step, setStep] = useState('1')
   const [countTicket, setCountTicket] = useState('0')
+  const [foodDrinks, setFoodDrinks] = useState([])
+  
+  const [fdStr, setFdStr] = useState("")
   var seats = [];
   const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false)
   const categories = useSelector(state => state.data.categories)||[]
   const detailSession = useSelector(state => state.data.detailSession)
   const bookedSeats = detailSession.bookedSeats||""
+  const token = useSelector(state => state.token.token);
 
-  console.log("id: "+ JSON.stringify(categories))
+  console.log("session: "+ JSON.stringify(detailSession))
 
   const rows = []
   const cols = []
@@ -55,10 +64,8 @@ const BookTicket = () => {
   rows.fill(1)
   cols.length = detailSession?.Room?.column||0
   cols.fill(1)
-  console.log(rows.length+", "+cols.length)
 
   const changeBg = (e) => {
-    console.log("click");
     if (seats.length <= countTicket && countTicket != 0) {
       if(e.target.classList.contains("bgGreen")){
         seats = seats.filter(item => item !== e.target);
@@ -80,6 +87,7 @@ const BookTicket = () => {
   }
 
   const change = (e) => {
+
     e.target.parentElement.parentElement.childNodes[3].childNodes[0].textContent = e.target.value * e.target.parentElement.parentElement.childNodes[2].childNodes[0].textContent;
     const ticketPrices = document.getElementsByClassName("ticket-price")
     const ticketNums = document.getElementsByClassName("ticketNum")
@@ -98,16 +106,34 @@ const BookTicket = () => {
     document.getElementById("comboSum").innerText = sum1
     setSum(sum1 + sum)
 
+
+    var fds = []
+    var fdstr = "  |  "
+    const combos = document.getElementsByClassName("fds");
+    for (var i = 0; i < combos.length; i++) {
+      let id = combos[i].id
+      if(combos[i].value !=="0"){
+        fds.push({
+          id: id.substring(id.indexOf("_")+1),
+          count: combos[i].value
+        })
+
+        fdstr = fdstr +"  |  " + combos[i].parentNode.parentNode.childNodes[0].id+ ":"+ combos[i].value
+      }
+    }
+    setFoodDrinks(fds)
+    setFdStr(fdstr.substring(10))
+
     var count = 0
     for (var i = 0; i < ticketNums.length; i++) {
       count = count + ticketNums[i].value * 1;
     }
-    console.log(count)
     setCountTicket(count)
+
   }
 
   const  nextStep = ()=>{
-    console.log(step)
+    console.log("step: " + step)
     if(step==='1'){
       if(countTicket == 0){
         alert("please select at least 1 ticket before going to next step.")
@@ -118,12 +144,42 @@ const BookTicket = () => {
       }
     }
     else if (step==='2'){
-      var seatStr = []
-      for(var i=0; i< seats.length; i++){
-        seatStr.push(seats[i].id);
+      if(seats.length === countTicket) {
+
+        var seatStr = []
+        for(var i=0; i< seats.length; i++){
+          seatStr.push(seats[i].id);
+        }
+        seatStr = seatStr.concat().toString()
+
+        var bookingTime = moment().format('YYYY-MM-DD h:mm:ss');
+        var keepingTime = moment().add(15, 'seconds').format('YYYY-MM-DD h:mm:ss');
+        let params ={
+          data:{
+            bookingTime,
+            keepingTime,
+            seats: seatStr,
+            fee: sum,
+            sessionId: detailSession.id,
+            sessionRoomId: detailSession.roomId,
+            foodDrinks: foodDrinks
+          },
+          headers:{
+            'Authorization': `Bearer ${token.access_token}`
+          }
+        } 
+        console.log(params.data)
+        console.log(params.headers)
+        dispatch(bookTicket(params))
+        
+        history.push("bookSS")
+
+        setStep(3)
+        // history.push("/bookss");
       }
-      seatStr = seatStr.concat().toString()
-      console.log(seatStr)
+      else{
+        alert("Please book enough tickets before going to next step!")
+      }
     }
   }
 
@@ -132,6 +188,10 @@ const BookTicket = () => {
     if(step==='2'){
       undisplayMap()
       setStep('1')
+    }
+    if(step==='3'){
+      undisplayMap()
+      setStep('2')
     }
   }
 
@@ -150,18 +210,6 @@ const BookTicket = () => {
     document.getElementById('btn-back').style.display = 'none'
 
   }
-
-  
-  const handleOk = () => {
-    setIsModalConfirmVisible(false);
-    localStorage.removeItem("allFilms-token");
-  };
-
-  
-  const handleCancel = () => {
-    setIsModalConfirmVisible(false);
-  };
-
 
   return (
     <BookTicketWrapper>
@@ -185,9 +233,9 @@ const BookTicket = () => {
             {categories.map((data, index)=>(
 
               <tr key={`typeCombo-${index}`}>
-              <td>{data.name}</td>
+              <td id={`${data.name}`}>{data.name}</td>
               <td>
-                <input key={`typeCombo-${index}`} type="number" name="ticketNum" defaultValue="0" min="0" max="100" onChange={change}></input>
+                <input className="fds" id={`fds_${data.id}`}  key={`typeCombo-${index}`} type="number" name="ticketNum" defaultValue="0" min="0" max="100" onChange={change}></input>
               </td>
               <td className="right">{data.price}</td><td className="right combo-price">0</td>
             </tr>
@@ -235,7 +283,7 @@ const BookTicket = () => {
               <Divider></Divider>
               <p><b>Suất chiếu:</b>{detailSession.startTime}</p>
               <Divider></Divider>
-              <p><b>Combo: </b><span></span></p>
+              <p><b>Combo: </b><span>{fdStr}</span></p>
               <Divider></Divider>
               <p><b>Ghế: </b><span></span></p>
               <Divider></Divider>

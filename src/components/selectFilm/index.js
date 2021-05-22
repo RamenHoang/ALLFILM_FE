@@ -1,34 +1,26 @@
 import React, { useState } from 'react';
 import { SelectFilmWrapper } from './styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSession_BaseFC } from '../../redux/data/actions';
 
-const listFilm = [
-  {
-    title: 'GODZILLA vs KONG',
-    subTitle: 'GODZILLA ĐẠI CHIẾN KONG',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim6.jpg?alt=media&token=21c40a0b-c0fb-4478-8a54-60d73ecf0e85',
-  },
-  {
-    title: 'THE UNHOLY',
-    subTitle: 'Ấn quỷ',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim2.jpg?alt=media&token=14f5caa7-49b1-4bac-980d-bb0307e71651',
-  },
-  {
-    title: 'Bố già',
-    subTitle: 'Bố già',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim3.jpg?alt=media&token=df0a6f6d-20b5-4be5-bccb-885337e25b3c',
-  },
-  {
-    title: 'Song song',
-    subTitle: 'Song song',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim1.jpg?alt=media&token=894e1a44-65cd-4950-987d-9ffb3736df91',
-  },
-];
 
 const SelectFilm = () => {
+
+  const listFilms = useSelector(state => state.data.films)
+  const dispatch = useDispatch()
+
+  const active_film = (e)=>{ 
+    var selectFilm = document.getElementsByClassName("film_active")
+    selectFilm[0]?.classList.remove("film_active")
+    e.currentTarget.classList.add("film_active")
+    var a = document.getElementsByClassName("cinema_active")
+    if(a.length){
+      dispatch(getSession_BaseFC({
+        cinemaId: a[0].id.substring(7),
+        filmId:  e.currentTarget.id.substring(5)
+      }));
+    }
+  }
 
   return (
     <SelectFilmWrapper>
@@ -36,8 +28,8 @@ const SelectFilm = () => {
         <h4>
           CHỌN PHIM
         </h4>
-        {listFilm.map((data, index) => (
-          <div className='item'>
+        {listFilms.map((data, index) => (
+          <div className='item' id={`phim_${data.id}`} onClick={active_film}>
             <img src={data.image} alt="img"></img>
             <div className='name'>
               <p>{data.title}</p>

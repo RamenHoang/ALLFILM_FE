@@ -1,17 +1,26 @@
-import {createSlice} from '@reduxjs/toolkit'
-import {getFilms, getFilm, getSession, getDetailSession, booking, getCategory} from './actions'
+import { createSlice } from '@reduxjs/toolkit'
+import {
+  getFilms, getFilm, getSession,
+  getDetailSession, booking, getCategory,
+  getCinema, getSession_BaseFC, bookTicket
+} from './actions'
+
+import { useHistory } from "react-router-dom";
 
 export const initialState = {
   films: [],
   film: {},
   loading: false,
   error: "",
-  session: [],
+  session_baseFilm: [],
+  session_baseFC: [],
   detailSession: {},
-  categories: []
+  categories: [],
+  cinemas: [],
+  booked_ticket: {}
 }
 
-export const {reducer, actions} = createSlice({
+export const { reducer, actions } = createSlice({
   name: 'Data',
   initialState,
 
@@ -22,73 +31,123 @@ export const {reducer, actions} = createSlice({
   },
 
   extraReducers: { //gọi action có api
-    [getFilms.fulfilled]: (state, {payload}) => {
+    [getFilms.fulfilled]: (state, { payload }) => {
       state.films = payload
       state.loading = false
     },
     [getFilms.pending]: state => {
       state.loading = true;
     },
-    [getFilms.rejected]: (state, {payload}) => {
+    [getFilms.rejected]: (state, { payload }) => {
       state.error = payload
       state.loading = false
     },
-    [getFilm.fulfilled]: (state, {payload}) => {
+    [getFilm.fulfilled]: (state, { payload }) => {
       state.film = payload
       state.loading = false
     },
     [getFilm.pending]: state => {
       state.loading = true;
     },
-    [getFilm.rejected]: (state, {payload}) => {
+    [getFilm.rejected]: (state, { payload }) => {
       state.error = payload
       state.loading = false
     },
-    [getSession.fulfilled]: (state, {payload}) => {
-      state.session = payload
+    [getSession.fulfilled]: (state, { payload }) => {
+      state.session_baseFilm = payload
       state.loading = false
     },
     [getSession.pending]: state => {
       state.loading = true;
     },
-    [getSession.rejected]: (state, {payload}) => {
+    [getSession.rejected]: (state, { payload }) => {
       state.error = payload
       state.loading = false
     },
-    [getDetailSession.fulfilled]: (state, {payload}) => {
+    [getDetailSession.fulfilled]: (state, { payload }) => {
       state.detailSession = payload
-      console.log("detailss-slice: "+ payload)
+      console.log("detailss-slice: " + payload)
       state.loading = false
     },
     [getDetailSession.pending]: state => {
       state.loading = true;
     },
-    [getDetailSession.rejected]: (state, {payload}) => {
+    [getDetailSession.rejected]: (state, { payload }) => {
       state.error = payload
       state.loading = false
     },
-    [booking.fulfilled]: (state, {payload}) => {
+    [booking.fulfilled]: (state, { payload }) => {
       state.detailSession = payload
       state.loading = false
     },
     [booking.pending]: state => {
       state.loading = true;
     },
-    [booking.rejected]: (state, {payload}) => {
+    [booking.rejected]: (state, { payload }) => {
       state.error = payload
       state.loading = false
     },
-    [getCategory.fulfilled]: (state, {payload}) => {
+    [getCategory.fulfilled]: (state, { payload }) => {
       state.categories = payload.data
       state.loading = false
     },
     [getCategory.pending]: state => {
       state.loading = true;
     },
-    [getCategory.rejected]: (state, {payload}) => {
+    [getCategory.rejected]: (state, { payload }) => {
       state.error = payload
       state.loading = false
-    }
+    },
+    [getCinema.fulfilled]: (state, { payload }) => {
+      state.cinemas = payload
+      state.loading = false
+    },
+    [getCinema.pending]: state => {
+      state.loading = true;
+    },
+    [getCinema.rejected]: (state, { payload }) => {
+      state.error = payload
+      state.loading = false
+    },
+
+    [getSession_BaseFC.fulfilled]: (state, { payload }) => {
+      const sessionsGroupByDate = payload[0]?.Sessions.reduce((sessionObject, currentSession) => {
+        if (Array.isArray(sessionObject[currentSession.date])) {
+          sessionObject[currentSession.date].push({
+            id: currentSession.id,
+            startTime: currentSession.startTime
+          });
+          return sessionObject;
+        }
+
+        sessionObject[currentSession.date] = [{
+          id: currentSession.id,
+          startTime: currentSession.startTime
+        }];
+        return sessionObject;
+      }, {});
+
+      state.session_baseFC = sessionsGroupByDate
+      state.loading = false
+    },
+    [getSession_BaseFC.pending]: state => {
+      state.loading = true;
+    },
+    [getSession_BaseFC.rejected]: (state, { payload }) => {
+      state.error = payload
+      state.loading = false
+    },
+    [bookTicket.fulfilled]: (state, { payload }) => {
+      state.booked_ticket = payload.data
+      state.loading = false
+    },
+    [bookTicket.pending]: state => {
+      state.loading = true;
+    },
+    [bookTicket.rejected]: (state, { payload }) => {
+      state.error = payload
+      state.loading = false
+    },
   }
 })
 
