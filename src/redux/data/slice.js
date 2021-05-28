@@ -28,6 +28,10 @@ export const { reducer, actions } = createSlice({
     // logout: (state, {payload}) => {
     //   state.token= {}
     // },
+
+    refeshTicket: (state, {payload}) =>{
+      state.booked_ticket = {}
+    }
   },
 
   extraReducers: { //gọi action có api

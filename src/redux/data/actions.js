@@ -94,12 +94,10 @@ export const bookTicket = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await bookTicketApi(payload);
-      alert("Book success")
       console.log("booking: "+ JSON.stringify(res.data) )
       return res;
     } catch (error) {
       console.log({error});
-      alert("Book fail!!!")
       return thunkAPI.rejectWithValue();
     }
   }
