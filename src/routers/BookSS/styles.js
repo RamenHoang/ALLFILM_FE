@@ -137,6 +137,8 @@ h3 {
   .content {
     width: fit-content; 
     margin: auto;
+    margin-top: 50px;
+
     & > * {
       display: flex;
       text-align: left;

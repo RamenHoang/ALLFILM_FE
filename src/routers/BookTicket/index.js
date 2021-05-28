@@ -199,6 +199,7 @@ const BookTicket = () => {
     document.getElementById('ticket-food').style.display = 'none'
     document.getElementById('map-section').style.display = 'block'
     document.getElementById('btn-back').style.display = 'initial'
+    dispatch(actions.refeshTicket())
   }
 
   const undisplayMap = () => {
