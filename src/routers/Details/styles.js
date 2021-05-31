@@ -216,6 +216,14 @@ export const DetailsWrapper = styled.div`
           font-weight: normal;
           margin-bottom: 5px;
           white-space: break-spaces;
+          span{
+            a{
+              color: black;
+            }
+            a:hover{
+              color: chocolate;
+            }
+          }
         }
       }
     }

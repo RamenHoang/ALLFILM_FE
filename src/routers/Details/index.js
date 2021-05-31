@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/data/slice';
 import { getFilm, getFilms, getSession } from '../../redux/data/actions';
 
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const listCity = [
   {
@@ -49,7 +49,7 @@ const Details = () => {
     dispatch(getSession(id));
     dispatch(getFilm(id));
     dispatch(getFilms());
-  }, []);
+  }, [id]);
 
   const listFilms = useSelector(state => state.data.films)
   const film = useSelector(state => state.data.film)
@@ -99,10 +99,10 @@ const Details = () => {
 
       <Breadcrumb>
         <Breadcrumb.Item>
-          <a href="">Trang chủ</a>
+          <Link to="/">Trang chủ</Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          <a href="">Đặt vé</a>
+          <Link to="/selectTicket">Đặt vé</Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item>{film.name}</Breadcrumb.Item>
       </Breadcrumb>
@@ -122,7 +122,7 @@ const Details = () => {
           allowFullScreen
         ></iframe>
       </ModalWrapper>
-      
+
       <div className="content-event">
         <div className="content-section">
           <div className="first">
@@ -160,11 +160,17 @@ const Details = () => {
                 </div>
                 <div>
                   <p>Đạo diễn</p>
-                  <h3>{film.Director?.name}</h3>
+                  <h3><span><Link to={`/director/${film?.Director?.id}`}>{film.Director?.name}</Link></span></h3>
                 </div>
                 <div>
                   <p>Diễn viên</p>
-                  <h3>{film.Actors?.map((data, index) => (data.name)).join(", ")}</h3>
+                  <h3>{film.Actors?.map((data, index) =>
+                  (
+                    <span>
+                      <Link to={`/actor/${data.id}`}>{data.name}</Link> {",  "}
+                    </span>)
+                  )}
+                  </h3>
                 </div>
                 <div>
                   <p>Ngày phát hành</p>
@@ -233,15 +239,15 @@ const Details = () => {
               <h2>{data.name}</h2>
               <div className="pick-time">
                 <p>2D-Phụ đề</p>
-                {data.Sessions.map((data, index)=>(
-                  
+                {data.Sessions.map((data, index) => (
+
                   <Link to={`/bookTicket/${data.id}`}><Button>{data.startTime}</Button></Link>
-                  ))}
+                ))}
 
               </div>
             </div>
 
-            
+
           ))}
 
 
@@ -256,18 +262,19 @@ const Details = () => {
           <h1>PHIM ĐANG CHIẾU</h1>
           <Divider />
           {listFilms.map((data, index) => (
-            <div key={`movie-${index}`}>
-              <img className="img" src={data.image} alt=""></img>
-              <h3>{data.title}</h3>
-              <h3 className="sub-title">{data.subTitle}</h3>
+          <Link to={`/details/${data.id}`}>
+            <div key={`movie-${index}`} >
+              <img className="img" src={data?.image} alt=""></img>
+              <h3>{data?.title}</h3>
+              <h3 className="sub-title">{data?.subTitle}</h3>
             </div>
+          </Link>
           ))}
           <div className="load-more">
-            <Button>XEM THÊM -></Button>
+            <Button> XEM THÊM </Button>
           </div>
         </div>
       </div>
-
     </DetailsWrapper>
   );
 };

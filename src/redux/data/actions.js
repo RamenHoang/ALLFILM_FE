@@ -2,10 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 // import api
 import { getFilmsApi, getFilmApi, getSessionApi_BaseFilm, 
   getDetailSessionApi, bookingApi, getCategoryApi
-  ,getCinemaApi, getSessionApi_BaseFC} from '../../api/data';
+  ,getCinemaApi, getSessionApi_BaseFC, getActorApi, getDirectorApi} from '../../api/data';
 import { bookTicketApi, checkoutTicketApi} from '../../api/bookTicket';
 import { Alert } from 'antd';
 import { HighlightFilled } from '@ant-design/icons';
+import { convertLegacyProps } from 'antd/lib/button/button';
 
 export const getFilms = createAsyncThunk(
   'data/getFilms',
@@ -111,7 +112,8 @@ export const checkoutTicket = createAsyncThunk(
     try {
       const res = await checkoutTicketApi(payload);
       console.log(JSON.stringify(payload))
-      alert(JSON.stringify(res.data))
+      // alert(JSON.stringify(res.data))
+      window.location=res.data.data
       return res;
     } catch (error) {
       console.log({error});
@@ -150,6 +152,36 @@ export const getSession_BaseFC = createAsyncThunk(
     }
   }
 );
+
+
+export const getActor = createAsyncThunk(
+  'data/getActor',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await getActorApi(payload);
+      console.log(JSON.stringify(res.data))
+      return res.data;
+    } catch (error) {
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+export const getDirector = createAsyncThunk(
+  'data/getDirector',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await getDirectorApi(payload);
+      console.log(JSON.stringify(res.data))
+      return res.data;
+    } catch (error) {
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
 
 
 // export const getDrink = createAsyncThunk(

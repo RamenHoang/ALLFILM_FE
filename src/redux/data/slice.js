@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
   getFilms, getFilm, getSession,
   getDetailSession, booking, getCategory,
-  getCinema, getSession_BaseFC, bookTicket, checkoutTicket
+  getCinema, getSession_BaseFC, bookTicket, checkoutTicket, 
+  getActor, getDirector
 } from './actions'
 
 import { useHistory } from "react-router-dom";
@@ -18,7 +19,9 @@ export const initialState = {
   categories: [],
   cinemas: [],
   booked_ticket: {},
-  link_checkout: ""
+  link_checkout: "",
+  actor: {},
+  director: {}
 }
 
 export const { reducer, actions } = createSlice({
@@ -158,6 +161,28 @@ export const { reducer, actions } = createSlice({
       state.loading = true;
     },
     [checkoutTicket.rejected]: (state, { payload }) => {
+      state.error = payload
+      state.loading = false
+    },
+    [getActor.fulfilled]: (state, { payload }) => {
+      state.actor = payload
+      state.loading = false
+    },
+    [getActor.pending]: state => {
+      state.loading = true;
+    },
+    [getActor.rejected]: (state, { payload }) => {
+      state.error = payload
+      state.loading = false
+    },
+    [getDirector.fulfilled]: (state, { payload }) => {
+      state.director = payload
+      state.loading = false
+    },
+    [getDirector.pending]: state => {
+      state.loading = true;
+    },
+    [getDirector.rejected]: (state, { payload }) => {
       state.error = payload
       state.loading = false
     },
