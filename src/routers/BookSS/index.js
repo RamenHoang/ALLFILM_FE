@@ -7,20 +7,33 @@ import {
 } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilms } from '../../redux/data/actions';
+import { getFilms, checkoutTicket } from '../../redux/data/actions';
 import { waitFor } from '@testing-library/dom';
+
 
 const BookSS = () => {
   const dispatch = useDispatch();
   const loading = useSelector(state => state.data.booked_ticket)
   const listFilms = useSelector(state => state.data.films)
   const booked_ticket = useSelector(state => state.data.booked_ticket)
+  const token = useSelector(state => state.token.token);
 
   useEffect(() => {
     dispatch(getFilms());
   }, []);
 
   const onClickRegister = () => { };
+
+  const checkout = () =>{
+    let params = {
+      id: booked_ticket.id,
+      headers:{
+        'Authorization': `Bearer ${token.access_token}`
+      }
+    }
+    console.log(JSON.stringify(params))
+    dispatch(checkoutTicket(params))
+  }
 
   return (
     <BookSSWrapper>
@@ -66,7 +79,7 @@ const BookSS = () => {
                   <h3>{booked_ticket?.Session?.startTime}</h3>
                 </div>
               </div>
-              <Button>THANH TOÁN </Button>
+              <Button onClick= {checkout}>THANH TOÁN </Button>
             </div>
             : <div className="content">
             <h2>Vui lòng chờ vài giây để xem kết quả.</h2>

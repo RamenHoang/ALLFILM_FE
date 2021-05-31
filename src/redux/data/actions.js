@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getFilmsApi, getFilmApi, getSessionApi_BaseFilm, 
   getDetailSessionApi, bookingApi, getCategoryApi
   ,getCinemaApi, getSessionApi_BaseFC} from '../../api/data';
-import { bookTicketApi} from '../../api/bookTicket';
+import { bookTicketApi, checkoutTicketApi} from '../../api/bookTicket';
 import { Alert } from 'antd';
 import { HighlightFilled } from '@ant-design/icons';
 
@@ -95,6 +95,23 @@ export const bookTicket = createAsyncThunk(
     try {
       const res = await bookTicketApi(payload);
       console.log("booking: "+ JSON.stringify(res.data) )
+      return res;
+    } catch (error) {
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+
+
+export const checkoutTicket = createAsyncThunk(
+  'data/checkoutTicket',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await checkoutTicketApi(payload);
+      console.log(JSON.stringify(payload))
+      alert(JSON.stringify(res.data))
       return res;
     } catch (error) {
       console.log({error});
