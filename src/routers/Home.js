@@ -6,42 +6,15 @@ import banner2 from '../img/banner2.jpg';
 import phim2 from '../img/phim2.jpg';
 import BuyTicket from "../components/BuyTicketComponent";
 import {
-  Tabs,
-  Select,
   Carousel
 } from 'antd';
 import { StarFilled } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../redux/token/actions'; //trong extra reducer
-import { actions } from '../redux/token/slice'; // trong reducer
 import { getFilms, getFilm } from '../redux/data/actions';
 
 
 import {Link } from 'react-router-dom';
-
-const { TabPane } = Tabs;
-const { Option } = Select;
-
-function callback(key) {
-  console.log(key);
-}
-
-const onChange = (value) => {
-  console.log(`selected ${value}`);
-};
-
-const onBlur = () => {
-  console.log('blur');
-};
-
-const onFocus = () => {
-  console.log('focus');
-};
-
-const onSearch = (val) => {
-  console.log('search:', val);
-};
 
 const listReview = [
   {
@@ -146,9 +119,9 @@ const Home = () => {
   const listFilms = useSelector(state => state.data.films);
 
   useEffect(() => {
-    console.log("res");
     dispatch(getFilms());
   }, []);
+
   return (
     <div className="Home">
       <div className="slider_container">

@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
   getFilms, getFilm, getSession,
   getDetailSession, booking, getCategory,
-  getCinema, getSession_BaseFC, bookTicket
+  getCinema, getSession_BaseFC, bookTicket, checkoutTicket, 
+  getActor, getDirector
 } from './actions'
 
 import { useHistory } from "react-router-dom";
@@ -17,7 +18,10 @@ export const initialState = {
   detailSession: {},
   categories: [],
   cinemas: [],
-  booked_ticket: {}
+  booked_ticket: {},
+  link_checkout: "",
+  actor: {},
+  director: {}
 }
 
 export const { reducer, actions } = createSlice({
@@ -25,10 +29,6 @@ export const { reducer, actions } = createSlice({
   initialState,
 
   reducers: { // để gọi action ko có api
-    // logout: (state, {payload}) => {
-    //   state.token= {}
-    // },
-
     refeshTicket: (state, {payload}) =>{
       state.booked_ticket = {}
     }
@@ -149,6 +149,40 @@ export const { reducer, actions } = createSlice({
       state.loading = true;
     },
     [bookTicket.rejected]: (state, { payload }) => {
+      state.error = payload
+      state.loading = false
+    },
+    
+    [checkoutTicket.fulfilled]: (state, { payload }) => {
+      state.link_checkout = payload.data
+      state.loading = false
+    },
+    [checkoutTicket.pending]: state => {
+      state.loading = true;
+    },
+    [checkoutTicket.rejected]: (state, { payload }) => {
+      state.error = payload
+      state.loading = false
+    },
+    [getActor.fulfilled]: (state, { payload }) => {
+      state.actor = payload
+      state.loading = false
+    },
+    [getActor.pending]: state => {
+      state.loading = true;
+    },
+    [getActor.rejected]: (state, { payload }) => {
+      state.error = payload
+      state.loading = false
+    },
+    [getDirector.fulfilled]: (state, { payload }) => {
+      state.director = payload
+      state.loading = false
+    },
+    [getDirector.pending]: state => {
+      state.loading = true;
+    },
+    [getDirector.rejected]: (state, { payload }) => {
       state.error = payload
       state.loading = false
     },

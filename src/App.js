@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PrivateRoute from './routers/PrivateRoute'
 import Home from './routers/Home';
 import Details from './routers/Details';
+import Actor from './routers/Actor';
+import Diretor from './routers/Director';
 import BookTicket from './routers/BookTicket';
 import BookSS from './routers/BookSS';
 import SelectTicket from './routers/SelectTicket';
@@ -17,18 +19,14 @@ import {
   Modal, Form, Input, Button, Checkbox, Tabs,
   Select, DatePicker
 } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, DownCircleFilled } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
 //import to use state
-import { login } from './redux/token/actions'; //trong extra reducer
+import { login} from './redux/token/actions'; //trong extra reducer
 import { actions } from './redux/token/slice'; // trong reducer
 
 function App() {
-
-  // useEffect(() => {
-  //   console.log("token1: "+JSON.stringify(token));
-  // }, []);
 
   const dispatch = useDispatch();
   const token = useSelector(state => state.token.token);
@@ -41,19 +39,29 @@ function App() {
 
   const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false);
 
+  
+  useEffect(() => {
+    dispatch(actions.setToken(localStorage.getItem("allFilms-token")? JSON.parse(localStorage.getItem("allFilms-token")): {}))
+    console.log("token1: "+JSON.stringify(token));
+  }, []);
+
   const showCfModal = () => {
     setIsModalConfirmVisible(true);
   };
 
   const handleCfOk = () => {
-    dispatch(actions.logout());
+    dispatch(actions.logout({}));
     setIsModalConfirmVisible(false);
-    localStorage.removeItem("allFilms-token");
   };
 
   const handleCfCancel = () => {
     setIsModalConfirmVisible(false);
   };
+
+  const goToFilms = ()=>{
+    var films = document.getElementById("#phim")
+    films.scrollIntoView({ behavior: 'smooth'})
+  }
 
   const config = {
     rules: [
@@ -346,7 +354,7 @@ function App() {
         <div className="black">
           <div className="menu">
             <ul className="flex">
-            <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<Link to="/#phim">PHIM</Link>|<a>GÓC ĐIỆN ẢNH</a>|<a>SỰ KIỆN</a>|<a>HỖ TRỢ</a>|<a>THÀNH VIÊN</a>
+            <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<a onClick={goToFilms} >PHIM</a>|<a>GÓC ĐIỆN ẢNH</a>|<a>SỰ KIỆN</a>|<a>HỖ TRỢ</a>|<a>THÀNH VIÊN</a>
             </ul>
           </div>
         </div>
@@ -355,6 +363,8 @@ function App() {
 
         <Switch>
           <Route path="/details/:id" component={Details}></Route>
+          <Route path="/actor/:id" component={Actor}></Route>          
+          <Route path="/director/:id" component={Diretor}></Route>
           <Route path="/bookTicket/bookSS" exact component={BookSS}></Route>
           <PrivateRoute path="/bookTicket/:id" exact component={BookTicket}></PrivateRoute>
           <Route path="/selectTicket" component={SelectTicket}></Route>

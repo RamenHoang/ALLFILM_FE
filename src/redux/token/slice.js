@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit'
 import {login} from './actions'
 
 export const initialState = {
-  token: localStorage.getItem("allFilms-token")|| {},
+  token: {},
   loading: false,
   error: ""
 }
@@ -13,8 +13,11 @@ export const {reducer, actions} = createSlice({
 
   reducers: { // để gọi action ko có api
     logout: (state, {payload}) => {
-      state.token= 
-      localStorage.getItem("allFilms-token", payload)  || {}
+      localStorage.removeItem("allFilms-token");
+      state.token = {}
+    },
+    setToken: (state, {payload}) => {
+      state.token = payload
     },
   },
 
@@ -23,7 +26,7 @@ export const {reducer, actions} = createSlice({
       state.token = payload
       state.loading = false
       if(document.getElementById("normal_login")?.remember?.checked) {
-        localStorage.setItem("allFilms-token", payload.access_token);
+        localStorage.setItem("allFilms-token", JSON.stringify(payload));
       }
     },
     [login.pending]: state => {

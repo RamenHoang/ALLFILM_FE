@@ -153,7 +153,7 @@ const BookTicket = () => {
         seatStr = seatStr.concat().toString()
 
         var bookingTime = moment().format('YYYY-MM-DD h:mm:ss');
-        var keepingTime = moment().add(15, 'seconds').format('YYYY-MM-DD h:mm:ss');
+        var keepingTime = moment().add(15, 'minutes').format('YYYY-MM-DD h:mm:ss');
         let params ={
           data:{
             bookingTime,

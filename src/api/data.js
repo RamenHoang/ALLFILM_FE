@@ -23,5 +23,8 @@ export const bookingApi = params => axios.post(`/booking`,{
 
 export const getCategoryApi = params => axios.get('/food-drink');
 
-
 export const getCinemaApi = params => axios.get(`/cinema`);
+
+export const getActorApi = params => axios.get(`/actor/${params}`);
+
+export const getDirectorApi = params => axios.get(`/director/${params}`);
