@@ -7,7 +7,9 @@ export const login = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await loginApi(payload);
-      return res.data;
+      return {token: res.data,
+               username: payload.username
+                };
     } catch (error) {
       console.log("error");
       return thunkAPI.rejectWithValue();

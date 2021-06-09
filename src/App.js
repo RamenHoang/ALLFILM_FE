@@ -30,10 +30,9 @@ function App() {
 
   const dispatch = useDispatch();
   const token = useSelector(state => state.token.token);
+  const username = useSelector(state => state.token.username);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [userName, setUserName] = useState("lieule99");
-  const [password, setpassword] = useState("Aa@12345");
   const [form] = Form.useForm();
   const { TabPane } = Tabs;
 
@@ -42,7 +41,7 @@ function App() {
   
   useEffect(() => {
     dispatch(actions.setToken(localStorage.getItem("allFilms-token")? JSON.parse(localStorage.getItem("allFilms-token")): {}))
-    console.log("token1: "+JSON.stringify(token));
+    dispatch(actions.setUsername(localStorage.getItem("allFilms-username")? JSON.parse(localStorage.getItem("allFilms-username")): {}))
   }, []);
 
   const showCfModal = () => {
@@ -337,7 +336,7 @@ function App() {
             </Modal>
           </div>
           <div className='logout' style={{ display: (token.access_token ? 'initial' : 'none') }}>
-            {userName + " "}
+            {username + " "}
             <label
               onClick={showCfModal}
             >
