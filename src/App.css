@@ -71,14 +71,17 @@ a{
   width: 200px;
   color: gray;
   transition: 0.3s;
+  position: relative;
+  z-index: 1001;
+  cursor: pointer;
 }
 
-.login:hover>label , .logout>label:hover{
+.login:hover>label{
   cursor: pointer;
   color: chocolate;
 }
 
-.user{
+.icon-user{
   margin-right: 10px;
 }
 
@@ -110,4 +113,29 @@ ul a{
 ul a:hover{
   cursor: pointer;
   color: chocolate;
+}
+
+.user{
+  position: absolute;
+  list-style: none;
+  top: 20px;
+  left: 0px;
+  text-align: left;
+  width: 70%;
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0px 0px 5px #000;
+  display: none;
+}
+
+.user li{
+    padding: 3px;
+}
+
+.user li:hover{
+    color: chocolate;
+}
+
+.logout:hover>ul{
+    display: inherit;
 }
