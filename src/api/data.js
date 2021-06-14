@@ -1,7 +1,7 @@
 import axios from '.';
 
 export const getFilmsApi = params => axios.get('/film', {
-  params: {limit: 9},
+  params: {limit: 12},
 });
 
 export const getFilmApi = params => axios.get(`/film/${params}`);
@@ -10,9 +10,7 @@ export const getSessionApi_BaseFilm = params => axios.get(`/session/?filmId=${pa
 
 export const getSessionApi_BaseFC = params => axios.get(`/session`, {params});
 
-
 export const getDetailSessionApi = params => axios.get(`/session/${params}`);
-
 
 export const bookingApi = params => axios.post(`/booking`,{
   headers:{
@@ -28,3 +26,4 @@ export const getCinemaApi = params => axios.get(`/cinema`);
 export const getActorApi = params => axios.get(`/actor/${params}`);
 
 export const getDirectorApi = params => axios.get(`/director/${params}`);
+

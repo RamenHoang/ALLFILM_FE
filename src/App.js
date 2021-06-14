@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PrivateRoute from './routers/PrivateRoute'
@@ -31,6 +31,7 @@ function App() {
   const dispatch = useDispatch();
   const token = useSelector(state => state.token.token);
   const username = useSelector(state => state.token.username);
+
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
@@ -161,7 +162,7 @@ function App() {
 
           <div className="login" style={{ display: (token.access_token ? 'none' : 'initial') }}>
             <label type="primary" onClick={showModal}>
-              <FontAwesomeIcon icon={faUser} size="3px" className="icon_abs user" />
+              <FontAwesomeIcon icon={faUser} size="3px" className="icon_abs icon-user" />
               Login
             </label>
             <Modal footer={null} visible={isModalVisible} onOk={handleOk} onCancel={closeModal}>
@@ -337,11 +338,10 @@ function App() {
           </div>
           <div className='logout' style={{ display: (token.access_token ? 'initial' : 'none') }}>
             {username + " "}
-            <label
-              onClick={showCfModal}
-            >
-              logout
-            </label>
+            <ul className='user'>
+                <li>Thông tin</li>
+                <li onClick={showCfModal}>Logout</li>
+            </ul>
 
             <Modal title="Confirm logout" visible={isModalConfirmVisible} onOk={handleCfOk} onCancel={handleCfCancel}>
               <p>Are you sure to logout?</p>
