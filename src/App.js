@@ -154,7 +154,7 @@ function App() {
       <Router>
         <div className="header">
         <div className="head_content flex">
-          <img className="logo" src={logo} alt="logo"></img>
+          <Link to="/"><img className="logo" src={logo} alt="logo"></img></Link>
           <div className="div_input">
             <input className="input" defaultValue="Tìm tên phim, diễn viên"></input>
             <FontAwesomeIcon icon={faSearch} size="3px" color="gray" className="icon_abs search" />
@@ -337,7 +337,9 @@ function App() {
             </Modal>
           </div>
           <div className='logout' style={{ display: (token.access_token ? 'initial' : 'none') }}>
-            {username + " "}
+            <p>
+              <FontAwesomeIcon icon={faUser} size="3px" className="icon_abs icon-user" /> {username + " "}
+            </p>
             <ul className='user'>
                 <li>Thông tin</li>
                 <li onClick={showCfModal}>Logout</li>

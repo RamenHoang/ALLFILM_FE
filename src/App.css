@@ -42,7 +42,6 @@ a{
 }
 
 .logo{
-  width: 200px;
   height: 80px;
 }
 
@@ -68,12 +67,20 @@ a{
 }
 
 .login, .logout{
-  width: 200px;
-  color: gray;
+  color: black;
   transition: 0.3s;
   position: relative;
   z-index: 1001;
   cursor: pointer;
+}
+
+.login {
+  width: 200px;
+}
+
+.logout {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .login:hover>label{
@@ -118,14 +125,15 @@ ul a:hover{
 .user{
   position: absolute;
   list-style: none;
-  top: 20px;
+  top: 100%;
   left: 0px;
   text-align: left;
-  width: 70%;
   background: #fff;
-  border-radius: 7px;
-  box-shadow: 0px 0px 5px #000;
+  box-shadow: 0px 5px 10px rgb(120, 120, 120);
   display: none;
+  padding: 5px;
+  width: max-content;
+  transition: ease 0.5s;
 }
 
 .user li{
@@ -138,4 +146,9 @@ ul a:hover{
 
 .logout:hover>ul{
     display: inherit;
+    transition: ease 0.5s;
+}
+
+.logout:hover p{
+    color: chocolate;
 }
