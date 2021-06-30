@@ -11,7 +11,7 @@ import {
 import { StarFilled } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilms, getFilm } from '../redux/data/actions';
+import { getFilms} from '../redux/data/actions';
 
 
 import {Link } from 'react-router-dom';
@@ -90,29 +90,6 @@ const listEvent = [
   },
 ];
 
-const listCity = [
-  {
-    key: 'daNang',
-    value: 'Đà Nẵng',
-  },
-  {
-    key: 'haNoi',
-    value: 'Hà Nội',
-  },
-];
-
-
-const listTheater = [
-  {
-    key: 'hoaKhanh',
-    value: 'Hòa Khánh',
-  },
-  {
-    key: 'hoaKhanh',
-    value: 'Hòa Khánh',
-  },
-];
-
 const Home = () => {
   
   const dispatch = useDispatch();
@@ -147,7 +124,7 @@ const Home = () => {
       </div>
 
       <div className="container">
-        <div className="chose_time" id="#phim">
+        <div className="tabs" id="#phim">
           <a href="">PHIM ĐANG CHIẾU</a>
           <a href="">PHIM SẮP CHIẾU</a>
         </div>
@@ -272,27 +249,27 @@ const Home = () => {
           </div>
           <div class="content-text">
             <p>
-              Galaxy Cinema là một trong những công ty tư nhân đầu tiên về điện
+              AllFilms Cinema là một trong những công ty tư nhân đầu tiên về điện
               ảnh được thành lập từ năm 2003, đã khẳng định thương hiệu là 1
               trong 10 địa điểm vui chơi giải trí được yêu thích nhất. Ngoài hệ
               thống rạp chiếu phim hiện đại, thu hút hàng triệu lượt người đến
-              xem, Galaxy Cinema còn hấp dẫn khán giả bởi không khí thân thiện
+              xem, AllFilms Cinema còn hấp dẫn khán giả bởi không khí thân thiện
               cũng như chất lượng dịch vụ hàng đầu.
             </p>
             <p>
-              Đến website galaxycine.vn, quý khách sẽ được cập nhật nhanh chóng
+              Đến website AllFilms, quý khách sẽ được cập nhật nhanh chóng
               các phim hay nhất phim mới nhất đang chiếu hoặc sắp chiếu. Lịch
-              chiếu tại mọi hệ thống rạp chiếu phim của Galaxy Cinema cũng được
+              chiếu tại mọi hệ thống rạp chiếu phim của AllFilms Cinema cũng được
               cập nhật đầy đủ hàng ngày hàng giờ trên trang chủ.
             </p>
             <p>
-              Đặt vé tại Galaxy Cinema dễ dàng chỉ sau vài thao tác vô cùng đơn
+              Đặt vé tại AllFilms Cinema dễ dàng chỉ sau vài thao tác vô cùng đơn
               giản. Để mua vé, hãy vào tab Mua vé. Quý khách có thể chọn Mua vé
               theo phim, theo rạp, theo ngày tùy cách nào tiện lợi nhất cho bản
               thân.Sau đó, tiến hành mua vé theo các bước hướng dẫn. Chỉ trong
               vài phút, quý khách sẽ nhận được tin nhắn và email phản hồi Đặt vé
-              thành công của Galaxy Cinema. Quý khách có thể dùng tin nhắn lấy
-              vé tại quầy vé của Galaxy Cinema hoặc quét mã QR để một bước vào
+              thành công của AllFilms Cinema. Quý khách có thể dùng tin nhắn lấy
+              vé tại quầy vé của AllFilms Cinema hoặc quét mã QR để một bước vào
               rạp mà không cần tốn thêm bất kỳ công đoạn nào nữa.
             </p>
             <p>
@@ -310,23 +287,23 @@ const Home = () => {
               chọn được suất chiếu và chỗ ngồi vừa ý nhất.
             </p>
             <p>
-              Galaxy Cinema luôn có những chương trình khuyến mãi, ưu đãi, quà
+              AllFilms Cinema luôn có những chương trình khuyến mãi, ưu đãi, quà
               tặng vô cùng hấp dẫn như giảm giá vé, tặng vé xem phim miễn phí,
-              tặng Combo, tặng quà phim… dành cho quý khách.{' '}
+              tặng Combo, tặng quà phim… dành cho quý khách.
             </p>
             <p>
-              Trang web galaxycine.vn còn có mục Góc Điện Ảnh - sở hữu lượng dữ
+              Trang web AllFilms còn có mục Góc Điện Ảnh - sở hữu lượng dữ
               liệu về phim, diễn viên và đạo diễn, giúp quý khách dễ dàng chọn
               được phim mình yêu thích và nâng cao kiến thức về điện ảnh của bản
-              thân.{' '}
+              thân.
             </p>
             <p>
-              Ngoài ra, vào mỗi tháng, Galaxy Cinema cũng giới thiệu các phim
+              Ngoài ra, vào mỗi tháng, AllFilms Cinema cũng giới thiệu các phim
               sắp chiếu hot nhất trong mục Phim Hay Tháng để quý khách sớm có sự
-              tính toán.{' '}
+              tính toán.
             </p>
             <p>
-              Hiện nay, Galaxy Cinema đang ngày càng phát triển hơn nữa với các
+              Hiện nay, AllFilms Cinema đang ngày càng phát triển hơn nữa với các
               chương trình đặc sắc, các khuyến mãi hấp dẫn, đem đến cho khán giả
               những bộ phim bom tấn của thế giới và Việt Nam nhanh chóng và sớm
               nhất.

@@ -1,12 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import api
+
 import { getFilmsApi, getFilmApi, getSessionApi_BaseFilm, 
   getDetailSessionApi, bookingApi, getCategoryApi
-  ,getCinemaApi, getSessionApi_BaseFC, getActorApi, getDirectorApi} from '../../api/data';
+  ,getCinemaApi, getSessionApi_BaseFC, getActorApi, getDirectorApi,
+  getUserInfoApi, editUserInfoApi, getUserBookingInfoApi} from '../../api/data';
 import { bookTicketApi, checkoutTicketApi} from '../../api/bookTicket';
-import { Alert } from 'antd';
-import { HighlightFilled } from '@ant-design/icons';
-import { convertLegacyProps } from 'antd/lib/button/button';
 
 export const getFilms = createAsyncThunk(
   'data/getFilms',
@@ -104,15 +102,12 @@ export const bookTicket = createAsyncThunk(
   }
 );
 
-
-
 export const checkoutTicket = createAsyncThunk(
   'data/checkoutTicket',
   async (payload, thunkAPI) => {
     try {
       const res = await checkoutTicketApi(payload);
       console.log(JSON.stringify(payload))
-      // alert(JSON.stringify(res.data))
       window.location=res.data.data
       return res;
     } catch (error) {
@@ -121,7 +116,6 @@ export const checkoutTicket = createAsyncThunk(
     }
   }
 );
-
 
 export const getCinema = createAsyncThunk(
   'data/getCinema',
@@ -136,8 +130,6 @@ export const getCinema = createAsyncThunk(
   }
 );
 
-
-
 export const getSession_BaseFC = createAsyncThunk(
   'data/getSession_BaseFC',
   async (payload, thunkAPI) => {
@@ -145,21 +137,17 @@ export const getSession_BaseFC = createAsyncThunk(
       const res = await getSessionApi_BaseFC(payload);
       return res.data;
     } catch (error) {
-      console.log({error});
-      
-      console.log("failll")
+      console.log({error});      
       return thunkAPI.rejectWithValue();
     }
   }
 );
-
 
 export const getActor = createAsyncThunk(
   'data/getActor',
   async (payload, thunkAPI) => {
     try {
       const res = await getActorApi(payload);
-      console.log(JSON.stringify(res.data))
       return res.data;
     } catch (error) {
       console.log({error});
@@ -182,18 +170,42 @@ export const getDirector = createAsyncThunk(
   }
 );
 
+export const getUserInfo = createAsyncThunk(
+  'data/getUserInfo',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await getUserInfoApi(payload);
+      return res.data;
+    } catch (error) {
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
 
+export const editUserInfo = createAsyncThunk(
+  'data/editUserInfo',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await editUserInfoApi(payload);
+      return res.data;
+    } catch (error) {      
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
 
-// export const getDrink = createAsyncThunk(
-//   'drink/getDrink',
-//   async (payload, thunkAPI) => {
-//     try {
-//       const res = await getDrinkApi(payload); //getDrink có filter
-//       // console.log(res);
-//       return res;
-
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue();
-//     }
-//   },
-// );
+export const getUserBookingInfo = createAsyncThunk(
+  'data/getUserBookingInfo',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await getUserBookingInfoApi(payload);
+      console.log(res.data)
+      return res.data;
+    } catch (error) {      
+      console.log({error});
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);

@@ -5,21 +5,21 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PrivateRoute from './routers/PrivateRoute'
 import Home from './routers/Home';
 import Details from './routers/Details';
+import InfoUser from './routers/InfoUserPage';
 import Actor from './routers/Actor';
 import Diretor from './routers/Director';
 import BookTicket from './routers/BookTicket';
 import BookSS from './routers/BookSS';
 import SelectTicket from './routers/SelectTicket';
 import SelectFilm from './routers/SelectTicket';
-import Drink from './routers/Login(test)';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import './libs/AlertBox/style.css';
 import {
   Modal, Form, Input, Button, Checkbox, Tabs,
-  Select, DatePicker
+  DatePicker
 } from 'antd';
-import { UserOutlined, LockOutlined, DownCircleFilled } from '@ant-design/icons';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
 //import to use state
@@ -93,8 +93,6 @@ function App() {
     console.log('Received values of form: ', values);
   };
 
-  const { Option } = Select;
-
   const formItemLayout = {
     labelCol: {
       xs: {
@@ -163,7 +161,7 @@ function App() {
           <div className="login" style={{ display: (token.access_token ? 'none' : 'initial') }}>
             <label type="primary" onClick={showModal}>
               <FontAwesomeIcon icon={faUser} size="3px" className="icon_abs icon-user" />
-              Login
+              Đăng nhập
             </label>
             <Modal footer={null} visible={isModalVisible} onOk={handleOk} onCancel={closeModal}>
 
@@ -323,7 +321,7 @@ function App() {
                       {...tailFormItemLayout}
                     >
                       <Checkbox>
-                        I have read the <a href="">agreement</a>
+                        I have read the <a href="/">agreement</a>
                       </Checkbox>
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
@@ -338,11 +336,11 @@ function App() {
           </div>
           <div className='logout' style={{ display: (token.access_token ? 'initial' : 'none') }}>
             <p>
-              <FontAwesomeIcon icon={faUser} size="3px" className="icon_abs icon-user" /> {username + " "}
+              <FontAwesomeIcon icon={faUser} size="3px" className="icon_abs icon-user" /> {`${username}`}
             </p>
             <ul className='user'>
-                <li>Thông tin</li>
-                <li onClick={showCfModal}>Logout</li>
+                <Link to="/member"><li>Thông tin</li></Link>
+                <li onClick={showCfModal}>Đăng xuất</li>
             </ul>
 
             <Modal title="Confirm logout" visible={isModalConfirmVisible} onOk={handleCfOk} onCancel={handleCfCancel}>
@@ -370,7 +368,7 @@ function App() {
           <PrivateRoute path="/bookTicket/:id" exact component={BookTicket}></PrivateRoute>
           <Route path="/selectTicket" component={SelectTicket}></Route>
           <Route path="/test" component={SelectFilm}></Route>
-          <Route path="/login" component={Drink}></Route>
+          <Route path="/member" component={InfoUser}></Route>
           <Route
             path="/" exact
             component={Home} />

@@ -39,7 +39,7 @@
     padding: 15px;
 }
 
-.chose_time{
+.tabs{
     display: flex;
     justify-content: flex-start;
     height: 50px;
@@ -47,7 +47,7 @@
     position: relative;
 }
 
-.chose_time::after{
+.tabs::after{
     content: " ";
     position: absolute;
     bottom: 0px;
@@ -57,7 +57,7 @@
     background-color: rgb(196, 193, 191);
 }
 
-.container .chose_time a{
+.tabs a{
     line-height: 35px;
     position: relative;
     color: rgb(153, 152, 152);
@@ -65,7 +65,7 @@
     font-size: large;
 }
 
-.chose_time a::after{
+.tabs a::after{
     content: " ";
     position: absolute;
     bottom: 0px;
@@ -78,14 +78,13 @@
 }
 
 
-.container .chose_time a:hover{
+.tabs a:hover{
     color: rgb(39, 36, 34);
 }
 
-.container .chose_time a:hover:after{
+.tabs a:hover:after{
     transform: scale(1);
 }
-
 
 .list_films{
     width: 100%;
@@ -137,6 +136,7 @@
     color: #ffffff;
     background-color: #f26b38;
     border-color: #f26b38;
+    cursor: pointer;
 }
 
 .fl-right {
@@ -151,7 +151,7 @@ footer{
 }
 
 footer p{
-    width: 1250px;
+    width: 100%;
     margin: auto;
     line-height: 65px;
 }

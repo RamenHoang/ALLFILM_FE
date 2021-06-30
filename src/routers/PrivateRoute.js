@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom'
+import { BrowserRouter as Route, Redirect } from 'react-router-dom'
 
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const PrivateRoute = ({ component: Component, ...rest })=>{
 

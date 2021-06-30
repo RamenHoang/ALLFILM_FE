@@ -3,10 +3,8 @@ import {
   getFilms, getFilm, getSession,
   getDetailSession, booking, getCategory,
   getCinema, getSession_BaseFC, bookTicket, checkoutTicket, 
-  getActor, getDirector
+  getActor, getDirector, getUserInfo, editUserInfo, getUserBookingInfo
 } from './actions'
-
-import { useHistory } from "react-router-dom";
 
 export const initialState = {
   films: [],
@@ -21,7 +19,9 @@ export const initialState = {
   booked_ticket: {},
   link_checkout: "",
   actor: {},
-  director: {}
+  director: {},
+  userInfo:{},
+  userBookingInfo: {}
 }
 
 export const { reducer, actions } = createSlice({
@@ -152,7 +152,6 @@ export const { reducer, actions } = createSlice({
       state.error = payload
       state.loading = false
     },
-    
     [checkoutTicket.fulfilled]: (state, { payload }) => {
       state.link_checkout = payload.data
       state.loading = false
@@ -183,6 +182,32 @@ export const { reducer, actions } = createSlice({
       state.loading = true;
     },
     [getDirector.rejected]: (state, { payload }) => {
+      state.error = payload
+      state.loading = false
+    },
+    [getUserInfo.fulfilled]: (state, { payload }) => {
+      state.userInfo = payload
+      state.loading = false
+    },
+    [getUserInfo.pending]: state => {
+      state.loading = true;
+    },
+    [getUserInfo.rejected]: (state, { payload }) => {
+      state.error = payload
+      state.loading = false
+    },
+    [editUserInfo.fulfilled]: (state, { payload }) => {
+      state.loading = false
+      alert("Thay đổi thông tin thành công.")
+    },
+    [getUserBookingInfo.fulfilled]: (state, { payload }) => {
+      state.userBookingInfo = payload
+      state.loading = false
+    },
+    [getUserBookingInfo.pending]: state => {
+      state.loading = true;
+    },
+    [getUserBookingInfo.rejected]: (state, { payload }) => {
       state.error = payload
       state.loading = false
     },

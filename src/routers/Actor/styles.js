@@ -9,8 +9,6 @@ max-width: 100%;
   text-align: left;
 }
 
-
-
 .ant-breadcrumb {
   text-align: left;
   margin-bottom: 20px;

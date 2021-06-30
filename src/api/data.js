@@ -27,3 +27,11 @@ export const getActorApi = params => axios.get(`/actor/${params}`);
 
 export const getDirectorApi = params => axios.get(`/director/${params}`);
 
+export const getUserInfoApi = params => axios.get(`/user/profile`,
+params);
+
+export const editUserInfoApi = params => axios.put(`/user/profile`, params.data,
+{headers: params.headers});
+
+export const getUserBookingInfoApi = params => axios.get(`user/profile/booking?fromDate=${params.data.fromDate}&toDate=${params.data.toDate}`,
+{headers: params.headers});

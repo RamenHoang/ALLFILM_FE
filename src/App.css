@@ -100,7 +100,7 @@ a{
 }
 
 .menu{
-  width: 1450px;
+  width: 100%;
   margin: auto;
 }
 
@@ -111,7 +111,7 @@ a{
   line-height: 50px;
 }
 
-ul a{
+.menu ul a{
   width: 178.5px;
   transition: 0.3s;
   color: white;
@@ -129,6 +129,7 @@ ul a:hover{
   left: 0px;
   text-align: left;
   background: #fff;
+  color: #000;
   box-shadow: 0px 5px 10px rgb(120, 120, 120);
   display: none;
   padding: 5px;
@@ -137,7 +138,11 @@ ul a:hover{
 }
 
 .user li{
-    padding: 3px;
+    padding: 2px 10px 2px 10px;
+}
+
+.user a{
+  color: #000;
 }
 
 .user li:hover{
@@ -147,6 +152,10 @@ ul a:hover{
 .logout:hover>ul{
     display: inherit;
     transition: ease 0.5s;
+}
+
+.logout p{
+  margin: 0;
 }
 
 .logout:hover p{

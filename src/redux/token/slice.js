@@ -23,7 +23,7 @@ export const {reducer, actions} = createSlice({
       state.token = payload
     },
     setUsername: (state, {payload}) =>{
-    state.username = payload
+      state.username = payload
     }
   },
 
@@ -36,13 +36,18 @@ export const {reducer, actions} = createSlice({
         localStorage.setItem("allFilms-token", JSON.stringify(payload.token))
         localStorage.setItem("allFilms-username", JSON.stringify(payload.username))
       }
+      console.log("ss")
     },
     [login.pending]: state => {
       state.loading = true;
+      
+      console.log("pd")
     },
     [login.rejected]: (state, {payload}) => {
       state.error = payload
       state.loading = false
+      
+      console.log("f")
     },
   },
 })
