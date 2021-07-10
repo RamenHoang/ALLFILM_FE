@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.png';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from 'react-router-dom';
 import PrivateRoute from './routers/PrivateRoute'
 import Home from './routers/Home';
 import Details from './routers/Details';
@@ -32,14 +32,12 @@ function App() {
   const token = useSelector(state => state.token.token);
   const username = useSelector(state => state.token.username);
 
-
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   const { TabPane } = Tabs;
 
   const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false);
 
-  
   useEffect(() => {
     dispatch(actions.setToken(localStorage.getItem("allFilms-token")? JSON.parse(localStorage.getItem("allFilms-token")): {}))
     dispatch(actions.setUsername(localStorage.getItem("allFilms-username")? JSON.parse(localStorage.getItem("allFilms-username")): {}))
@@ -59,8 +57,20 @@ function App() {
   };
 
   const goToFilms = ()=>{
-    var films = document.getElementById("#phim")
-    films.scrollIntoView({ behavior: 'smooth'})
+    let films = document.getElementById("#phim");
+
+    if (films) {
+      films.scrollIntoView({ behavior: 'smooth'});
+
+      return;
+    }
+
+    document.getElementById("logo-allfilms").click();
+
+    setTimeout(() => {
+      films = document.getElementById("#phim");
+      films.scrollIntoView({ behavior: 'smooth'});
+    });
   }
 
   const config = {
@@ -152,7 +162,7 @@ function App() {
       <Router>
         <div className="header">
         <div className="head_content flex">
-          <Link to="/"><img className="logo" src={logo} alt="logo"></img></Link>
+          <Link to="/" id="logo-allfilms"><img className="logo" src={logo} alt="logo"></img></Link>
           <div className="div_input">
             <input className="input" defaultValue="Tìm tên phim, diễn viên"></input>
             <FontAwesomeIcon icon={faSearch} size="3px" color="gray" className="icon_abs search" />
@@ -368,7 +378,7 @@ function App() {
           <PrivateRoute path="/bookTicket/:id" exact component={BookTicket}></PrivateRoute>
           <Route path="/selectTicket" component={SelectTicket}></Route>
           <Route path="/test" component={SelectFilm}></Route>
-          <Route path="/member" component={InfoUser}></Route>
+          <PrivateRoute path="/member" exact component={InfoUser}></PrivateRoute>
           <Route
             path="/" exact
             component={Home} />
