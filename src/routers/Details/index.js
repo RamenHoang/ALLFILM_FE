@@ -141,7 +141,7 @@ const Details = () => {
                 <StarFilled />
                 <p className="rateNo">
                   {film.rating}
-                  /{film.rating_turn}
+                  /{film.ratingTurn}
                 </p>
                 <Button>ĐÁNH GIÁ</Button>
               </div>

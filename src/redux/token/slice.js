@@ -2,8 +2,8 @@ import {createSlice} from '@reduxjs/toolkit'
 import {login} from './actions'
 
 export const initialState = {
-  token: {},
-  username: "",
+  token: localStorage.getItem("allFilms-token") ? JSON.parse(localStorage.getItem("allFilms-token")) : {},
+  username: localStorage.getItem("allFilms-username") ? JSON.parse(localStorage.getItem("allFilms-username")) : "",
   loading: false,
   error: ""
 }

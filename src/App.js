@@ -38,11 +38,6 @@ function App() {
 
   const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false);
 
-  useEffect(() => {
-    dispatch(actions.setToken(localStorage.getItem("allFilms-token")? JSON.parse(localStorage.getItem("allFilms-token")): {}))
-    dispatch(actions.setUsername(localStorage.getItem("allFilms-username")? JSON.parse(localStorage.getItem("allFilms-username")): {}))
-  }, []);
-
   const showCfModal = () => {
     setIsModalConfirmVisible(true);
   };
