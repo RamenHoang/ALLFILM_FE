@@ -43,6 +43,32 @@ h3 {
     }
   }
 
+  table{
+        
+    color: black;
+    width: 100%;
+    table-layout: fixed;
+    margin: 10px 0 30px 0;
+
+    th, td {
+      text-align: center;
+      padding: 10px;
+    }
+    
+    tr:nth-child(even){background-color: #f9f9f9}
+    
+    tr:nth-child(odd){background-color: white}
+    
+    th {
+      background-color: #47251c;
+      color: white;
+    }
+
+    .tr-sum{
+      color: #f26b38;
+    }
+  }
+
   .content {
     width: 80%;
     min-width: fit-content;
@@ -128,10 +154,10 @@ h3 {
         }
       }
       
-    .change{
-      margin-top: 10px;
-      width: fit-content;
-    }
+      .change{
+        margin-top: 10px;
+        width: fit-content;
+      }
     }
   }
 }

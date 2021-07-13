@@ -21,7 +21,7 @@ export const initialState = {
   actor: {},
   director: {},
   userInfo:{},
-  userBookingInfo: {}
+  userBookingInfo: []
 }
 
 export const { reducer, actions } = createSlice({
