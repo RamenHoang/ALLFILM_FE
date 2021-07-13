@@ -126,6 +126,21 @@ const InfoUser = () => {
                 </span>
               </div>
             </div>
+
+            <table>
+              <tr><th>Thời gian</th><th>Rạp</th><th>Phim</th><th>Tổng tiền</th></tr>
+              
+              {bookingInfo.map((data, index) => (
+                <tr key={`bookinfo-${index}`}>
+                  <td>{data?.Session?.startTime}</td>
+                  <td>{data?.Session?.Cinema?.address}</td>
+                  <td>{data?.Session?.Film?.name}</td>
+                  <td>{data.fee}</td>
+                </tr>
+              ))}
+
+            </table>
+
           </div>
 
         </TabPane>
