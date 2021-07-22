@@ -1,5 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit'
-import {login} from './actions'
+import { createSlice } from '@reduxjs/toolkit'
+import { login } from './actions'
 
 export const initialState = {
   token: localStorage.getItem("allFilms-token") ? JSON.parse(localStorage.getItem("allFilms-token")) : {},
@@ -8,46 +8,41 @@ export const initialState = {
   error: ""
 }
 
-export const {reducer, actions} = createSlice({
+export const { reducer, actions } = createSlice({
   name: 'Login',
   initialState,
 
   reducers: { // để gọi action ko có api
-    logout: (state, {payload}) => {
+    logout: (state, { payload }) => {
       localStorage.removeItem("allFilms-token")
       localStorage.removeItem("allFilms-username")
       state.token = {}
-      state.username=""
+      state.username = ""
     },
-    setToken: (state, {payload}) => {
+    setToken: (state, { payload }) => {
       state.token = payload
     },
-    setUsername: (state, {payload}) =>{
+    setUsername: (state, { payload }) => {
       state.username = payload
     }
   },
 
   extraReducers: { //gọi action có api
-    [login.fulfilled]: (state, {payload}) => {
+    [login.fulfilled]: (state, { payload }) => {
       state.token = payload.token
       state.username = payload.username
       state.loading = false
-      if(document.getElementById("normal_login")?.remember?.checked) {
+      if (document.getElementById("normal_login")?.remember?.checked) {
         localStorage.setItem("allFilms-token", JSON.stringify(payload.token))
         localStorage.setItem("allFilms-username", JSON.stringify(payload.username))
       }
-      console.log("ss")
     },
     [login.pending]: state => {
       state.loading = true;
-      
-      console.log("pd")
     },
-    [login.rejected]: (state, {payload}) => {
+    [login.rejected]: (state, { payload }) => {
       state.error = payload
       state.loading = false
-      
-      console.log("f")
     },
   },
 })

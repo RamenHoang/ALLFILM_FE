@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import '../css/home.css';
 import '../css/reviewFilm.css';
 import banner from '../img/banner.jpg';
@@ -11,10 +11,10 @@ import {
 import { StarFilled } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilms} from '../redux/data/actions';
+import { getFilms } from '../redux/data/actions';
 
 
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const listReview = [
   {
@@ -91,7 +91,7 @@ const listEvent = [
 ];
 
 const Home = () => {
-  
+
   const dispatch = useDispatch();
   const listFilms = useSelector(state => state.data.films);
 
@@ -103,20 +103,20 @@ const Home = () => {
     <div className="Home">
       <div className="slider_container">
         <Carousel autoplay autoplaySpeed={3000} className="slider">
-          <div tabIndex={1} key={1}>
-            <img src={banner}></img>
+          <div tabIndex={1}>
+            <img src={banner} alt=""></img>
           </div>
-          <div tabIndex={2} key={2}>
-            <img src={banner2}></img>
+          <div tabIndex={2}>
+            <img src={banner2} alt=""></img>
           </div>
-          <div tabIndex={3} key={3}>
-            <img src={banner}></img>
+          <div tabIndex={3}>
+            <img src={banner} alt=""></img>
           </div>
-          <div tabIndex={4} key={4}>
-            <img src={banner2}></img>
+          <div tabIndex={4}>
+            <img src={banner2} alt=""></img>
           </div>
-          <div tabIndex={5} key={5}>
-            <img src={banner}></img>
+          <div tabIndex={5}>
+            <img src={banner} alt=""></img>
           </div>
         </Carousel>
 
@@ -125,13 +125,13 @@ const Home = () => {
 
       <div className="container">
         <div className="tabs" id="#phim">
-          <a href="">PHIM ĐANG CHIẾU</a>
-          <a href="">PHIM SẮP CHIẾU</a>
+          <a href="/">PHIM ĐANG CHIẾU</a>
+          <a href="/">PHIM SẮP CHIẾU</a>
         </div>
 
         <div className="list_films flex upper">
           {listFilms.map((data, index) => (
-            <div className="film" key={`film-${index}`}>
+            <div className="film" key={`film-3-${index}`}>
               <Link to={`/details/${data.id}`}>
                 <div className="img_film">
                   <img src={data.image} alt="phim"></img>
@@ -153,11 +153,11 @@ const Home = () => {
         <div className="review-film flex">
           <div className="col">
             <div className="title-block">
-              <a href="">BÌNH LUẬN PHIM</a>
+              <a href="/">BÌNH LUẬN PHIM</a>
             </div>
             {listReview.map((data, index) => (
-              <article className="block flex">
-                <a href="">
+              <article className="block flex" key={`cmt${index}`} >
+                <a href="/">
                   <div>
                     <img src={phim2} alt="phim"></img>
                   </div>
@@ -165,7 +165,7 @@ const Home = () => {
 
                 <div className="movie-thum">
                   <h5>
-                    <a href="">
+                    <a href="/">
                       [Review]
                       {data.title}
                     </a>
@@ -191,18 +191,18 @@ const Home = () => {
 
           <div className="col">
             <div className="title-block">
-              <a href="">BLOG ĐIỆN ẢNH</a>
+              <a href="/">BLOG ĐIỆN ẢNH</a>
             </div>
             {listReview.map((data, index) => (
-              <article className="block flex">
-                <a href="">
+              <article className="block flex" key={`blog-${index}`}>
+                <a href="/">
                   <div>
                     <img src={phim2} alt="phim"></img>
                   </div>
                 </a>
                 <div className="movie-thum">
                   <h5>
-                    <a href="">
+                    <a href="/">
                       [Review]
                       {data.title}
                     </a>
@@ -223,17 +223,17 @@ const Home = () => {
 
         <div>
           <div className="title-block">
-            <a href="">TIN KHUYẾN MÃI</a>
+            <a href="/">TIN KHUYẾN MÃI</a>
           </div>
           <div className="flex no-space-between">
             {listEvent.map((data, index) => (
-              <div class="promotion-item-home">
+              <div className="promotion-item-home" key={`event-${index}`}>
                 <a href={data.url}>
                   <img src={data.image} alt="km"></img>
-                  <div class="overlay">
+                  <div className="overlay">
                     <h2>{data.name}</h2>
                     <p>{data.description}</p>
-                    <a href={data.url} class="btn secondary-white">
+                    <a href={data.url} className="btn secondary-white">
                       chi tiết
                     </a>
                   </div>
@@ -245,9 +245,9 @@ const Home = () => {
 
         <div>
           <div className="title-block">
-            <a href="">ALLFILMS CINEMA</a>
+            <Link to="/">ALLFILMS CINEMA</Link>
           </div>
-          <div class="content-text">
+          <div className="content-text">
             <p>
               AllFilms Cinema là một trong những công ty tư nhân đầu tiên về điện
               ảnh được thành lập từ năm 2003, đã khẳng định thương hiệu là 1

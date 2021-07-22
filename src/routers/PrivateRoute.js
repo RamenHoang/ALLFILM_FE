@@ -10,30 +10,30 @@ const openNotification = () => {
       'Bạn không được phép truy cập vào đường dẫn này. Vui lòng đăng nhập.',
     duration: 2,
   };
-  
+
   notification.warning(args);
 };
 
-const PrivateRoute = ({ component: Component, ...rest })=>{
+const PrivateRoute = ({ component: Component, ...rest }) => {
 
-    const token = useSelector(state => state.token.token);
+  const token = useSelector(state => state.token.token);
 
-    useEffect(() => {
-        if(token.access_token === undefined) {
-            openNotification();
-        }
-    }, []);
-  
-    return(
-        <Route 
-            {...rest} 
-            render={(props) => (
-                token.access_token !== undefined
-                ? <Component {...props} />
-                : <Redirect to='/' />
-            )} 
-        />
-    )
-} 
+  useEffect(() => {
+    if (token.access_token === undefined) {
+      openNotification();
+    }
+  }, []);
+
+  return (
+    <Route
+      {...rest}
+      render={(props) => (
+        token.access_token !== undefined
+          ? <Component {...props} />
+          : <Redirect to='/' />
+      )}
+    />
+  )
+}
 
 export default PrivateRoute

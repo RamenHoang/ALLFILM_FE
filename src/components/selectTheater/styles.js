@@ -9,7 +9,6 @@ export const SelectTheaterWrapper = styled.div`
     text-align: left;
   }
 
-
   .col{
     width: 100%;
     h4{

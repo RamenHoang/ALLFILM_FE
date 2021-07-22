@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Modal } from 'antd';
 
 export const DetailsWrapper = styled.div`
 margin: 20px auto 20px auto;
@@ -161,4 +160,4 @@ h3 {
     }
   }
 }
-`;
+`

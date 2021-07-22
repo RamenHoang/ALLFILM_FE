@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Modal } from 'antd';
 
 export const BookSSWrapper = styled.div`
 margin: 20px auto 20px auto;
@@ -10,12 +9,9 @@ max-width: 100%;
   text-align: left;
 }
 
-
-
 .ant-breadcrumb {
   text-align: left;
   margin-bottom: 20px;
-  ${'' /* margin: 20px; */}
 }
 
 h2 {
@@ -45,8 +41,6 @@ h3 {
 }
 
 .content-section {
-  ${'' /* display: flex;
-  justify-content: flex-start; */}
   width: 65%;
 
   .description,
@@ -86,8 +80,6 @@ h3 {
       margin: 0;
     }
 
-    
-
     .pick-time {
       border: 1px solid #00000033;
       width: 100%;
@@ -98,7 +90,6 @@ h3 {
       p {
         font-size: 16px;
         padding-top: 5px;
-        ${'' /* width: 25%; */}
         margin-right: 20px;
       }
 
@@ -112,7 +103,6 @@ h3 {
       }
     }
   }
-
 
   .inline{
     .ant-select{
@@ -130,7 +120,6 @@ h3 {
   .img-primary {
     width: 250px;
     height: 381px;
-    ${'' /* margin-left: 20px; */}
     margin-right: 20px;
   }
 
@@ -224,7 +213,6 @@ h3 {
     }
   }
 
-
   .img {
     width: 100%;
     height: auto;
@@ -278,6 +266,7 @@ h3 {
       color: white;
     }
   }
+
   .ant-input {
     width: 100%;
     height: 40px;
@@ -294,7 +283,6 @@ h3 {
     text-align: left;
   }
 }
-
 
 @media screen and (min-width: 320px) and (max-width: 860px){
   .content-event {

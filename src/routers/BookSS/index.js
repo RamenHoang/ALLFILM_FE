@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BookSSWrapper, ModalWrapper } from './styles';
+import React, { useEffect } from 'react';
+import { BookSSWrapper } from './styles';
 import {
   Input,
   Button,
@@ -8,12 +8,10 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilms, checkoutTicket } from '../../redux/data/actions';
-import { waitFor } from '@testing-library/dom';
-
+import { Link } from "react-router-dom";
 
 const BookSS = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.data.booked_ticket)
   const listFilms = useSelector(state => state.data.films)
   const booked_ticket = useSelector(state => state.data.booked_ticket)
   const token = useSelector(state => state.token.token);
@@ -24,14 +22,13 @@ const BookSS = () => {
 
   const onClickRegister = () => { };
 
-  const checkout = () =>{
+  const checkout = () => {
     let params = {
       id: booked_ticket.id,
-      headers:{
+      headers: {
         'Authorization': `Bearer ${token.access_token}`
       }
     }
-    console.log(JSON.stringify(params))
     dispatch(checkoutTicket(params))
   }
 
@@ -79,12 +76,12 @@ const BookSS = () => {
                   <h3>{booked_ticket?.Session?.startTime}</h3>
                 </div>
               </div>
-              <Button onClick= {checkout}>THANH TOÁN </Button>
+              <Button onClick={checkout}>THANH TOÁN </Button>
             </div>
             : <div className="content">
-            <h2>Vui lòng chờ vài giây để xem kết quả.</h2>
-            <h2>Nếu trong vòng 10 giây vẫn chưa thấy kết quả, vui lòng kiểm tra lại kết nối internet và đặt lại lần nữa.</h2>
-          </div>
+              <h2>Vui lòng chờ vài giây để xem kết quả.</h2>
+              <h2>Nếu trong vòng 10 giây vẫn chưa thấy kết quả, vui lòng kiểm tra lại kết nối internet và đặt lại lần nữa.</h2>
+            </div>
           }
         </div>
         <div className="event-section">
@@ -97,11 +94,13 @@ const BookSS = () => {
           <h1>PHIM ĐANG CHIẾU</h1>
           <Divider />
           {listFilms.map((data, index) => (
-            <div key={`movie1-${index}`}>
-              <img className="img" src={data.image} alt=""></img>
-              <h3>{data.title}</h3>
-              <h3 className="sub-title">{data.subTitle}</h3>
-            </div>
+            <Link to={`/details/${data.id}`}>
+              <div key={`movie-ss-${index}`}>
+                <img className="img" src={data.image} alt=""></img>
+                <h3>{data.title}</h3>
+                <h3 className="sub-title">{data.subTitle}</h3>
+              </div>
+            </Link>
           ))}
           <div className="load-more">
             <Button>XEM THÊM</Button>

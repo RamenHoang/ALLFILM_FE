@@ -75,8 +75,8 @@ const Details = () => {
   };
 
   const onClickRegister = () => { };
+
   const getDate = (date, dateString) => {
-    console.log(date, dateString);
   };
 
   const onChange = (value) => {
@@ -144,7 +144,7 @@ const Details = () => {
                   /10
                 </p>
                 <Button>ĐÁNH GIÁ</Button>
-              </div>              
+              </div>
               <p>
                 Lượt đánh giá:{` ${film.ratingTurn}`}
               </p>
@@ -265,13 +265,13 @@ const Details = () => {
           <h1>PHIM ĐANG CHIẾU</h1>
           <Divider />
           {listFilms.map((data, index) => (
-          <Link to={`/details/${data.id}`}>
-            <div key={`movie-${index}`} >
-              <img className="img" src={data?.image} alt=""></img>
-              <h3>{data?.title}</h3>
-              <h3 className="sub-title">{data?.subTitle}</h3>
-            </div>
-          </Link>
+            <Link to={`/details/${data.id}`}>
+              <div key={`movie-4-${index}`} >
+                <img className="img" src={data?.image} alt=""></img>
+                <h3>{data?.title}</h3>
+                <h3 className="sub-title">{data?.subTitle}</h3>
+              </div>
+            </Link>
           ))}
           <div className="load-more">
             <Button> XEM THÊM </Button>

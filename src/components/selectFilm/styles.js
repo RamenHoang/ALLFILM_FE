@@ -9,7 +9,6 @@ export const SelectFilmWrapper = styled.div`
     text-align: left;
   }
 
-
   .col{
     width: 100%;
     h4{
@@ -58,15 +57,11 @@ export const SelectFilmWrapper = styled.div`
       }
     }
 
-    
     .film_active{
       background: #ffdea894;
       .name>p{
         color: chocolate;
       }
     }
-
-
   }
-
 `;

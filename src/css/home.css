@@ -1,9 +1,9 @@
-.slider_container{
+.slider_container {
     height: 500px;
     position: relative;
 }
 
-.slider{
+.slider {
     width: 100%;
     max-width: 1800px;
     height: fit-content;
@@ -11,20 +11,19 @@
     margin: auto;
 }
 
-.slider img{
+.slider img {
     max-width: 1800px;
     height: 500px;
     width: auto;
     margin: auto;
 }
 
-.slider .Carousel{
+.slider .Carousel {
     margin: auto;
 }
 
 .awssld {
     --slider-height-percentage: 500px !important;
-
 }
 
 .awssld__bullets {
@@ -32,14 +31,14 @@
     z-index: 5;
 }
 
-.container{
+.container {
     width: 1250px;
     max-width: 94%;
     margin: auto;
     padding: 15px;
 }
 
-.tabs{
+.tabs {
     display: flex;
     justify-content: flex-start;
     height: 50px;
@@ -47,7 +46,7 @@
     position: relative;
 }
 
-.tabs::after{
+.tabs::after {
     content: " ";
     position: absolute;
     bottom: 0px;
@@ -57,15 +56,15 @@
     background-color: rgb(196, 193, 191);
 }
 
-.tabs a{
+.tabs a {
     line-height: 35px;
     position: relative;
     color: rgb(153, 152, 152);
-    margin: 10px 45px 0 0; 
+    margin: 10px 45px 0 0;
     font-size: large;
 }
 
-.tabs a::after{
+.tabs a::after {
     content: " ";
     position: absolute;
     bottom: 0px;
@@ -77,29 +76,28 @@
     transition: 0.5s;
 }
 
-
-.tabs a:hover{
+.tabs a:hover {
     color: rgb(39, 36, 34);
 }
 
-.tabs a:hover:after{
+.tabs a:hover:after {
     transform: scale(1);
 }
 
-.list_films{
+.list_films {
     width: 100%;
     margin-top: 15px;
     flex-direction: row;
     font-weight: 500;
 }
 
-.film{
+.film {
     margin-top: 10px;
     margin-top: 25px;
-    width:32%;
+    width: 32%;
 }
 
-.film p{
+.film p {
     font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 5px;
@@ -107,15 +105,15 @@
     text-align: left;
 }
 
-.film p{
+.film p {
     color: #43464b;
 }
 
-.film p.vn{
+.film p.vn {
     color: #a0a3a7;
 }
 
-.film img{
+.film img {
     width: 100%;
     height: 100%;
 }
@@ -143,14 +141,14 @@
     float: right;
 }
 
-footer{
+footer {
     background-color: rgba(24, 23, 23, 0.842);
     color: white;
     height: 65px;
     width: 100%;
 }
 
-footer p{
+footer p {
     width: 100%;
     margin: auto;
     line-height: 65px;
@@ -171,6 +169,6 @@ footer p{
 .rating .rateNo {
     margin-left: 10px;
     align-items: baseline;
-    display:inline;
+    display: inline;
     color: black;
 }

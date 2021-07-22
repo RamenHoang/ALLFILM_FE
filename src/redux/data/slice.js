@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
   getFilms, getFilm, getSession,
   getDetailSession, booking, getCategory,
-  getCinema, getSession_BaseFC, bookTicket, checkoutTicket, 
+  getCinema, getSession_BaseFC, bookTicket, checkoutTicket,
   getActor, getDirector, getUserInfo, editUserInfo, getUserBookingInfo
 } from './actions'
 
@@ -20,7 +20,7 @@ export const initialState = {
   link_checkout: "",
   actor: {},
   director: {},
-  userInfo:{},
+  userInfo: {},
   userBookingInfo: []
 }
 
@@ -29,7 +29,7 @@ export const { reducer, actions } = createSlice({
   initialState,
 
   reducers: { // để gọi action ko có api
-    refeshTicket: (state, {payload}) =>{
+    refeshTicket: (state, { payload }) => {
       state.booked_ticket = {}
     }
   },
@@ -62,7 +62,7 @@ export const { reducer, actions } = createSlice({
       state.loading = false
     },
     [getSession.pending]: state => {
-      state.loading = true;
+      state.loading = true
     },
     [getSession.rejected]: (state, { payload }) => {
       state.error = payload
@@ -70,11 +70,10 @@ export const { reducer, actions } = createSlice({
     },
     [getDetailSession.fulfilled]: (state, { payload }) => {
       state.detailSession = payload
-      console.log("detailss-slice: " + payload)
       state.loading = false
     },
     [getDetailSession.pending]: state => {
-      state.loading = true;
+      state.loading = true
     },
     [getDetailSession.rejected]: (state, { payload }) => {
       state.error = payload
@@ -85,7 +84,7 @@ export const { reducer, actions } = createSlice({
       state.loading = false
     },
     [booking.pending]: state => {
-      state.loading = true;
+      state.loading = true
     },
     [booking.rejected]: (state, { payload }) => {
       state.error = payload

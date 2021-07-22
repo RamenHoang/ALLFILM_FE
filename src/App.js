@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import logo from './logo.png';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PrivateRoute from './routers/PrivateRoute'
 import Home from './routers/Home';
 import Details from './routers/Details';
@@ -14,7 +14,6 @@ import SelectTicket from './routers/SelectTicket';
 import SelectFilm from './routers/SelectTicket';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
-import './libs/AlertBox/style.css';
 import {
   Modal, Form, Input, Button, Checkbox, Tabs,
   DatePicker
@@ -22,9 +21,8 @@ import {
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
-//import to use state
-import { login} from './redux/token/actions'; //trong extra reducer
-import { actions } from './redux/token/slice'; // trong reducer
+import { login } from './redux/token/actions';
+import { actions } from './redux/token/slice';
 
 function App() {
 
@@ -51,12 +49,11 @@ function App() {
     setIsModalConfirmVisible(false);
   };
 
-  const goToFilms = ()=>{
+  const goToFilms = () => {
     let films = document.getElementById("#phim");
 
     if (films) {
-      films.scrollIntoView({ behavior: 'smooth'});
-
+      films.scrollIntoView({ behavior: 'smooth' });
       return;
     }
 
@@ -64,7 +61,7 @@ function App() {
 
     setTimeout(() => {
       films = document.getElementById("#phim");
-      films.scrollIntoView({ behavior: 'smooth'});
+      films.scrollIntoView({ behavior: 'smooth' });
     });
   }
 
@@ -94,52 +91,6 @@ function App() {
     console.log(key);
   }
 
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
-  };
-
-  const formItemLayout = {
-    labelCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 8,
-      },
-    },
-    wrapperCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 16,
-      },
-    },
-  };
-
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0,
-      },
-      sm: {
-        span: 16,
-        offset: 8,
-      },
-    },
-  };
-
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
-    }
-  };
-
   const loginClick = () => {
 
     const name = document.getElementById("normal_login").username.value;
@@ -156,218 +107,223 @@ function App() {
     <div className="App">
       <Router>
         <div className="header">
-        <div className="head_content flex">
-          <Link to="/" id="logo-allfilms"><img className="logo" src={logo} alt="logo"></img></Link>
-          <div className="div_input">
-            <input className="input" defaultValue="Tìm tên phim, diễn viên"></input>
-            <FontAwesomeIcon icon={faSearch} size="3px" color="gray" className="icon_abs search" />
-          </div>
+          <div className="head_content flex">
+            <Link to="/" id="logo-allfilms"><img className="logo" src={logo} alt="logo"></img></Link>
+            <div className="div_input">
+              <input className="input" defaultValue="Tìm tên phim, diễn viên"></input>
+              <FontAwesomeIcon icon={faSearch} color="gray" className="icon_abs search" />
+            </div>
 
-          <div className="login" style={{ display: (token.access_token ? 'none' : 'initial') }}>
-            <label type="primary" onClick={showModal}>
-              <FontAwesomeIcon icon={faUser} size="3px" className="icon_abs icon-user" />
-              Đăng nhập
-            </label>
-            <Modal footer={null} visible={isModalVisible} onOk={handleOk} onCancel={closeModal}>
+            <div className="login" style={{ display: (token.access_token ? 'none' : 'initial') }}>
+              <label type="primary" onClick={showModal}>
+                <FontAwesomeIcon icon={faUser} className="icon_abs icon-user" />
+                Đăng nhập
+              </label>
+              <Modal footer={null} visible={isModalVisible} onOk={handleOk} onCancel={closeModal}>
 
-              <Tabs defaultActiveKey="1" onChange={callback}>
-                <TabPane tab="Login" key="1">
-                  <Form
-                    name="normal_login"
-                    className="login-form"
-                    initialValues={{ remember: true }}
-                    onFinish={onFinish}
-                  >
-                    <Form.Item
-                      name="username"
-                      rules={[{ required: true, message: 'Please input your Username!' }]}
+                <Tabs defaultActiveKey="1" onChange={callback}>
+                  <TabPane tab="Đăng nhập" key="1">
+                    <Form
+                      name="normal_login"
+                      className="login-form"
+                      initialValues={{ remember: true }}
                     >
-                      <Input name="username" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-                    </Form.Item>
-                    <Form.Item
-                      name="password"
-                      rules={[{ required: true, message: 'Please input your Password!' }]}
-                    >
-                      <Input
-                        name="password"
-                        prefix={<LockOutlined className="site-form-item-icon" />}
-                        type="password"
-                        placeholder="Password"
-                      />
-                    </Form.Item>
-                    <Form.Item>
-                      <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox name="remember">Remember me</Checkbox>
+                      <Form.Item
+                        name="username"
+                        rules={[{ required: true, message: 'Nhập tên người dùng của bạn!' }]}
+                      >
+                        <Input name="username" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                       </Form.Item>
-                      {/* <a className="login-form-forgot" href="">
-                        Forgot password</a> */}
-                    </Form.Item>
+                      <Form.Item
+                        name="password"
+                        rules={[{ required: true, message: 'Nhập mật khẩu của bạn!' }]}
+                      >
+                        <Input
+                          name="password"
+                          prefix={<LockOutlined className="site-form-item-icon" />}
+                          type="password"
+                          placeholder="Password"
+                        />
+                      </Form.Item>
+                      <Form.Item>
+                        <Form.Item name="remember" valuePropName="checked" noStyle>
+                          <Checkbox name="remember">Ghi nhớ tài khoản này</Checkbox>
+                        </Form.Item>
+                      </Form.Item>
 
-                    <Form.Item>
-                      <Button type="primary" className="login-form-button"
-                        onClick={loginClick}>
-                        Log in
-                      </Button>
-                    </Form.Item>
-                  </Form>
-                </TabPane>
-                <TabPane tab="Register" key="2">
-                  <Form
-                    {...formItemLayout}
-                    form={form}
-                    name="register"
-                    onFinish={onFinish}
-                    initialValues={{
-                      residence: ['zhejiang', 'hangzhou', 'xihu'],
-                      prefix: '86',
-                    }}
-                    scrollToFirstError
-                  >
-                    <Form.Item
-                      name="email"
-                      label="E-mail"
-                      rules={[
-                        {
-                          type: 'email',
-                          message: 'The input is not valid E-mail!',
-                        },
-                        {
-                          required: true,
-                          message: 'Please input your E-mail!',
-                        },
-                      ]}
+                      <Form.Item>
+                        <Button type="primary" className="login-form-button"
+                          onClick={loginClick}>
+                          Đăng nhập
+                        </Button>
+                      </Form.Item>
+                    </Form>
+                  </TabPane>
+                  <TabPane tab="Đăng ký" key="2">
+                    <Form
+                      form={form}
+                      name="register"
+                      scrollToFirstError
                     >
-                      <Input />
-                    </Form.Item>
-
-                    <Form.Item
-                      name="password"
-                      label="Password"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please input your password!',
-                        },
-                      ]}
-                      hasFeedback
-                    >
-                      <Input.Password />
-                    </Form.Item>
-
-                    <Form.Item
-                      name="confirm"
-                      label="Confirm Password"
-                      dependencies={['password']}
-                      hasFeedback
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please confirm your password!',
-                        },
-                        ({ getFieldValue }) => ({
-                          validator(_, value) {
-                            if (!value || getFieldValue('password') === value) {
-                              return Promise.resolve();
-                            }
-
-                            return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                      <Form.Item
+                        name="email"
+                        label="E-mail"
+                        rules={[
+                          {
+                            type: 'email',
+                            message: 'Email không hợp lệ!',
                           },
-                        }),
-                      ]}
-                    >
-                      <Input.Password />
-                    </Form.Item>
+                          {
+                            required: true,
+                            message: 'Nhập E-mail của bạn!',
+                          },
+                        ]}
+                      >
+                        <Input />
+                      </Form.Item>
 
-                    <Form.Item
-                      name="nickname"
-                      label="Nickname"
-                      tooltip="What do you want others to call you?"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please input your nickname!',
-                          whitespace: true,
-                        },
-                      ]}
-                    >
-                      <Input />
-                    </Form.Item>
+                      <Form.Item
+                        name="password"
+                        label="Mật khẩu"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Nhập mật khẩu của bạn!',
+                          },
+                        ]}
+                        hasFeedback
+                      >
+                        <Input.Password />
+                      </Form.Item>
 
-                    <Form.Item
-                      name="phone"
-                      label="Phone Number"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please input your phone number!',
-                        },
-                      ]}
-                    >
-                      <Input
-                        style={{
-                          width: '100%',
-                        }}
-                      />
-                    </Form.Item>
+                      <Form.Item
+                        name="confirm"
+                        label="Xác nhận lại"
+                        dependencies={['password']}
+                        hasFeedback
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Hãy xác nhận lại mật khẩu!',
+                          },
+                          ({ getFieldValue }) => ({
+                            validator(_, value) {
+                              if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                              }
 
-                    <Form.Item name="date-picker" label="DatePicker" {...config}>
-                      <DatePicker placeholder="select birthday" />
-                    </Form.Item>
+                              return Promise.reject(new Error('Mật khẩu xác nhận lại không trùng khớp!!!'));
+                            },
+                          }),
+                        ]}
+                      >
+                        <Input.Password />
+                      </Form.Item>
 
-                    <Form.Item
-                      name="agreement"
-                      valuePropName="checked"
-                      rules={[
-                        {
-                          validator: (_, value) =>
-                            value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-                        },
-                      ]}
-                      {...tailFormItemLayout}
-                    >
-                      <Checkbox>
-                        I have read the <a href="/">agreement</a>
-                      </Checkbox>
-                    </Form.Item>
-                    <Form.Item {...tailFormItemLayout}>
-                      <Button type="primary" htmlType="submit">
-                        Register
-                      </Button>
-                    </Form.Item>
-                  </Form>
-                </TabPane>
-              </Tabs>
-            </Modal>
-          </div>
-          <div className='logout' style={{ display: (token.access_token ? 'initial' : 'none') }}>
-            <p>
-              <FontAwesomeIcon icon={faUser} size="3px" className="icon_abs icon-user" /> {`${username}`}
-            </p>
-            <ul className='user'>
+                      <Form.Item
+                        name="username"
+                        label="Tên người dùng"
+                        tooltip="Tên dùng cho đăng nhập."
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Hãy nhập tên người dùng của bạn!',
+                            whitespace: true,
+                          },
+                        ]}
+                      >
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item
+                        name="fullname"
+                        label="Họ tên"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Hãy nhập họ tên đầy đủ của bạn!',
+                            whitespace: true,
+                          },
+                        ]}
+                      >
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item
+                        name="nickname"
+                        label="Biệt danh"
+                        tooltip="Mọi người thường gọi bạn là gì?"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Hãy nhập biệt danh của bạn!',
+                            whitespace: true,
+                          },
+                        ]}
+                      >
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item
+                        name="phone"
+                        label="Số điện thoại"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Hãy nhập số điện thoại của bạn!',
+                          },
+                        ]}
+                      >
+                        <Input
+                          style={{
+                            width: '100%',
+                          }}
+                        />
+                      </Form.Item>
+
+                      <Form.Item name="date-picker" label="Ngày sinh" {...config}>
+                        <DatePicker placeholder="Chọn ngày sinh" />
+                      </Form.Item>
+
+                      <Form.Item>
+                        <Button type="primary" htmlType="submit">
+                          Đăng ký
+                        </Button>
+                      </Form.Item>
+                    </Form>
+                  </TabPane>
+                </Tabs>
+              </Modal>
+            </div>
+            <div className='logout' style={{ display: (token.access_token ? 'initial' : 'none') }}>
+              <p>
+                <FontAwesomeIcon icon={faUser} className="icon_abs icon-user" /> {`${username}`}
+              </p>
+              <ul className='user'>
                 <Link to="/member"><li>Thông tin</li></Link>
                 <li onClick={showCfModal}>Đăng xuất</li>
-            </ul>
+              </ul>
 
-            <Modal title="Confirm logout" visible={isModalConfirmVisible} onOk={handleCfOk} onCancel={handleCfCancel}>
-              <p>Are you sure to logout?</p>
-            </Modal>
+              <Modal title="Confirm logout" visible={isModalConfirmVisible} onOk={handleCfOk} onCancel={handleCfCancel}>
+                <p>Bạn có chắc chắn muốn đăng xuất khỏi hệ thống?</p>
+              </Modal>
 
+            </div>
+          </div>
+
+          <div className="black">
+            <div className="menu">
+              <ul className="flex">
+                <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<p onClick={goToFilms} >PHIM</p>|<p>GÓC ĐIỆN ẢNH</p>|<p>SỰ KIỆN</p>|<p>HỖ TRỢ</p>|<p>THÀNH VIÊN</p>
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div className="black">
-          <div className="menu">
-            <ul className="flex">
-            <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<a onClick={goToFilms} >PHIM</a>|<a>GÓC ĐIỆN ẢNH</a>|<a>SỰ KIỆN</a>|<a>HỖ TRỢ</a>|<a>THÀNH VIÊN</a>
-            </ul>
-          </div>
-        </div>
-      </div>
-      
 
         <Switch>
           <Route path="/details/:id" component={Details}></Route>
-          <Route path="/actor/:id" component={Actor}></Route>          
+          <Route path="/actor/:id" component={Actor}></Route>
           <Route path="/director/:id" component={Diretor}></Route>
           <Route path="/bookTicket/bookSS" exact component={BookSS}></Route>
           <PrivateRoute path="/bookTicket/:id" exact component={BookTicket}></PrivateRoute>

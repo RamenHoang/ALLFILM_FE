@@ -9,12 +9,9 @@ max-width: 100%;
   text-align: left;
 }
 
-
-
 .ant-breadcrumb {
   text-align: left;
   margin-bottom: 20px;
-  ${'' /* margin: 20px; */}
 }
 
 h2 {
@@ -44,8 +41,6 @@ h3 {
 }
 
 .content-section {
-  ${'' /* display: flex;
-  justify-content: flex-start; */}
   width: 65%;
 
   .inline{
@@ -60,7 +55,6 @@ h3 {
   .img-primary {
     width: 250px;
     height: 381px;
-    ${'' /* margin-left: 20px; */}
     margin-right: 20px;
   }
 
@@ -188,7 +182,6 @@ h3 {
     }
   }
 
-
   .img {
     width: 100%;
     height: auto;
@@ -258,7 +251,6 @@ h3 {
     text-align: left;
   }
 }
-
 
 @media screen and (min-width: 320px) and (max-width: 860px){
   .content-event {

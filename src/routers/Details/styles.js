@@ -13,7 +13,6 @@ export const DetailsWrapper = styled.div`
   .ant-breadcrumb {
     text-align: left;
     margin-bottom: 20px;
-    ${'' /* margin: 20px; */}
   }
 
   h1 {
@@ -42,8 +41,6 @@ export const DetailsWrapper = styled.div`
   }
 
   .content-section {
-    ${'' /* display: flex;
-    justify-content: flex-start; */}
     max-width: 65%;
 
     .description,
@@ -83,8 +80,6 @@ export const DetailsWrapper = styled.div`
         margin: 0;
       }
 
-      
-
       .pick-time {
         border: 1px solid #00000033;
         width: 100%;
@@ -95,7 +90,6 @@ export const DetailsWrapper = styled.div`
         p {
           font-size: 16px;
           padding-top: 5px;
-          ${'' /* width: 25%; */}
           margin-right: 20px;
         }
 
@@ -109,7 +103,6 @@ export const DetailsWrapper = styled.div`
         }
       }
     }
-
 
     .inline{
       .ant-select{
@@ -127,7 +120,6 @@ export const DetailsWrapper = styled.div`
     .img-primary {
       width: 250px;
       height: 381px;
-      ${'' /* margin-left: 20px; */}
       margin-right: 20px;
     }
 
@@ -251,7 +243,6 @@ export const DetailsWrapper = styled.div`
       }
     }
 
-
     .img {
       width: 100%;
       height: auto;
@@ -321,7 +312,6 @@ export const DetailsWrapper = styled.div`
       text-align: left;
     }
   }
-
   
   @media screen and (min-width: 320px) and (max-width: 860px){
     .content-event {
@@ -339,7 +329,6 @@ export const DetailsWrapper = styled.div`
       }
     }
   }
-
 `;
 
 export const ModalWrapper = styled(Modal)`

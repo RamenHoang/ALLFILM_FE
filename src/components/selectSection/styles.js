@@ -9,7 +9,6 @@ export const SelectSectionWrapper = styled.div`
     text-align: left;
   }
 
-
   .col{
     width: 100%;
     h4{
@@ -59,5 +58,4 @@ export const SelectSectionWrapper = styled.div`
       }
     }
   }
-
 `;

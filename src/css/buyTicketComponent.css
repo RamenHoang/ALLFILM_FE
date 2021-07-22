@@ -1,4 +1,4 @@
-.box-buy-ticket{
+.box-buy-ticket {
     position: absolute;
     right: 5%;
     top: 30px;
@@ -7,7 +7,7 @@
     padding: 15px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 768px){
+@media screen and (min-width: 320px) and (max-width: 768px) {
     .box-buy-ticket {
         position: initial;
         background-color: #1f1b19d2;
@@ -16,7 +16,7 @@
     }
 }
 
-@media only screen and (max-width: 1280px){
+@media only screen and (max-width: 1280px) {
     .box-buy-ticket {
         right: 30px;
         top: 22px;
@@ -35,36 +35,36 @@
     vertical-align: baseline;
 }
 
-.box-buy-ticket .ant-tabs{
+.box-buy-ticket .ant-tabs {
     color: white;
     margin-top: 45px;
 }
 
-.box-buy-ticket .ant-tabs-tab{
+.box-buy-ticket .ant-tabs-tab {
     padding: 8px 12px;
 }
 
-.box-buy-ticket .ant-tabs-tab:hover{
+.box-buy-ticket .ant-tabs-tab:hover {
     color: coral;
 }
 
-.box-buy-ticket .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+.box-buy-ticket .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
     color: coral;
 }
 
-.box-buy-ticket .ant-tabs-ink-bar{
+.box-buy-ticket .ant-tabs-ink-bar {
     background: coral;
-    width:max-content;
+    width: max-content;
 }
 
-.box-buy-ticket .ant-select{
+.box-buy-ticket .ant-select {
     min-width: 100%;
     margin: 10px 5px 15px 0px;
     display: block;
     background-color: #a7a4a0d0;
 }
 
-.box-buy-ticket .ant-select:not(.ant-select-customize-input) .ant-select-selector{
+.box-buy-ticket .ant-select:not(.ant-select-customize-input) .ant-select-selector {
     background-color: rgba(122, 118, 113, 0.801);
     border: none;
     color: white;
@@ -73,11 +73,11 @@
     text-align: left;
 }
 
-.box-buy-ticket .ant-select-selection-search-input{
+.box-buy-ticket .ant-select-selection-search-input {
     justify-content: left;
     left: 0;
 }
 
-.ant-select-selection-item{
+.ant-select-selection-item {
     cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { DirectorWrapper } from './styles';
 import {
   Input,
@@ -17,7 +17,6 @@ const Director = () => {
   const dispatch = useDispatch();
   const listFilms = useSelector(state => state.data.films)
   const director = useSelector(state => state.data.director);
-  console.log(JSON.stringify(director))
 
   var history = useHistory();
 
@@ -27,7 +26,6 @@ const Director = () => {
   }, []);
 
   const onClickRegister = () => { };
-
 
   return (
     <DirectorWrapper>

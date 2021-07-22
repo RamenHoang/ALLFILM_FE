@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ActorWrapper } from './styles';
 import {
   Input,
@@ -31,7 +31,7 @@ const Actor = () => {
   return (
     <ActorWrapper>
 
-      <Breadcrumb style={{'margin-bottom': '0px'}}>
+      <Breadcrumb style={{ 'margin-bottom': '0px' }}>
         <Breadcrumb.Item>
           <Link to="/">Trang chủ</Link>
         </Breadcrumb.Item>

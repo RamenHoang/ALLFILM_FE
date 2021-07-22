@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SelectSectionWrapper } from './styles';
 import {
   Button
 } from 'antd';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const SelectSection = () => {
 
   const listSS = useSelector(state => state.data.session_baseFC)
-  console.log("list ss: " + JSON.stringify(listSS))
 
   return (
     <SelectSectionWrapper>
@@ -28,7 +27,7 @@ const SelectSection = () => {
                   <label>2D -  Phụ đề</label>
                   <div className="time">
                     {listSS[key].map((data, index) => (
-                      <Link to={`/bookTicket/${data.id}`}><Button>{data.startTime.substring(11,16)}</Button></Link>
+                      <Link to={`/bookTicket/${data.id}`}><Button>{data.startTime.substring(11, 16)}</Button></Link>
                     ))}
                   </div>
                 </div>

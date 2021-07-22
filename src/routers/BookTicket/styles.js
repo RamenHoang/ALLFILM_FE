@@ -209,10 +209,15 @@ export const BookTicketWrapper = styled.div`
         .div-img{
           width: 100%;
           text-align: center;
+
           img{
             width: 85%;
             height: auto;
             margin: 10px 0 20px 0;
+          }
+
+          p{
+            color: #220d08a8;
           }
 
           .sub-title{
@@ -280,3 +285,4 @@ export const BookTicketWrapper = styled.div`
     display: none;
   }
 `;
+

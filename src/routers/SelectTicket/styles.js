@@ -44,4 +44,4 @@ export const SelectTicketWrapper = styled.div`
       }
     }
   }
-`;
+`

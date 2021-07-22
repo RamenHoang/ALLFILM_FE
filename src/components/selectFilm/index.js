@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SelectFilmWrapper } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSession_BaseFC } from '../../redux/data/actions';
-
 
 const SelectFilm = () => {
 
   const listFilms = useSelector(state => state.data.films)
   const dispatch = useDispatch()
 
-  const active_film = (e)=>{ 
+  const active_film = (e) => {
     var selectFilm = document.getElementsByClassName("film_active")
     selectFilm[0]?.classList.remove("film_active")
     e.currentTarget.classList.add("film_active")
     var a = document.getElementsByClassName("cinema_active")
-    if(a.length){
+    if (a.length) {
       dispatch(getSession_BaseFC({
         cinemaId: a[0].id.substring(7),
-        filmId:  e.currentTarget.id.substring(5)
+        filmId: e.currentTarget.id.substring(5)
       }));
     }
   }

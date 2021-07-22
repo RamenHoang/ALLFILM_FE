@@ -61,7 +61,6 @@ const InfoUser = () => {
         }
       }
       dispatch(getUserBookingInfo(params));
-      console.log(JSON.stringify(bookingInfo))
     }
     else {
       alert("Vui lòng chọn thời gian!!!")
@@ -81,7 +80,7 @@ const InfoUser = () => {
       </Breadcrumb>
 
       <Tabs defaultActiveKey="1">
-        <TabPane tab="THÔNG TIN THÀNH VIÊN" key="1" className="flex">
+        <TabPane tab="THÔNG TIN THÀNH VIÊN" className="flex" key="6">
           <div className="content-section">
             <div className="content">
               <h3>THÔNG TIN CÁ NHÂN</h3>
@@ -108,7 +107,7 @@ const InfoUser = () => {
 
         </TabPane>
 
-        <TabPane tab="GIAO DỊCH CÁ NHÂN" key="2" className="flex">
+        <TabPane tab="GIAO DỊCH CÁ NHÂN" className="flex" key="7">
           <div className="content-section">
             <div className="content">
               <h3>GIAO DỊCH CỦA TÔI</h3>
@@ -129,7 +128,7 @@ const InfoUser = () => {
 
             <table>
               <tr><th>Thời gian</th><th>Rạp</th><th>Phim</th><th>Tổng tiền</th></tr>
-              
+
               {bookingInfo.map((data, index) => (
                 <tr key={`bookinfo-${index}`}>
                   <td>{data?.Session?.startTime}</td>
@@ -138,14 +137,11 @@ const InfoUser = () => {
                   <td>{data.fee}</td>
                 </tr>
               ))}
-
             </table>
-
           </div>
-
         </TabPane>
 
-        <TabPane tab="THAY ĐỔI THÔNG TIN" key="3" className="flex">
+        <TabPane tab="THAY ĐỔI THÔNG TIN" className="flex" key="8">
           <div className="content-section">
             <div className="content">
               <h3>THÔNG TIN CÁ NHÂN</h3>
@@ -177,14 +173,13 @@ const InfoUser = () => {
         </TabPane>
       </Tabs>
 
-
       <div className="tabs" id="#phim">
-        <a href="">PHIM ĐANG CHIẾU</a>
+        <Link to="/">PHIM ĐANG CHIẾU</Link>
       </div>
 
       <div className="list_films flex upper">
         {listFilms.map((data, index) => (
-          <div className="film" key={`film-${index}`}>
+          <div className="film" key={`film-4-${index}`}>
             <Link to={`/details/${data.id}`}>
               <div className="img_film">
                 <img src={data.image} alt="phim"></img>
