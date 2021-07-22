@@ -214,6 +214,12 @@ export const BookTicketWrapper = styled.div`
             height: auto;
             margin: 10px 0 20px 0;
           }
+
+          .sub-title{
+            color: gray;
+            margin: 8px 0 30px 0;
+          }
+          
         }
       
         .ant-divider-horizontal{

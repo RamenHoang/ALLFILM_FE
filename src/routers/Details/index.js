@@ -141,10 +141,13 @@ const Details = () => {
                 <StarFilled />
                 <p className="rateNo">
                   {film.rating}
-                  /{film.ratingTurn}
+                  /10
                 </p>
                 <Button>ĐÁNH GIÁ</Button>
-              </div>
+              </div>              
+              <p>
+                Lượt đánh giá:{` ${film.ratingTurn}`}
+              </p>
               <div className="time">
                 <ClockCircleOutlined />
                 <p>{film.duration} phút</p>

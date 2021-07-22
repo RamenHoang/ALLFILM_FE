@@ -9,39 +9,30 @@ import { useParams } from 'react-router'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/data/slice';
-import { getDetailSession, getCategory, bookTicket } from '../../redux/data/actions';
+import { getDetailSession, getCategory, bookTicket, getFilm } from '../../redux/data/actions';
 import Details from '../Details';
 import moment from 'moment';
 import { useHistory } from "react-router-dom";
 
-
-const info = {
-  title: 'Lật mặt 24h',
-  theater: 'Đà Nẵng',
-  room: 'Rạp 2',
-  startTime: '11:15',
-  date: '14/4/2021',
-  image:
-    'https://www.galaxycine.vn/media/2021/3/4/300-lat-mat_1614842112584.jpg',
-  time: '110 phút',
-  url: 'https://www.youtube.com/watch?v=g1nZ785I6fs',
-  description:
-    'Một gia đình bị truy đuổi giữa vùng sông nước. Cơ hội nào cho người đàn ông cứu lấy vợ con khỏi bọn xã hội đen máu mặt? Trong phần 5 này, đạo diễn Lý Hải đã “mạnh tay” mời đạo diễn Kim Jung Min từ Hàn Quốc sang Việt Nam làm cố vấn hành động cho đoàn phim. Được biết, Kim Jung Min cũng chính là đạo diễn hành động của phim hay ra mắt năm 2018 The Witch: Part 1. The Subversion. Theo nhận xét của giới chuyên môn, yếu tố hành động trong siêu phẩm này được đánh giá cao bởi sự độc đáo, mạnh mẽ và ác liệt. Và với sự thể hiện này, tại giải thưởng điện ảnh danh giá Rồng Xanh lần thứ 39, Kim Jung Min và Park Jung Ryul đã nhận được đề cử ở hạng mục Kỹ thuật cho phần chỉ đạo hành động xuất sắc nhất',
-};
-
 const BookTicket = () => {
   
   const dispatch = useDispatch();
-  const { id } = useParams()
+  const { id } = useParams();
   var history = useHistory();
   
   const [step, setStep] = useState('1')
+  
+  const categories = useSelector(state => state.data.categories)||[]
+  const detailSession = useSelector(state => state.data.detailSession)  
+  const film = useSelector(state => state.data.film)
+  const bookedSeats = detailSession.bookedSeats||""
+  const token = useSelector(state => state.token.token);
 
   useEffect(() => {
     dispatch(getDetailSession(id))
+    dispatch(getFilm(detailSession?.filmId))
     dispatch(getCategory())
-  }, []);
-
+  }, [detailSession]);
 
   const [sum, setSum] = useState('0')
   const [countTicket, setCountTicket] = useState('0')
@@ -50,10 +41,6 @@ const BookTicket = () => {
   const [fdStr, setFdStr] = useState("")
   var seats = [];
   const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false)
-  const categories = useSelector(state => state.data.categories)||[]
-  const detailSession = useSelector(state => state.data.detailSession)
-  const bookedSeats = detailSession.bookedSeats||""
-  const token = useSelector(state => state.token.token);
 
   console.log("session: "+ JSON.stringify(detailSession))
 
@@ -277,12 +264,15 @@ const BookTicket = () => {
         <div className="event-section">
           <div className="content-event">
             <div className="div-img">
-              <img src={info.image} ></img>
-              <h1>{info.title}</h1>
+              <img src={film.poster} ></img>
+              <h1>{film.name}</h1>
+              <h1 className="sub-title">{film.subName}</h1>
               <Divider></Divider>
-              <p><b>Rạp:</b>{info.theater} | {detailSession?.Room?.name}</p>
+              <p><b>Rạp:</b>{detailSession?.Room?.name}</p>
               <Divider></Divider>
-              <p><b>Suất chiếu:</b>{detailSession.startTime}</p>
+              <p><b>Suất chiếu:</b>{detailSession?.startTime}</p>
+              <Divider></Divider>
+              <p><b>Thời lượng:</b>{`${film?.duration} phút`}</p>
               <Divider></Divider>
               <p><b>Combo: </b><span>{fdStr}</span></p>
               <Divider></Divider>
