@@ -1,13 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { login } from './actions'
 import { register } from './actions'
-import { notification } from 'antd';
+import { notification, message} from 'antd';
 
 export const initialState = {
   token: localStorage.getItem("allFilms-token") ? JSON.parse(localStorage.getItem("allFilms-token")) : {},
   username: localStorage.getItem("allFilms-username") ? JSON.parse(localStorage.getItem("allFilms-username")) : "",
-  loading: false,
-  error: ""
+}
+
+var hide;
+
+const loadingMsg = (task) => {
+  hide = message.loading(`Đang thực hiện ${task}.....`, 0);
 }
 
 const openNotification = (mess) => {
@@ -61,11 +65,11 @@ export const { reducer, actions } = createSlice({
 
   extraReducers: { //gọi action có api
     [login.fulfilled]: (state, { payload }) => {
+      hide()
+      openLoginSuccessMsg(payload.username)
+
       state.token = payload.token
       state.username = payload.username
-      state.loading = false
-      
-      openLoginSuccessMsg(payload.username)
 
       if (document.getElementById("normal_login")?.remember?.checked) {
         localStorage.setItem("allFilms-token", JSON.stringify(payload.token))
@@ -73,22 +77,22 @@ export const { reducer, actions } = createSlice({
       }
     },
     [login.pending]: state => {
-      state.loading = true
+      loadingMsg("đăng nhập")
     },
     [login.rejected]: (state, { payload }) => {
-      state.error = payload
       state.loading = false
+      hide()
       openNotification(payload.message)
     },
     [register.fulfilled]: (state, { payload }) => {
-      state.loading = false
+      hide()
       openRegisterSuccessMsg(payload.data)
     },
     [register.pending]: state => {
-      state.loading = true
+      loadingMsg("đăng ký")
     },
     [register.rejected]: (state, { payload }) => {
-      state.loading = false
+      hide()
       openNotification(payload.message)
     },
   },
