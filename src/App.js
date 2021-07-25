@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'
 import logo from './logo.png';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
@@ -16,12 +16,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import {
   Modal, Form, Input, Button, Checkbox, Tabs,
-  DatePicker
+  DatePicker, message
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from './redux/token/actions';
+import { login, register } from './redux/token/actions';
 import { actions } from './redux/token/slice';
 
 function App() {
@@ -69,7 +69,7 @@ function App() {
     rules: [
       {
         type: 'object',
-        required: true,
+        required: false,
         message: 'Please select time!'
       }
     ]
@@ -100,6 +100,28 @@ function App() {
       username: name,
       password: pass
     }));
+
+    closeModal();
+  }
+
+  const registerClick = () => {
+
+    const username = document.getElementById("register").username.value;
+    const password = document.getElementById("register").password.value;
+    const name = document.getElementById("register").name.value;
+    const fullname = document.getElementById("register").fullname.value;
+    const email = document.getElementById("register").email.value;
+    const phone = document.getElementById("register").phone.value;
+
+    dispatch(register({
+      username: username,
+      password: password,
+      name: name,
+      fullname: fullname,
+      email: email,
+      phone: phone
+    }));
+
     closeModal();
   }
 
@@ -179,7 +201,7 @@ function App() {
                           },
                         ]}
                       >
-                        <Input />
+                        <Input name="email" />
                       </Form.Item>
 
                       <Form.Item
@@ -193,7 +215,7 @@ function App() {
                         ]}
                         hasFeedback
                       >
-                        <Input.Password />
+                        <Input.Password name="password" />
                       </Form.Item>
 
                       <Form.Item
@@ -232,7 +254,7 @@ function App() {
                           },
                         ]}
                       >
-                        <Input />
+                        <Input name="username" />
                       </Form.Item>
 
                       <Form.Item
@@ -246,11 +268,11 @@ function App() {
                           },
                         ]}
                       >
-                        <Input />
+                        <Input name="fullname" />
                       </Form.Item>
 
                       <Form.Item
-                        name="nickname"
+                        name="name"
                         label="Biệt danh"
                         tooltip="Mọi người thường gọi bạn là gì?"
                         rules={[
@@ -261,7 +283,7 @@ function App() {
                           },
                         ]}
                       >
-                        <Input />
+                        <Input name="name" />
                       </Form.Item>
 
                       <Form.Item
@@ -274,7 +296,7 @@ function App() {
                           },
                         ]}
                       >
-                        <Input
+                        <Input name="phone"
                           style={{
                             width: '100%',
                           }}
@@ -286,7 +308,7 @@ function App() {
                       </Form.Item>
 
                       <Form.Item>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" onClick={registerClick}>
                           Đăng ký
                         </Button>
                       </Form.Item>

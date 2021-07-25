@@ -72,7 +72,7 @@ a {
   position: relative;
   z-index: 1001;
   cursor: pointer;
-  width: 100px;
+  width: fit-content;
 }
 
 .logout {
@@ -81,6 +81,11 @@ a {
 }
 
 .logout p{
+  color: black;
+  margin: 0;
+}
+
+.ant-modal-body p{
   color: black;
 }
 
@@ -156,10 +161,6 @@ ul a:hover {
 .logout:hover>ul {
   display: inherit;
   transition: ease 0.5s;
-}
-
-.logout p {
-  margin: 0;
 }
 
 .logout:hover p {
