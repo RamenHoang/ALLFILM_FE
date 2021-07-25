@@ -72,15 +72,16 @@ a {
   position: relative;
   z-index: 1001;
   cursor: pointer;
-}
-
-.login {
-  width: 200px;
+  width: 100px;
 }
 
 .logout {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.logout p{
+  color: black;
 }
 
 .login:hover>label {
