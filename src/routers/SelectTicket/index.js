@@ -24,7 +24,7 @@ const SelectTicket = () => {
   useEffect(() => {
     dispatch(getFilms());
     dispatch(getCinema());
-  }, []);
+  });
 
   return (
     <SelectTicketWrapper>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import logo from './logo.png';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
@@ -15,8 +15,7 @@ import SelectFilm from './routers/SelectTicket';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import {
-  Modal, Form, Input, Button, Checkbox, Tabs,
-  DatePicker, message
+  Modal, Form, Input, Button, Checkbox, Tabs, DatePicker
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 

@@ -23,7 +23,7 @@ const Actor = () => {
   useEffect(() => {
     dispatch(getFilms());
     dispatch(getActor(id));
-  }, []);
+  });
 
   const onClickRegister = () => { };
 
