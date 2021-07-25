@@ -13,6 +13,7 @@ const SelectTheater = () => {
     selectFilm[0]?.classList.remove("cinema_active")
     e.currentTarget.classList.add("cinema_active")
     var a = document.getElementsByClassName("film_active")
+    
     if (a.length) {
       dispatch(getSession_BaseFC({
         cinemaId: e.currentTarget.id.substring(7),

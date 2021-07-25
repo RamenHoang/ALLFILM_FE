@@ -11,7 +11,7 @@ export const initialState = {
 var hide;
 
 const loadingMsg = (task) => {
-  hide = message.loading(`Đang thực hiện ${task}.....`, 0);
+  hide = message.loading(`Đang thực hiện ${task}.....`, "topRight", 0);
 }
 
 const openNotification = (mess) => {

@@ -5,11 +5,25 @@ import {
   getCinema, getSession_BaseFC, bookTicket, checkoutTicket,
   getActor, getDirector, getUserInfo, editUserInfo, getUserBookingInfo
 } from './actions'
+import { message, notification} from 'antd';
+
+var hide;
+const loadingMsg = (task) => {
+  hide = message.loading(`Đang thực hiện ${task}.....`, 0);
+}
+
+const openSuccessMsg = (mess) => {
+  const args = {
+    message: 'Chúc mừng!!!',
+    description: mess,
+    duration: 3,
+  };
+  notification.success(args);
+};
 
 export const initialState = {
   films: [],
   film: {},
-  loading: false,
   error: "",
   session_baseFilm: [],
   session_baseFC: [],
@@ -34,83 +48,61 @@ export const { reducer, actions } = createSlice({
     }
   },
 
-  extraReducers: { //gọi action có api
+  extraReducers: {
     [getFilms.fulfilled]: (state, { payload }) => {
       state.films = payload
-      state.loading = false
-    },
-    [getFilms.pending]: state => {
-      state.loading = true;
     },
     [getFilms.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
     },
+
     [getFilm.fulfilled]: (state, { payload }) => {
       state.film = payload
-      state.loading = false
-    },
-    [getFilm.pending]: state => {
-      state.loading = true;
     },
     [getFilm.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
     },
+
     [getSession.fulfilled]: (state, { payload }) => {
       state.session_baseFilm = payload
-      state.loading = false
     },
     [getSession.pending]: state => {
-      state.loading = true
     },
     [getSession.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
     },
+
     [getDetailSession.fulfilled]: (state, { payload }) => {
       state.detailSession = payload
-      state.loading = false
-    },
-    [getDetailSession.pending]: state => {
-      state.loading = true
     },
     [getDetailSession.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
     },
+
     [booking.fulfilled]: (state, { payload }) => {
       state.detailSession = payload
-      state.loading = false
+      hide()
     },
     [booking.pending]: state => {
-      state.loading = true
+      loadingMsg("đặt vé")
     },
     [booking.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
+      hide()
     },
+
     [getCategory.fulfilled]: (state, { payload }) => {
       state.categories = payload.data
-      state.loading = false
-    },
-    [getCategory.pending]: state => {
-      state.loading = true;
     },
     [getCategory.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
     },
+
     [getCinema.fulfilled]: (state, { payload }) => {
       state.cinemas = payload
-      state.loading = false
-    },
-    [getCinema.pending]: state => {
-      state.loading = true;
     },
     [getCinema.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
     },
 
     [getSession_BaseFC.fulfilled]: (state, { payload }) => {
@@ -131,84 +123,93 @@ export const { reducer, actions } = createSlice({
       }, {});
 
       state.session_baseFC = sessionsGroupByDate
-      state.loading = false
+      hide()
     },
     [getSession_BaseFC.pending]: state => {
-      state.loading = true;
+      loadingMsg("lấy thông tin suất chiếu")
     },
     [getSession_BaseFC.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
+      hide()
     },
+
     [bookTicket.fulfilled]: (state, { payload }) => {
       state.booked_ticket = payload.data
-      state.loading = false
+      hide()
     },
     [bookTicket.pending]: state => {
-      state.loading = true;
+      loadingMsg("đặt vé")
     },
     [bookTicket.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
+      hide()
     },
+
     [checkoutTicket.fulfilled]: (state, { payload }) => {
       state.link_checkout = payload.data
-      state.loading = false
+      hide()
     },
     [checkoutTicket.pending]: state => {
-      state.loading = true;
+      loadingMsg("lấy vé")
     },
     [checkoutTicket.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
+      hide()
     },
+
     [getActor.fulfilled]: (state, { payload }) => {
       state.actor = payload
-      state.loading = false
+      hide()
     },
     [getActor.pending]: state => {
-      state.loading = true;
+      loadingMsg("lấy thông tin diễn viên")
     },
     [getActor.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
+      hide()
     },
+
     [getDirector.fulfilled]: (state, { payload }) => {
       state.director = payload
-      state.loading = false
+      hide()
     },
     [getDirector.pending]: state => {
-      state.loading = true;
+      loadingMsg("lấy thông tin đạo diễn")
     },
     [getDirector.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
+      hide()
     },
+
     [getUserInfo.fulfilled]: (state, { payload }) => {
       state.userInfo = payload
-      state.loading = false
-    },
-    [getUserInfo.pending]: state => {
-      state.loading = true;
     },
     [getUserInfo.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
     },
+
     [editUserInfo.fulfilled]: (state, { payload }) => {
-      state.loading = false
-      alert("Thay đổi thông tin thành công.")
+      hide()
+      openSuccessMsg("Thay đổi thông tin người dùng thành công.")
     },
+    [editUserInfo.pending]: state => {
+      loadingMsg("thay đổi thông tin người dùng")
+    },
+    [editUserInfo.rejected]: (state, { payload }) => {
+      state.error = payload
+      hide()
+    },
+
     [getUserBookingInfo.fulfilled]: (state, { payload }) => {
       state.userBookingInfo = payload
-      state.loading = false
+      hide()
     },
     [getUserBookingInfo.pending]: state => {
-      state.loading = true;
+      loadingMsg("lấy thông tin vé đã mua")
     },
     [getUserBookingInfo.rejected]: (state, { payload }) => {
       state.error = payload
-      state.loading = false
+      hide()
     },
   }
 })

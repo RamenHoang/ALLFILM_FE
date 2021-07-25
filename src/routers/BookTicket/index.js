@@ -47,7 +47,7 @@ const BookTicket = () => {
   cols.fill(1)
 
   const changeBg = (e) => {
-    if (seats.length <= countTicket && countTicket != 0) {
+    if (seats.length <= countTicket && countTicket !== 0) {
       if (e.target.classList.contains("bgGreen")) {
         seats = seats.filter(item => item !== e.target);
         e.target.classList.remove("bgGreen")
@@ -72,7 +72,7 @@ const BookTicket = () => {
     const ticketPrices = document.getElementsByClassName("ticket-price")
     const ticketNums = document.getElementsByClassName("ticketNum")
     var sum = 0
-    for (var i = 0; i < ticketPrices.length; i++) {
+    for (let i = 0; i < ticketPrices.length; i++) {
       sum = sum + ticketPrices[i].innerText * 1
     }
     document.getElementById("ticketSum").innerText = sum
@@ -80,7 +80,7 @@ const BookTicket = () => {
     var sum1 = 0
     e.target.parentElement.parentElement.childNodes[3].childNodes[0].textContent = e.target.value * e.target.parentElement.parentElement.childNodes[2].childNodes[0].textContent;
     const comboPrices = document.getElementsByClassName("combo-price");
-    for (var i = 0; i < comboPrices.length; i++) {
+    for (let i = 0; i < comboPrices.length; i++) {
       sum1 = sum1 + comboPrices[i].innerText * 1
     }
     document.getElementById("comboSum").innerText = sum1
@@ -89,7 +89,7 @@ const BookTicket = () => {
     var fds = []
     var fdstr = "  |  "
     const combos = document.getElementsByClassName("fds");
-    for (var i = 0; i < combos.length; i++) {
+    for (let i = 0; i < combos.length; i++) {
       let id = combos[i].id
       if (combos[i].value !== "0") {
         fds.push({

@@ -10,9 +10,7 @@ import {
 } from 'antd';
 import { StarFilled, ClockCircleOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { actions } from '../../redux/data/slice';
 import { getFilm, getFilms, getSession } from '../../redux/data/actions';
 
 import { Link } from 'react-router-dom';
@@ -49,7 +47,7 @@ const Details = () => {
     dispatch(getSession(id));
     dispatch(getFilm(id));
     dispatch(getFilms());
-  }, [id]);
+  });
 
   const listFilms = useSelector(state => state.data.films)
   const film = useSelector(state => state.data.film)
@@ -114,7 +112,7 @@ const Details = () => {
         footer={null}
         title={film.name}
       >
-        <iframe id="watch-trailer" width="700"
+        <iframe id="watch-trailer" width="700" title="This is a unique title"
           height="400"
           src=""
           frameBorder="0"
