@@ -4,7 +4,8 @@ import {
   getDetailSession, booking, getCategory,
   getCinema, getSession_BaseFC, bookTicket, checkoutTicket,
   getActor, getDirector, getUserInfo, editUserInfo, getUserBookingInfo,
-  postRating
+  postRating,
+  searchFilm
 } from './actions'
 import { message, notification} from 'antd';
 
@@ -80,10 +81,25 @@ export const { reducer, actions } = createSlice({
       state.error = payload
     },
 
+    [searchFilm.pending]: (state, { payload }) => {
+      loadingMsg("tìm kiếm")
+    },
+    [searchFilm.fulfilled]: (state, { payload }) => {
+      hide()
+      if(payload.length === 0) {
+        openNotification("Không tồn tại phim có tên mong muốn")
+      }
+      else{
+        state.films = payload
+      }
+    },
+    [searchFilm.rejected]: (state, { payload }) => {
+      hide()
+      readError(payload, openNotification)
+    },
+
     [getSession.fulfilled]: (state, { payload }) => {
       state.session_baseFilm = payload
-    },
-    [getSession.pending]: state => {
     },
     [getSession.rejected]: (state, { payload }) => {
       state.error = payload

@@ -22,6 +22,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, register } from './redux/token/actions';
 import { actions } from './redux/token/slice';
+import {searchFilm} from './redux/data/actions';
 
 import ScrollToTop from './ScrollToTop';
 
@@ -35,6 +36,7 @@ function App() {
   const [form] = Form.useForm();
   const { TabPane } = Tabs;
 
+  const [searchValue, setSearchValue] = useState('')
   const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false);
 
   const showCfModal = () => {
@@ -126,6 +128,13 @@ function App() {
     closeModal();
   }
 
+  function search(e){
+    if(e.key === "Enter"){
+      dispatch(searchFilm(searchValue))
+    }
+    goToFilms()
+  }
+
   return (
     <div className="App">
       <Router>
@@ -134,7 +143,7 @@ function App() {
           <div className="head_content flex">
             <Link to="/" id="logo-allfilms"><img className="logo" src={logo} alt="logo"></img></Link>
             <div className="div_input">
-              <input className="input" defaultValue="Tìm tên phim, diễn viên"></input>
+              <input className="input" placeholder="Tìm tên phim, diễn viên" onChange={event => setSearchValue(event.target.value)} onKeyPress={(e)=>search(e)}></input>
               <FontAwesomeIcon icon={faSearch} color="gray" className="icon_abs search" />
             </div>
 
@@ -338,7 +347,7 @@ function App() {
           <div className="black">
             <div className="menu">
               <ul className="flex">
-                <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<p onClick={goToFilms} >PHIM</p>|<p>GÓC ĐIỆN ẢNH</p>|<p>SỰ KIỆN</p>|<p>HỖ TRỢ</p>|<p>THÀNH VIÊN</p>
+                <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<p onClick={goToFilms} >PHIM</p>|<p>GÓC ĐIỆN ẢNH</p>|<p>SỰ KIỆN</p>|<p>HỖ TRỢ</p>|<Link to="/member">THÀNH VIÊN</Link>
               </ul>
             </div>
           </div>
