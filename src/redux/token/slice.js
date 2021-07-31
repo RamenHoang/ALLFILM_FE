@@ -44,6 +44,12 @@ const openLoginSuccessMsg = (mess) => {
   notification.success(args);
 };
 
+const readError = (payload, callback) =>{
+  payload?.response?.data?.error?.errors.forEach(element => {
+    callback(element?.message)
+  });
+}
+
 export const { reducer, actions } = createSlice({
   name: 'Login',
   initialState,
@@ -82,7 +88,7 @@ export const { reducer, actions } = createSlice({
     [login.rejected]: (state, { payload }) => {
       state.loading = false
       hide()
-      openNotification(payload.message)
+      readError(payload, openNotification)
     },
     [register.fulfilled]: (state, { payload }) => {
       hide()
@@ -93,7 +99,7 @@ export const { reducer, actions } = createSlice({
     },
     [register.rejected]: (state, { payload }) => {
       hide()
-      openNotification(payload.message)
+      readError(payload, openNotification)
     },
   },
 })

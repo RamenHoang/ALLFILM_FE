@@ -23,6 +23,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, register } from './redux/token/actions';
 import { actions } from './redux/token/slice';
 
+import ScrollToTop from './ScrollToTop';
+
 function App() {
 
   const dispatch = useDispatch();
@@ -127,6 +129,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+      <ScrollToTop>
         <div className="header">
           <div className="head_content flex">
             <Link to="/" id="logo-allfilms"><img className="logo" src={logo} alt="logo"></img></Link>
@@ -355,6 +358,7 @@ function App() {
             path="/" exact
             component={Home} />
         </Switch>
+        </ScrollToTop>
       </Router>
       <footer>
         <p>Công Ty Cổ Phần ALLFILMS, Đại học Bách khoa- Đại học Đà Nẵng, 54, Nguyễn Lương Bằng, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng</p>

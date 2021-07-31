@@ -1,57 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { DetailsWrapper, ModalWrapper } from './styles';
+import { DetailsWrapper, ModalWrapper, ModalRating } from './styles';
 import {
   Breadcrumb,
   Input,
   Button,
-  Divider,
-  DatePicker,
-  Select
+  Divider
 } from 'antd';
 import { StarFilled, ClockCircleOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilm, getFilms, getSession } from '../../redux/data/actions';
+import { getFilm, getFilms, getSession, postRating } from '../../redux/data/actions';
 
 import { Link } from 'react-router-dom';
 
-const listCity = [
-  {
-    key: 'daNang',
-    value: 'Đà Nẵng',
-  },
-  {
-    key: 'haNoi',
-    value: 'Hà Nội',
-  },
-];
-
-const listTheater = [
-  {
-    key: 'hoaKhanh',
-    value: 'Hòa Khánh',
-  },
-  {
-    key: 'hoaKhanh',
-    value: 'Hòa Khánh',
-  },
-];
-const { Option } = Select;
-
 const Details = () => {
   const { id } = useParams();
+
+  //use for play video modal
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  //use for rating modal
+  const [isModalRatingVisible, setIsModalRatingVisible] = useState(false);
+  const [rating, setRating] = useState(0);
+
   const dispatch = useDispatch();
+  const listFilms = useSelector(state => state.data.films)
+  const film = useSelector(state => state.data.film)
+  const session_baseFilm = useSelector(state => state.data.session_baseFilm)
+  const token = useSelector(state => state.token.token);
 
   useEffect(() => {
     dispatch(getSession(id));
     dispatch(getFilm(id));
     dispatch(getFilms());
-  });
-
-  const listFilms = useSelector(state => state.data.films)
-  const film = useSelector(state => state.data.film)
-  const session_baseFilm = useSelector(state => state.data.session_baseFilm)
+  }, [rating, id]);
 
   const getVideo = (url) => {
     if (url.includes('youtube')) return url.replace('watch?v=', 'embed/');
@@ -74,24 +56,33 @@ const Details = () => {
 
   const onClickRegister = () => { };
 
-  const getDate = (date, dateString) => {
+  const showRatingModal = () => {
+    setIsModalRatingVisible(true);
   };
 
-  const onChange = (value) => {
-    console.log(`selected ${value}`);
-  };
+  const handleRatingCancel = () => {
+    setIsModalRatingVisible(false);
+  }
 
-  const onBlur = () => {
-    console.log('blur');
-  };
+  const callRatingApi = () => {
+    if(rating===0){
+      alert("Vui lòng chọn số sao bạn muốn đánh giá")
+      return
+    }
 
-  const onFocus = () => {
-    console.log('focus');
-  };
+    let params = {
+      headers: {
+        'Authorization': `Bearer ${token.access_token}`,
+        'Content-type': 'application/json'
+      },
+      id: id,
+      rating: rating
+    }
 
-  const onSearch = (val) => {
-    console.log('search:', val);
-  };
+    dispatch(postRating(params));
+    setIsModalRatingVisible(false);
+  }
+
   return (
     <DetailsWrapper>
 
@@ -121,6 +112,27 @@ const Details = () => {
         ></iframe>
       </ModalWrapper>
 
+      <ModalRating
+        visible={isModalRatingVisible}
+        footer={null}
+        onCancel={handleRatingCancel}
+        title={`đánh giá phim ${film.name}`}>
+        <p>Click để chọn số sao bạn nhé.</p>
+        <div>
+          <StarFilled id="btn-star-1" onClick={() => setRating(1)} className={rating > 0 ? "yellow" : ""} />
+          <StarFilled id="btn-star-2" onClick={() => setRating(2)} className={rating > 1 ? "yellow" : ""} />
+          <StarFilled id="btn-star-3" onClick={() => setRating(3)} className={rating > 2 ? "yellow" : ""} />
+          <StarFilled id="btn-star-4" onClick={() => setRating(4)} className={rating > 3 ? "yellow" : ""} />
+          <StarFilled id="btn-star-5" onClick={() => setRating(5)} className={rating > 4 ? "yellow" : ""} />
+          <StarFilled id="btn-star-6" onClick={() => setRating(6)} className={rating > 5 ? "yellow" : ""} />
+          <StarFilled id="btn-star-7" onClick={() => setRating(7)} className={rating > 6 ? "yellow" : ""} />
+          <StarFilled id="btn-star-8" onClick={() => setRating(8)} className={rating > 7 ? "yellow" : ""} />
+          <StarFilled id="btn-star-9" onClick={() => setRating(9)} className={rating > 8 ? "yellow" : ""} />
+          <StarFilled id="btn-star-10" onClick={() => setRating(10)} className={rating > 9 ? "yellow" : ""} />
+        </div>
+        <Button onClick={callRatingApi}>ĐÁNH GIÁ</Button>
+      </ModalRating>
+
       <div className="content-event">
         <div className="content-section">
           <div className="first">
@@ -141,7 +153,7 @@ const Details = () => {
                   {film.rating}
                   /10
                 </p>
-                <Button>ĐÁNH GIÁ</Button>
+                <Button onClick={showRatingModal}>ĐÁNH GIÁ</Button>
               </div>
               <p>
                 Lượt đánh giá:{` ${film.ratingTurn}`}
@@ -185,74 +197,25 @@ const Details = () => {
             <Divider />
             <p>{film.description}</p>
           </div>
+
           <div className="calendar">
             <h1>LỊCH CHIẾU</h1>
             <Divider />
-            <div className="inline">
-              <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Cả nước</Option>
-                {listCity.map((data, index) => (
-                  <Option value={data.key} key={`city-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-              <DatePicker style={{ width: '32%' }} onChange={getDate} />
-              <Select
-                showSearch
-                style={{ width: '32%' }}
-                defaultValue="all"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="all">Tất cả rạp</Option>
-                {listTheater.map((data, index) => (
-                  <Option value={data.key} key={`theater-${index}`}>
-                    {data.value}
-                  </Option>
-                ))}
-              </Select>
-            </div>
-          </div>
+            {session_baseFilm.map((data, index) => (
+              <div className="time2">
+                <h2>{data.name}</h2>
+                <div className="pick-time">
+                  <p>2D-Phụ đề</p>
+                  {data.Sessions.map((data, index) => (
 
-          {session_baseFilm.map((data, index) => (
-            <div className="time2">
-              <h2>{data.name}</h2>
-              <div className="pick-time">
-                <p>2D-Phụ đề</p>
-                {data.Sessions.map((data, index) => (
-
-                  <Link to={`/bookTicket/${data.id}`}><Button>{data.startTime}</Button></Link>
-                ))}
-
+                    <Link to={`/bookTicket/${data.id}`}><Button>{data.startTime}</Button></Link>
+                  ))}
+                </div>
               </div>
-            </div>
-
-
-          ))}
-
-
+            ))}
+          </div>
         </div>
+
         <div className="event-section">
           <h1>NHẬN KHUYẾN MÃI</h1>
           <Divider />

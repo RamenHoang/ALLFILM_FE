@@ -1,31 +1,32 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import {
   getFilmsApi, getFilmApi, getSessionApi_BaseFilm,
   getDetailSessionApi, bookingApi, getCategoryApi
   , getCinemaApi, getSessionApi_BaseFC, getActorApi, getDirectorApi,
   getUserInfoApi, editUserInfoApi, getUserBookingInfoApi
-} from '../../api/data';
-import { bookTicketApi, checkoutTicketApi } from '../../api/bookTicket';
+} from '../../api/data'
+import { bookTicketApi, checkoutTicketApi } from '../../api/bookTicket'
+import { ratingApi } from '../../api/rating'
 
 export const getFilms = createAsyncThunk(
   'data/getFilms',
   async (payload, thunkAPI) => {
     try {
-      const res = await getFilmsApi();
-      return res.data;
+      const res = await getFilmsApi()
+      return res.data
     } catch (error) {
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue()
     }
   }
-);
+)
 
 export const getFilm = createAsyncThunk(
   'data/getFilm',
   async (payload, thunkAPI) => {
     try {
-      const res = await getFilmApi(payload);
-      return res.data;
+      const res = await getFilmApi(payload)
+      return res.data
     } catch (error) {
       return thunkAPI.rejectWithValue();
     }
@@ -101,7 +102,7 @@ export const checkoutTicket = createAsyncThunk(
     try {
       const res = await checkoutTicketApi(payload);
       window.location = res.data.data
-      return res;
+      return res
     } catch (error) {
       return thunkAPI.rejectWithValue();
     }
@@ -113,7 +114,7 @@ export const getCinema = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await getCinemaApi();
-      return res.data;
+      return res.data
     } catch (error) {
       return thunkAPI.rejectWithValue();
     }
@@ -125,7 +126,7 @@ export const getSession_BaseFC = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await getSessionApi_BaseFC(payload);
-      return res.data;
+      return res.data
     } catch (error) {
       return thunkAPI.rejectWithValue();
     }
@@ -137,7 +138,7 @@ export const getActor = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await getActorApi(payload);
-      return res.data;
+      return res.data
     } catch (error) {
       return thunkAPI.rejectWithValue();
     }
@@ -149,7 +150,7 @@ export const getDirector = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await getDirectorApi(payload);
-      return res.data;
+      return res.data
     } catch (error) {
       return thunkAPI.rejectWithValue();
     }
@@ -161,7 +162,7 @@ export const getUserInfo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await getUserInfoApi(payload);
-      return res.data;
+      return res.data
     } catch (error) {
       return thunkAPI.rejectWithValue();
     }
@@ -172,22 +173,34 @@ export const editUserInfo = createAsyncThunk(
   'data/editUserInfo',
   async (payload, thunkAPI) => {
     try {
-      const res = await editUserInfoApi(payload);
-      return res.data;
+      const res = await editUserInfoApi(payload) 
+      return res.data
     } catch (error) {
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue(error) 
     }
   }
-);
+) 
 
 export const getUserBookingInfo = createAsyncThunk(
   'data/getUserBookingInfo',
   async (payload, thunkAPI) => {
     try {
-      const res = await getUserBookingInfoApi(payload);
-      return res.data;
+      const res = await getUserBookingInfoApi(payload) 
+      return res.data
     } catch (error) {
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue(error) 
     }
   }
-);
+) 
+
+export const postRating = createAsyncThunk(
+  'data/postRating',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await ratingApi(payload)
+      return res.data
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)

@@ -177,10 +177,17 @@ export const DetailsWrapper = styled.div`
         }
       }
 
+      
+      p{
+        color: black;
+      }
+
+
       .rateNo {
         font-weight: 500;
         font-size: 18px;
       }
+
 
       .ant-btn {
         color: #ffffff;
@@ -335,7 +342,6 @@ export const ModalWrapper = styled(Modal)`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${'' /* padding: 0; */}
   margin: auto;
 
   .ant-modal-content {
@@ -349,4 +355,34 @@ export const ModalWrapper = styled(Modal)`
   .ant-modal-body {
     padding: 10px;
   }
+`;
+
+export const ModalRating = styled(Modal)`
+  width: fix-content;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: auto;
+
+.ant-modal-content{
+  .ant-modal-body{
+    .yellow{
+      svg > path {
+        fill: #fac917;
+      }
+    }
+
+    .anticon-star{
+      padding-right: 5px;
+    }
+    
+    .ant-btn {
+      color: #ffffff;
+      background-color: #f26b38;
+      border-color: #f26b38;
+      text-transform: uppercase;
+      margin-top: 20px;
+    }
+  }
+}
 `;

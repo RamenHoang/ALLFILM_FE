@@ -3,7 +3,8 @@ import {
   getFilms, getFilm, getSession,
   getDetailSession, booking, getCategory,
   getCinema, getSession_BaseFC, bookTicket, checkoutTicket,
-  getActor, getDirector, getUserInfo, editUserInfo, getUserBookingInfo
+  getActor, getDirector, getUserInfo, editUserInfo, getUserBookingInfo,
+  postRating
 } from './actions'
 import { message, notification} from 'antd';
 
@@ -16,10 +17,26 @@ const openSuccessMsg = (mess) => {
   const args = {
     message: 'Chúc mừng!!!',
     description: mess,
-    duration: 3,
+    duration: 5,
   };
   notification.success(args);
 };
+
+const openNotification = (mess) => {
+  const args = {
+    message: 'Đã xảy ra lỗi!!!',
+    description: mess,
+    duration: 5,
+  };
+
+  notification.warning(args);
+};
+
+const readError = (payload, callback) =>{
+  payload?.response?.data?.error?.errors.forEach(element => {
+    callback(element?.message)
+  });
+}
 
 export const initialState = {
   films: [],
@@ -89,6 +106,7 @@ export const { reducer, actions } = createSlice({
     [booking.rejected]: (state, { payload }) => {
       state.error = payload
       hide()
+      readError(payload, openNotification)
     },
 
     [getCategory.fulfilled]: (state, { payload }) => {
@@ -138,11 +156,12 @@ export const { reducer, actions } = createSlice({
       hide()
     },
     [bookTicket.pending]: state => {
-      loadingMsg("đặt vé")
+      loadingMsg("lấy thông tin vé")
     },
     [bookTicket.rejected]: (state, { payload }) => {
       state.error = payload
       hide()
+      readError(payload, openNotification)
     },
 
     [checkoutTicket.fulfilled]: (state, { payload }) => {
@@ -198,6 +217,7 @@ export const { reducer, actions } = createSlice({
     [editUserInfo.rejected]: (state, { payload }) => {
       state.error = payload
       hide()
+      readError(payload, openNotification)
     },
 
     [getUserBookingInfo.fulfilled]: (state, { payload }) => {
@@ -210,6 +230,19 @@ export const { reducer, actions } = createSlice({
     [getUserBookingInfo.rejected]: (state, { payload }) => {
       state.error = payload
       hide()
+      readError(payload, openNotification)
+    },
+    
+    [postRating.fulfilled]: (state, { payload }) => {
+      hide()
+      openSuccessMsg("Đánh giá của bạn đã được hệ thống ghi nhận.")
+    },
+    [postRating.pending]: state => {
+      loadingMsg("đánh giá phim")
+    },
+    [postRating.rejected]: (state, { payload }) => {
+      hide()
+      readError(payload, openNotification)
     },
   }
 })
