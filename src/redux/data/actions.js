@@ -4,7 +4,8 @@ import {
   getFilmsApi, getFilmApi, getSessionApi_BaseFilm,
   getDetailSessionApi, bookingApi, getCategoryApi
   , getCinemaApi, getSessionApi_BaseFC, getActorApi, getDirectorApi,
-  getUserInfoApi, editUserInfoApi, getUserBookingInfoApi
+  getUserInfoApi, editUserInfoApi, getUserBookingInfoApi,
+  searchFilmApi
 } from '../../api/data'
 import { bookTicketApi, checkoutTicketApi } from '../../api/bookTicket'
 import { ratingApi } from '../../api/rating'
@@ -33,6 +34,17 @@ export const getFilm = createAsyncThunk(
   }
 );
 
+export const searchFilm = createAsyncThunk(
+  'data/searchFilm',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await searchFilmApi(payload)
+      return res.data
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const getSession = createAsyncThunk(
   'data/getSession',

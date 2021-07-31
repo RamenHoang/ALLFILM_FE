@@ -6,6 +6,8 @@ export const getFilmsApi = params => axios.get('/film', {
 
 export const getFilmApi = params => axios.get(`/film/${params}`);
 
+export const searchFilmApi = params => axios.get(`/film?q=${params}&limit=10&offset=1`);
+
 export const getSessionApi_BaseFilm = params => axios.get(`/session/?filmId=${params}`);
 
 export const getSessionApi_BaseFC = params => axios.get(`/session`, { params });
