@@ -201,7 +201,7 @@ const BookTicket = () => {
               <td className="right">{detailSession.price}</td>
               <td className="right ticket-price">0</td>
             </tr>
-            <tr className="tr-sum"><td colspan={3}>Tổng</td><td className="right" id="ticketSum">0</td></tr>
+            <tr className="tr-sum"><td colSpan={3}>Tổng</td><td className="right" id="ticketSum">0</td></tr>
 
             <tr><th>Combo</th><th>Số lượng</th><th className="right">Giá(VNĐ)</th><th className="right">Tổng(VNĐ)</th></tr>
 
@@ -216,7 +216,7 @@ const BookTicket = () => {
               </tr>
             ))}
 
-            <tr className="tr-sum"><td colspan={3}>Tổng</td><td className="right" id="comboSum">0</td></tr>
+            <tr className="tr-sum"><td colSpan={3}>Tổng</td><td className="right" id="comboSum">0</td></tr>
           </table>
           <div className="sum">
             <label>Tổng</label> <label>{sum}</label> VNĐ
