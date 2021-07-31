@@ -15,7 +15,7 @@ import SelectFilm from './routers/SelectTicket';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import {
-  Modal, Form, Input, Button, Checkbox, Tabs, DatePicker
+  Modal, Form, Input, Button, Checkbox, Tabs, DatePicker, Select
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
@@ -24,6 +24,7 @@ import { login, register } from './redux/token/actions';
 import { actions } from './redux/token/slice';
 import {searchFilm} from './redux/data/actions';
 
+import SearchFilm from './components/listSearch';
 import ScrollToTop from './ScrollToTop';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
   const dispatch = useDispatch();
   const token = useSelector(state => state.token.token);
   const username = useSelector(state => state.token.username);
+  const listSearch = useSelector(state => state.data.listSearch);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
@@ -132,18 +134,18 @@ function App() {
     if(e.key === "Enter"){
       dispatch(searchFilm(searchValue))
     }
-    goToFilms()
   }
 
   return (
     <div className="App">
       <Router>
       <ScrollToTop>
-        <div className="header">
+         <div className="header">
           <div className="head_content flex">
             <Link to="/" id="logo-allfilms"><img className="logo" src={logo} alt="logo"></img></Link>
             <div className="div_input">
               <input className="input" placeholder="Tìm tên phim, diễn viên" onChange={event => setSearchValue(event.target.value)} onKeyPress={(e)=>search(e)}></input>
+              <SearchFilm style={{ display: (listSearch.length===0 ? 'none' : 'initial') }}/>
               <FontAwesomeIcon icon={faSearch} color="gray" className="icon_abs search" />
             </div>
 

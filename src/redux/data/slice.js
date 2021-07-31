@@ -42,6 +42,7 @@ const readError = (payload, callback) =>{
 export const initialState = {
   films: [],
   film: {},
+  listSearch: [],
   error: "",
   session_baseFilm: [],
   session_baseFC: [],
@@ -60,9 +61,12 @@ export const { reducer, actions } = createSlice({
   name: 'Data',
   initialState,
 
-  reducers: { // để gọi action ko có api
+  reducers: {
     refeshTicket: (state, { payload }) => {
       state.booked_ticket = {}
+    },
+    clearSearchList: (state) =>{
+      state.listSearch = []
     }
   },
 
@@ -86,12 +90,7 @@ export const { reducer, actions } = createSlice({
     },
     [searchFilm.fulfilled]: (state, { payload }) => {
       hide()
-      if(payload.length === 0) {
-        openNotification("Không tồn tại phim có tên mong muốn")
-      }
-      else{
-        state.films = payload
-      }
+      state.listSearch = payload
     },
     [searchFilm.rejected]: (state, { payload }) => {
       hide()
