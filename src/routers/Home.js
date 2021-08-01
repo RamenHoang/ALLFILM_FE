@@ -119,8 +119,6 @@ const Home = () => {
             <img src={banner} alt=""></img>
           </div>
         </Carousel>
-
-        <BuyTicket></BuyTicket>
       </div>
 
       <div className="container">

@@ -119,11 +119,30 @@ a {
   margin: auto;
 }
 
-.menu .flex a,p {
+.menu .flex p, .menu .flex a {
   transition: 0.3s;
   color: white;
   cursor: pointer;
-  margin-bottom: 0px;
+  margin: 0px 0px 0px;
+  padding-bottom: 3px;
+  position: relative;
+  transition: 0.5s;
+}
+
+.menu .flex a::after, p::after {
+  content: " ";
+  position: absolute;
+  bottom: 15px;
+  left: 0px;
+  height: 1.5px;
+  width: 100%;
+  background-color: rgb(196, 193, 191);
+  transform: scale(0);
+  transition: 0.3s;
+}
+
+.menu .flex a:hover:after, p:hover:after{
+  transform: scale(1);
 }
 
 ul a:hover {
