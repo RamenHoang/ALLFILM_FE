@@ -141,6 +141,11 @@
     float: right;
 }
 
+.content-text p{
+    color: black;
+    font-family: 'Roboto', sans-serif;
+}
+
 footer {
     background-color: rgba(24, 23, 23, 0.842);
     color: white;
