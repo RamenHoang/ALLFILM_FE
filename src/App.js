@@ -15,7 +15,7 @@ import SelectFilm from './routers/SelectTicket';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import {
-  Modal, Form, Input, Button, Checkbox, Tabs, DatePicker, Select
+  Modal, Form, Input, Button, Checkbox, Tabs, DatePicker
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, register } from './redux/token/actions';
 import { actions } from './redux/token/slice';
 import {searchFilm} from './redux/data/actions';
+import {actions as dataActions}  from './redux/data/slice' ;
 
 import SearchFilm from './components/listSearch';
 import ScrollToTop from './ScrollToTop';
@@ -37,8 +38,6 @@ function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   const { TabPane } = Tabs;
-
-  const [searchValue, setSearchValue] = useState('')
   const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false);
 
   const showCfModal = () => {
@@ -130,10 +129,11 @@ function App() {
     closeModal();
   }
 
-  function search(e){
-    if(e.key === "Enter"){
-      dispatch(searchFilm(searchValue))
+  function search(value){
+    if(value === ""){
+      dispatch(dataActions.clearSearchList())
     }
+    else dispatch(searchFilm(value))
   }
 
   return (
@@ -144,7 +144,7 @@ function App() {
           <div className="head_content flex">
             <Link to="/" id="logo-allfilms"><img className="logo" src={logo} alt="logo"></img></Link>
             <div className="div_input">
-              <input className="input" placeholder="Tìm tên phim, diễn viên" onChange={event => setSearchValue(event.target.value)} onKeyPress={(e)=>search(e)}></input>
+              <input className="input" placeholder="Tìm tên phim, diễn viên" onChange={event => search(event.target.value)}></input>
               <SearchFilm style={{ display: (listSearch.length===0 ? 'none' : 'initial') }}/>
               <FontAwesomeIcon icon={faSearch} color="gray" className="icon_abs search" />
             </div>
@@ -155,7 +155,6 @@ function App() {
                 Đăng nhập
               </label>
               <Modal footer={null} visible={isModalVisible} onOk={handleOk} onCancel={closeModal}>
-
                 <Tabs defaultActiveKey="1" onChange={callback}>
                   <TabPane tab="Đăng nhập" key="1">
                     <Form
@@ -354,7 +353,6 @@ function App() {
             </div>
           </div>
         </div>
-
 
         <Switch>
           <Route path="/details/:id" component={Details}></Route>

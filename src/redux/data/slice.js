@@ -9,7 +9,7 @@ import {
 } from './actions'
 import { message, notification} from 'antd';
 
-var hide;
+var hide = ()=>{}
 const loadingMsg = (task) => {
   hide = message.loading(`Đang thực hiện ${task}.....`, 0);
 }
@@ -86,6 +86,7 @@ export const { reducer, actions } = createSlice({
     },
 
     [searchFilm.pending]: (state, { payload }) => {
+      hide()
       loadingMsg("tìm kiếm")
     },
     [searchFilm.fulfilled]: (state, { payload }) => {
