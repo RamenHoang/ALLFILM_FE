@@ -23,6 +23,11 @@ const BookTicket = () => {
   const bookedSeats = detailSession.bookedSeats || ""
   const token = useSelector(state => state.token.token)
 
+  const [step, setStep] = useState('1')
+  const [sum, setSum] = useState('0')
+  const [countTicket, setCountTicket] = useState('0')
+  const [foodDrinks, setFoodDrinks] = useState([])
+
   const filmId = detailSession?.filmId;
 
   useEffect(() => {
@@ -31,13 +36,8 @@ const BookTicket = () => {
     dispatch(getFilm(detailSession.filmId))
   }, [filmId])
 
-  const [step, setStep] = useState('1')
-  const [sum, setSum] = useState('0')
-  const [countTicket, setCountTicket] = useState('0')
-  const [foodDrinks, setFoodDrinks] = useState([])
-
   const [fdStr, setFdStr] = useState("")
-  var seats = []
+  const [seats, setSeats] = useState([])
   const rows = []
   const cols = []
 
@@ -49,7 +49,7 @@ const BookTicket = () => {
   const changeBg = (e) => {
     if (seats.length <= countTicket && countTicket !== 0) {
       if (e.target.classList.contains("bgGreen")) {
-        seats = seats.filter(item => item !== e.target);
+        setSeats(seats.filter(item => item !== e.target));
         e.target.classList.remove("bgGreen")
       }
       else if (!e.target.classList.contains("bgRed")) {
@@ -65,6 +65,8 @@ const BookTicket = () => {
         }
       }
     }
+
+    setSeats(seats)
   }
 
   const change = (e) => {
@@ -108,7 +110,6 @@ const BookTicket = () => {
       count = count + ticketNums[i].value * 1;
     }
     setCountTicket(count)
-
   }
 
   const nextStep = () => {
