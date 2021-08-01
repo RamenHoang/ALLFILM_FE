@@ -34,9 +34,11 @@ const openNotification = (mess) => {
 };
 
 const readError = (payload, callback) =>{
+  if(payload?.response?.data?.error?.errors.length !== 0)
   payload?.response?.data?.error?.errors.forEach(element => {
     callback(element?.message)
   });
+  else callback(payload?.message)
 }
 
 export const initialState = {
