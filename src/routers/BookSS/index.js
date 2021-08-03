@@ -18,7 +18,7 @@ const BookSS = () => {
 
   useEffect(() => {
     dispatch(getFilms());
-  });
+  },[]);
 
   const onClickRegister = () => { };
 

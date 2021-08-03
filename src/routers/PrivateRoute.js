@@ -2,6 +2,7 @@ import { Route, Redirect } from 'react-router-dom'
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { notification } from 'antd';
+import jwt_decode from "jwt-decode";
 
 const openNotification = () => {
   const args = {
@@ -18,8 +19,22 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   const token = useSelector(state => state.token.token);
 
+  const checkValidToken = () => {
+    if (Object.keys(token).length === 0) return 0;
+  
+    const decoded = jwt_decode(token.access_token);
+    const now = Math.floor(new Date().getTime()/1000);
+    
+    if (decoded.exp > now) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
   useEffect(() => {
-    if (token.access_token === undefined) {
+    console.log(checkValidToken())
+    if (!checkValidToken()) {
       openNotification();
     }
   }, []);
@@ -28,7 +43,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => (
-        token.access_token !== undefined
+        checkValidToken()
           ? <Component {...props} />
           : <Redirect to='/' />
       )}

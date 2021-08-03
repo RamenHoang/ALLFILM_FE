@@ -123,8 +123,8 @@ export const { reducer, actions } = createSlice({
     },
     [booking.rejected]: (state, { payload }) => {
       state.error = payload
-      hide()
       readError(payload, openNotification)
+      hide()
     },
 
     [getCategory.fulfilled]: (state, { payload }) => {
@@ -233,9 +233,9 @@ export const { reducer, actions } = createSlice({
       loadingMsg("thay đổi thông tin người dùng")
     },
     [editUserInfo.rejected]: (state, { payload }) => {
-      state.error = payload
       hide()
       readError(payload, openNotification)
+      state.error = payload
     },
 
     [getUserBookingInfo.fulfilled]: (state, { payload }) => {
@@ -246,9 +246,9 @@ export const { reducer, actions } = createSlice({
       loadingMsg("lấy thông tin vé đã mua")
     },
     [getUserBookingInfo.rejected]: (state, { payload }) => {
-      state.error = payload
       hide()
-      readError(payload, openNotification)
+      readError(payload, openNotification)      
+      state.error = payload
     },
     
     [postRating.fulfilled]: (state, { payload }) => {
@@ -260,7 +260,8 @@ export const { reducer, actions } = createSlice({
     },
     [postRating.rejected]: (state, { payload }) => {
       hide()
-      readError(payload, openNotification)
+      readError(payload, openNotification)      
+      state.error = payload
     },
   }
 })

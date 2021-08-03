@@ -73,9 +73,7 @@ export const { reducer, actions } = createSlice({
 
   extraReducers: { //gọi action có api
     [login.fulfilled]: (state, { payload }) => {
-      hide()
       openLoginSuccessMsg(payload.username)
-
       state.token = payload.token
       state.username = payload.username
 
@@ -83,14 +81,15 @@ export const { reducer, actions } = createSlice({
         localStorage.setItem("allFilms-token", JSON.stringify(payload.token))
         localStorage.setItem("allFilms-username", JSON.stringify(payload.username))
       }
+      hide()
     },
     [login.pending]: state => {
       loadingMsg("đăng nhập")
     },
     [login.rejected]: (state, { payload }) => {
       state.loading = false
-      hide()
       readError(payload, openNotification)
+      hide()
     },
     [register.fulfilled]: (state, { payload }) => {
       hide()
