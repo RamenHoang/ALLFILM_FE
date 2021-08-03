@@ -2,6 +2,8 @@ import { Route, Redirect } from 'react-router-dom'
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { notification } from 'antd';
+import { useDispatch } from 'react-redux';
+import { actions } from '../redux/token/slice' //loi cho ni 
 import jwt_decode from "jwt-decode";
 
 const openNotification = () => {
@@ -18,6 +20,7 @@ const openNotification = () => {
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
   const token = useSelector(state => state.token.token);
+  const dispatch = useDispatch();
 
   const checkValidToken = () => {
     if (Object.keys(token).length === 0) return 0;
@@ -28,12 +31,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     if (decoded.exp > now) {
       return 1
     } else {
+      dispatch(actions.logout({}));
       return 0
     }
   }
 
   useEffect(() => {
-    console.log(checkValidToken())
     if (!checkValidToken()) {
       openNotification();
     }

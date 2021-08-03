@@ -65,7 +65,6 @@ const onFocus = () => {
 };
 
 const onSearch = (val) => {
-    console.log('search:', val);
 };
 
 

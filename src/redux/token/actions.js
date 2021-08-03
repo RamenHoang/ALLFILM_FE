@@ -21,7 +21,6 @@ export const register = createAsyncThunk(
   'token/register',
   async (payload, thunkAPI) => {
     try {
-      console.log(JSON.stringify(payload))
       const res = await registerApi(payload);
       return res;
     } catch (error) {
