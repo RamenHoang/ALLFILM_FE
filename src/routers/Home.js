@@ -4,7 +4,6 @@ import '../css/reviewFilm.css';
 import banner from '../img/banner.jpg';
 import banner2 from '../img/banner2.jpg';
 import phim2 from '../img/phim2.jpg';
-import BuyTicket from "../components/BuyTicketComponent";
 import {
   Carousel
 } from 'antd';
@@ -119,8 +118,6 @@ const Home = () => {
             <img src={banner} alt=""></img>
           </div>
         </Carousel>
-
-        <BuyTicket></BuyTicket>
       </div>
 
       <div className="container">

@@ -45,9 +45,11 @@ const openLoginSuccessMsg = (mess) => {
 };
 
 const readError = (payload, callback) =>{
+  if(payload?.response?.data?.error?.errors.length !== 0)
   payload?.response?.data?.error?.errors.forEach(element => {
     callback(element?.message)
   });
+  else callback(payload?.message)
 }
 
 export const { reducer, actions } = createSlice({
@@ -71,9 +73,7 @@ export const { reducer, actions } = createSlice({
 
   extraReducers: { //gọi action có api
     [login.fulfilled]: (state, { payload }) => {
-      hide()
       openLoginSuccessMsg(payload.username)
-
       state.token = payload.token
       state.username = payload.username
 
@@ -81,14 +81,15 @@ export const { reducer, actions } = createSlice({
         localStorage.setItem("allFilms-token", JSON.stringify(payload.token))
         localStorage.setItem("allFilms-username", JSON.stringify(payload.username))
       }
+      hide()
     },
     [login.pending]: state => {
       loadingMsg("đăng nhập")
     },
     [login.rejected]: (state, { payload }) => {
       state.loading = false
-      hide()
       readError(payload, openNotification)
+      hide()
     },
     [register.fulfilled]: (state, { payload }) => {
       hide()

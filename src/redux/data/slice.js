@@ -9,7 +9,7 @@ import {
 } from './actions'
 import { message, notification} from 'antd';
 
-var hide;
+var hide = ()=>{}
 const loadingMsg = (task) => {
   hide = message.loading(`Đang thực hiện ${task}.....`, 0);
 }
@@ -34,14 +34,17 @@ const openNotification = (mess) => {
 };
 
 const readError = (payload, callback) =>{
+  if(payload?.response?.data?.error?.errors.length !== 0)
   payload?.response?.data?.error?.errors.forEach(element => {
     callback(element?.message)
   });
+  else callback(payload?.message)
 }
 
 export const initialState = {
   films: [],
   film: {},
+  listSearch: [],
   error: "",
   session_baseFilm: [],
   session_baseFC: [],
@@ -60,9 +63,12 @@ export const { reducer, actions } = createSlice({
   name: 'Data',
   initialState,
 
-  reducers: { // để gọi action ko có api
+  reducers: {
     refeshTicket: (state, { payload }) => {
       state.booked_ticket = {}
+    },
+    clearSearchList: (state) =>{
+      state.listSearch = []
     }
   },
 
@@ -82,16 +88,12 @@ export const { reducer, actions } = createSlice({
     },
 
     [searchFilm.pending]: (state, { payload }) => {
+      hide()
       loadingMsg("tìm kiếm")
     },
     [searchFilm.fulfilled]: (state, { payload }) => {
       hide()
-      if(payload.length === 0) {
-        openNotification("Không tồn tại phim có tên mong muốn")
-      }
-      else{
-        state.films = payload
-      }
+      state.listSearch = payload
     },
     [searchFilm.rejected]: (state, { payload }) => {
       hide()
@@ -121,8 +123,8 @@ export const { reducer, actions } = createSlice({
     },
     [booking.rejected]: (state, { payload }) => {
       state.error = payload
-      hide()
       readError(payload, openNotification)
+      hide()
     },
 
     [getCategory.fulfilled]: (state, { payload }) => {
@@ -231,9 +233,9 @@ export const { reducer, actions } = createSlice({
       loadingMsg("thay đổi thông tin người dùng")
     },
     [editUserInfo.rejected]: (state, { payload }) => {
-      state.error = payload
       hide()
       readError(payload, openNotification)
+      state.error = payload
     },
 
     [getUserBookingInfo.fulfilled]: (state, { payload }) => {
@@ -244,9 +246,9 @@ export const { reducer, actions } = createSlice({
       loadingMsg("lấy thông tin vé đã mua")
     },
     [getUserBookingInfo.rejected]: (state, { payload }) => {
-      state.error = payload
       hide()
-      readError(payload, openNotification)
+      readError(payload, openNotification)      
+      state.error = payload
     },
     
     [postRating.fulfilled]: (state, { payload }) => {
@@ -258,7 +260,8 @@ export const { reducer, actions } = createSlice({
     },
     [postRating.rejected]: (state, { payload }) => {
       hide()
-      readError(payload, openNotification)
+      readError(payload, openNotification)      
+      state.error = payload
     },
   }
 })
