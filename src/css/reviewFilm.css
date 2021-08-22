@@ -113,6 +113,18 @@
     margin-bottom: 25px;
 }
 
+@media screen and (max-width: 860px){
+    .promotion-item-home {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .promotion-item-home {
+        width: 46%;
+    }
+}
+
 .promotion-item-home:nth-child(4n+4) {
     margin-right: 0%;
 }
@@ -126,7 +138,7 @@
     position: absolute;
     z-index: 99;
     width: fit-content;
-    height: 99%;
+    height: 100%;
     width: 100%;
     top: 0;
     left: 0;
@@ -146,9 +158,10 @@
 
 .promotion-item-home .overlay h2 {
     font-size: 18px;
-    line-height: 24px;
+    line-height: 26px;
     text-transform: uppercase;
     text-overflow: ellipsis;
+    color: white;
 }
 
 .secondary-white {

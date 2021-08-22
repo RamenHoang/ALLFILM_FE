@@ -12,6 +12,7 @@ import BookTicket from './routers/BookTicket';
 import BookSS from './routers/BookSS';
 import SelectTicket from './routers/SelectTicket';
 import SelectFilm from './routers/SelectTicket';
+import Promotion from './routers/Promotion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -69,6 +70,22 @@ function App() {
     });
   }
 
+  const goToPromotions = () => {
+    let promotions = document.getElementById("#promotion");
+
+    if (promotions) {
+      promotions.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    document.getElementById("logo-allfilms").click();
+
+    setTimeout(() => {
+      promotions = document.getElementById("#promotion");
+      promotions.scrollIntoView({ behavior: 'smooth' });
+    });
+  } 
+  
   const config = {
     rules: [
       {
@@ -348,7 +365,7 @@ function App() {
           <div className="black">
             <div className="menu">
               <ul className="flex">
-                <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<p onClick={goToFilms} >PHIM</p>|<p>GÓC ĐIỆN ẢNH</p>|<p>SỰ KIỆN</p>|<p>HỖ TRỢ</p>|<Link to="/member">THÀNH VIÊN</Link>
+                <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<p onClick={goToFilms} >PHIM</p>|<p>GÓC ĐIỆN ẢNH</p>|<p onClick={goToPromotions}>KHUYẾN MÃI</p>|<p>HỖ TRỢ</p>|<Link to="/member">THÀNH VIÊN</Link>
               </ul>
             </div>
           </div>
@@ -363,6 +380,7 @@ function App() {
           <Route path="/selectTicket" component={SelectTicket}></Route>
           <Route path="/test" component={SelectFilm}></Route>
           <PrivateRoute path="/member" exact component={InfoUser}></PrivateRoute>
+          <PrivateRoute path="/promotion/:id" exact component={Promotion}></PrivateRoute>
           <Route
             path="/" exact
             component={Home} />

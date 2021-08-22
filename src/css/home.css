@@ -97,6 +97,22 @@
     width: 32%;
 }
 
+@media screen and (max-width: 860px){
+    .film {
+        margin-top: 8px;
+        margin-top: 20px;
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .film {
+        margin-top: 8px;
+        margin-top: 20px;
+        width: 100%;
+    }
+}
+
 .film p {
     font-family: "Roboto", sans-serif;
     margin: 0;

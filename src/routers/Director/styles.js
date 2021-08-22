@@ -59,7 +59,8 @@ h3 {
   }
 
   .content {
-    width: fit-content; 
+    width: fit-content;
+    min-width: 700px;
     margin: auto;
     margin-top: 50px;
 
@@ -252,7 +253,7 @@ h3 {
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 860px){
+@media screen and (max-width: 860px){
   .content-event {
     display: block;
 

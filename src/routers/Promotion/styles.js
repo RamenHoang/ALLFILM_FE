@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ActorWrapper = styled.div`
+export const PromotionWrapper = styled.div`
 margin: 20px auto 20px auto;
 width: 1250px;
 max-width: 100%;
@@ -9,54 +9,13 @@ max-width: 100%;
   text-align: left;
 }
 
-.ant-breadcrumb {
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-h2 {
-  font-size: 17px;
-  font-weight: 400;
-  text-align: left;
-  color: #f26b38;
-}
-
-h3 {
-  text-align: left;
-  font-size: 16px;
-  color: #43464b;
-  line-height: 20px;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
 .content-event {
   display: flex;
   justify-content: space-between;
 }
 
-.first {
-  display: flex;
-  margin-bottom: 25px;
-}
-
 .content-section {
   width: 65%;
-
-  .inline{
-    .ant-select{
-      .ant-select-selector:hover{
-        border: 1px solid chocolate;
-        cusor: pointer;
-      }
-    }
-  }
-
-  .img-primary {
-    width: 250px;
-    height: 381px;
-    margin-right: 20px;
-  }
 
   .content {
     width: fit-content;
@@ -69,6 +28,12 @@ h3 {
       text-align: left;
     }
 
+    .img-primary {
+      width: 250px;
+      height: 381px;
+      margin-right: 20px;
+    }
+
     h1 {
       font-size: 26px;
       color: #43464b;
@@ -78,10 +43,6 @@ h3 {
       white-space: nowrap;
       line-height: 34px;
       font-weight: normal;
-    }
-
-    .subName{
-      color: gray;
     }
 
     .ant-btn {
@@ -107,55 +68,17 @@ h3 {
 
       & > * {
         display: flex;
+        font-weight: normal;
       }
 
       p {
-        min-width: 140px;
-        width: 15%;
-        font-weight: normal;
         color: #a0a4b2;
         margin-bottom: 10px;
-        display: -webkit-box;
       }
 
       h3 {
-        font-weight: normal;
         margin-bottom: 5px;
         white-space: break-spaces;
-      }
-
-      a{
-        width: 90%;
-        .phim{
-          height: fit-content;
-          border: solid #dbdcdd 0.8px;
-          display: flex;
-          transition: 0.4s;
-          width: 100%;
-
-          :hover{
-            background: #dbdcdd;
-            cursor: pointer;
-          }
-          
-          img{
-            width: 70px;
-            height: 70px;
-            margin: auto 10px;
-            float: left;
-          }
-
-          .name{
-            align-item: center;
-            text-transform: uppercase;
-            padding: 15px;
-            p{
-              font-family: "Roboto", sans-serif;
-              color: #43464b;
-              margin: 0;
-            }
-          }
-        }
       }
     }
   }

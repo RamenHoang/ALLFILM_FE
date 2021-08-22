@@ -10,7 +10,7 @@ import {
 import { StarFilled } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilms } from '../redux/data/actions';
+import { getFilms, getPromotions } from '../redux/data/actions';
 
 
 import { Link } from 'react-router-dom';
@@ -54,48 +54,15 @@ const listReview = [
   },
 ];
 
-const listEvent = [
-  {
-    name: 'Happy Day Happy Popcorn',
-    description:
-      'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
-    url: '/khuyen-mai/happy-day-happy-popcorn',
-  },
-  {
-    name: 'Happy Day Happy Popcorn',
-    description:
-      'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
-    url: '/khuyen-mai/happy-day-happy-popcorn',
-  },
-  {
-    name: 'Happy Day Happy Popcorn',
-    description:
-      'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
-    url: '/khuyen-mai/happy-day-happy-popcorn',
-  },
-  {
-    name: 'Happy Day Happy Popcorn',
-    description:
-      'Vào thứ 3 hàng tuần – Happy Day, ngoài ưu đãi giá vé CHỈ TỪ 45K, khi các Stars mua 01 bắp sẽ được TẶNG NGAY 01 NƯỚC.',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/km1.jpg?alt=media&token=212ba0cf-d92c-4300-a39d-f46d6faa7f80',
-    url: '/khuyen-mai/happy-day-happy-popcorn',
-  },
-];
-
 const Home = () => {
 
   const dispatch = useDispatch();
   const listFilms = useSelector(state => state.data.films);
+  const listPromotions = useSelector(state => state.data.promotions);
 
   useEffect(() => {
     dispatch(getFilms());
+    dispatch(getPromotions());
   }, []);
 
   return (
@@ -218,23 +185,23 @@ const Home = () => {
           </div>
         </div>
 
-        <div>
+        <div id="#promotion">
           <div className="title-block">
             <a href="/">TIN KHUYẾN MÃI</a>
           </div>
           <div className="flex no-space-between">
-            {listEvent.map((data, index) => (
+            {listPromotions.map((data, index) => (
               <div className="promotion-item-home" key={`event-${index}`}>
-                <a href={data.url}>
+                <Link to={`/promotion/${data.id}`}>
                   <img src={data.image} alt="km"></img>
                   <div className="overlay">
                     <h2>{data.name}</h2>
-                    <p>{data.description}</p>
-                    <a href={data.url} className="btn secondary-white">
+                    <p>{data.content}</p>
+                    <Link to={`/promotion/${data.id}`} className="btn secondary-white">
                       chi tiết
-                    </a>
+                    </Link>
                   </div>
-                </a>
+                </Link>
               </div>
             ))}
           </div>
