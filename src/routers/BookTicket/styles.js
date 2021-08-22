@@ -266,7 +266,7 @@ export const BookTicketWrapper = styled.div`
     }
   }
 
-  @media screen and (min-width: 320px) and (max-width: 860px){
+  @media screen and (max-width: 860px){
     .content {
       display: block;
 

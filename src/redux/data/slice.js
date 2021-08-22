@@ -240,9 +240,14 @@ export const { reducer, actions } = createSlice({
       state.error = payload
     },
 
-    [getUserBookingInfo.fulfilled]: (state, { payload }) => {
-      state.userBookingInfo = payload
+    [getUserBookingInfo.fulfilled]: (state, { payload }) => {      
       hide()
+      if(payload.length === 0){
+        openNotification("Không có giao dịch nào được thực hiện trong khoảng thời gian bạn tìm kiếm.")
+      }
+      else{
+        state.userBookingInfo = payload
+      }
     },
     [getUserBookingInfo.pending]: state => {
       loadingMsg("lấy thông tin vé đã mua")

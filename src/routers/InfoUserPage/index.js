@@ -104,7 +104,6 @@ const InfoUser = () => {
               </div>
             </div>
           </div>
-
         </TabPane>
 
         <TabPane tab="GIAO DỊCH CÁ NHÂN" className="flex" key="7">

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { DetailsWrapper, ModalWrapper, ModalRating } from './styles';
+import RightPanel from '../../components/RightPanel';
 import {
   Breadcrumb,
-  Input,
   Button,
   Divider
 } from 'antd';
 import { StarFilled, ClockCircleOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilm, getFilms, getSession, postRating } from '../../redux/data/actions';
+import { getFilm, getSession, postRating } from '../../redux/data/actions';
 
 import { Link } from 'react-router-dom';
 
@@ -24,7 +24,6 @@ const Details = () => {
   const [rating, setRating] = useState(0);
 
   const dispatch = useDispatch();
-  const listFilms = useSelector(state => state.data.films)
   const film = useSelector(state => state.data.film)
   const session_baseFilm = useSelector(state => state.data.session_baseFilm)
   const token = useSelector(state => state.token.token);
@@ -32,7 +31,6 @@ const Details = () => {
   useEffect(() => {
     dispatch(getSession(id));
     dispatch(getFilm(id));
-    dispatch(getFilms());
   }, [rating, id]);
 
   const getVideo = (url) => {
@@ -53,8 +51,6 @@ const Details = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-  const onClickRegister = () => { };
 
   const showRatingModal = () => {
     setIsModalRatingVisible(true);
@@ -216,28 +212,8 @@ const Details = () => {
           </div>
         </div>
 
-        <div className="event-section">
-          <h1>NHẬN KHUYẾN MÃI</h1>
-          <Divider />
-          <div className="email">
-            <Input placeholder="Email" />
-            <Button onClick={onClickRegister}>ĐĂNG KÝ</Button>
-          </div>
-          <h1>PHIM ĐANG CHIẾU</h1>
-          <Divider />
-          {listFilms.map((data, index) => (
-            <Link to={`/details/${data.id}`}>
-              <div key={`movie-4-${index}`} >
-                <img className="img" src={data?.image} alt=""></img>
-                <h3>{data?.title}</h3>
-                <h3 className="sub-title">{data?.subTitle}</h3>
-              </div>
-            </Link>
-          ))}
-          <div className="load-more">
-            <Button> XEM THÊM </Button>
-          </div>
-        </div>
+        <RightPanel></RightPanel>
+        
       </div>
     </DetailsWrapper>
   );
