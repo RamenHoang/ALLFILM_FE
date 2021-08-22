@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import logo from './logo.png';
-import './App.css';
+import './css/App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PrivateRoute from './routers/PrivateRoute'
 import Home from './routers/Home';
@@ -365,7 +365,7 @@ function App() {
           <div className="black">
             <div className="menu">
               <ul className="flex">
-                <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<p onClick={goToFilms} >PHIM</p>|<p>GÓC ĐIỆN ẢNH</p>|<p onClick={goToPromotions}>KHUYẾN MÃI</p>|<p>HỖ TRỢ</p>|<Link to="/member">THÀNH VIÊN</Link>
+                <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<p className="menu_tab" onClick={goToFilms} >PHIM</p>|<p className="menu_tab">GÓC ĐIỆN ẢNH</p>|<p className="menu_tab" onClick={goToPromotions}>KHUYẾN MÃI</p>|<p className="menu_tab">HỖ TRỢ</p>|<Link to="/member">THÀNH VIÊN</Link>
               </ul>
             </div>
           </div>

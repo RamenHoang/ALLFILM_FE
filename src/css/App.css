@@ -141,7 +141,7 @@ a {
   transition: 0.3s;
 }
 
-.menu .flex a:hover:after, p:hover:after{
+.menu .flex a:hover:after, .menu_tab:hover:after{
   transform: scale(1);
 }
 

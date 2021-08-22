@@ -1,31 +1,27 @@
 import React, { useEffect } from 'react';
 import { PromotionWrapper } from './styles';
+import RightPanel from '../../components/RightPanel';
 import {
-  Input,
   Button,
   Divider,
   Breadcrumb
 } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilms, getPromotion } from '../../redux/data/actions';
+import { getPromotion } from '../../redux/data/actions';
 import { useParams } from 'react-router';
 import { useHistory, Link } from "react-router-dom";
 
 const Promotion = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const listFilms = useSelector(state => state.data.films)
   const promotion = useSelector(state => state.data.promotion);
 
   var history = useHistory();
 
   useEffect(() => {
-    dispatch(getFilms());
     dispatch(getPromotion(id));
   }, []);
-
-  const onClickRegister = () => { };
 
   return (
     <PromotionWrapper>
@@ -49,33 +45,10 @@ const Promotion = () => {
                 <h3>{promotion?.content}</h3>
               </div>
             </div>
-              
             <Button onClick={() => { history.goBack() }}> Quay lại </Button>
           </div>
         </div>
-        <div className="event-section">
-          <h1>NHẬN KHUYẾN MÃI</h1>
-          <Divider />
-          <div className="email">
-            <Input placeholder="Email" />
-            <Button onClick={onClickRegister}>ĐĂNG KÝ</Button>
-          </div>
-          <h1>PHIM ĐANG CHIẾU</h1>
-          <Divider />
-          {listFilms.map((data, index) => (
-            <Link to={`/details/${data.id}`}>
-              <div key={`movie2-${index}`}>
-                <img className="img" src={data.image} alt=""></img>
-                <h3>{data.title}</h3>
-                <h3 className="sub-title">{data.subTitle}</h3>
-              </div>
-            </Link>
-          ))}
-
-          <div className="load-more">
-            <Button>XEM THÊM</Button>
-          </div>
-        </div>
+        <RightPanel></RightPanel>
       </div>
     </PromotionWrapper>
   );
