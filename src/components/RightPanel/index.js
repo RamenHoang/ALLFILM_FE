@@ -4,10 +4,11 @@ import {
   Input,
   Button,
   Divider,
+  notification
 } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilms } from '../../redux/data/actions';
+import { getFilms, postPromotion } from '../../redux/data/actions';
 import { Link } from "react-router-dom";
 
 const RightPanel = () => {
@@ -18,14 +19,38 @@ const RightPanel = () => {
     dispatch(getFilms());
   },[]);
 
-  const onClickRegister = () => { };
+  
+  const openNotification = (mess) => {
+    const args = {
+      message: 'Đã xảy ra lỗi!!!',
+      description: mess,
+      duration: 5,
+    };
+
+    notification.warning(args);
+  };
+
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  const onClickRegister = () => {
+    let email = document.getElementById("email_pro")?.value
+
+    if(validateEmail(email)){
+        dispatch(postPromotion({email}))
+    }
+
+    else openNotification("Email không hợp lệ.")
+  };
 
   return (
     <RightPanelWrapper>
           <h1>NHẬN KHUYẾN MÃI</h1>
           <Divider />
           <div className="email">
-            <Input placeholder="Email" />
+            <Input placeholder="Email" type="email" id="email_pro"/>
             <Button onClick={onClickRegister}>ĐĂNG KÝ</Button>
           </div>
           <h1>PHIM ĐANG CHIẾU</h1>

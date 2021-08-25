@@ -5,7 +5,7 @@ import {
   getCinema, getSession_BaseFC, bookTicket, checkoutTicket,
   getActor, getDirector, getUserInfo, editUserInfo, getUserBookingInfo,
   postRating,
-  searchFilm, getPromotion, getPromotions
+  searchFilm, getPromotion, getPromotions, postPromotion
 } from './actions'
 import { message, notification} from 'antd';
 
@@ -249,7 +249,7 @@ export const { reducer, actions } = createSlice({
         state.userBookingInfo = payload
       }
     },
-    [getUserBookingInfo.pending]: state => {
+    [getUserBookingInfo.pending]: () => {
       loadingMsg("lấy thông tin vé đã mua")
     },
     [getUserBookingInfo.rejected]: (state, { payload }) => {
@@ -258,7 +258,7 @@ export const { reducer, actions } = createSlice({
       state.error = payload
     },
     
-    [postRating.fulfilled]: (state, { payload }) => {
+    [postRating.fulfilled]: () => {
       hide()
       openSuccessMsg("Đánh giá của bạn đã được hệ thống ghi nhận.")
     },
@@ -275,7 +275,7 @@ export const { reducer, actions } = createSlice({
       state.promotion = payload
       hide()
     },
-    [getPromotion.pending]: state => {
+    [getPromotion.pending]: () => {
       loadingMsg("lấy thông tin chi tiết khuyến mãi")
     },
     [getPromotion.rejected]: (state, { payload }) => {
@@ -288,6 +288,18 @@ export const { reducer, actions } = createSlice({
     },
     [getPromotions.rejected]: (state, { payload }) => {
       state.error = payload
+    },
+
+    [postPromotion.pending]: () => {
+      loadingMsg("đăng kí email nhận thông tin khuyến mãi")
+    },
+    [postPromotion.fulfilled]: () => {
+      hide()
+      openSuccessMsg("Bạn đã đăng kí email để nhận khuyến mãi thành công.")
+    },
+    [postPromotion.rejected]: (state, { payload }) => {
+      hide()
+      readError(payload, openNotification)     
     },
   }
 })

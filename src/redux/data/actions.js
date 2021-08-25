@@ -9,7 +9,7 @@ import {
 } from '../../api/data'
 import { bookTicketApi, checkoutTicketApi } from '../../api/bookTicket'
 import { ratingApi } from '../../api/rating'
-import { getPromotionsApi , getPromotionApi} from '../../api/promotion'
+import { getPromotionsApi , getPromotionApi, postPromotionApi} from '../../api/promotion'
 
 export const getFilms = createAsyncThunk(
   'data/getFilms',
@@ -235,6 +235,18 @@ export const getPromotion = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await getPromotionApi(payload)
+      return res.data
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
+
+export const postPromotion = createAsyncThunk(
+  'data/postPromotion',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await postPromotionApi(payload)
       return res.data
     } catch (error) {
       return thunkAPI.rejectWithValue(error)
