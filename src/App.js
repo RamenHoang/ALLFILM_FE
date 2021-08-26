@@ -365,7 +365,7 @@ function App() {
           <div className="black">
             <div className="menu">
               <ul className="flex">
-                <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<p className="menu_tab" onClick={goToFilms} >PHIM</p>|<p className="menu_tab">GÓC ĐIỆN ẢNH</p>|<p className="menu_tab" onClick={goToPromotions}>KHUYẾN MÃI</p>|<p className="menu_tab">HỖ TRỢ</p>|<Link to="/member">THÀNH VIÊN</Link>
+                <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<p className="menu_tab" onClick={goToFilms} >PHIM</p>|<p className="menu_tab" onClick={goToPromotions}>KHUYẾN MÃI</p>|<Link to="/member">THÀNH VIÊN</Link>
               </ul>
             </div>
           </div>

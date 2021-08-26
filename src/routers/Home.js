@@ -3,56 +3,15 @@ import '../css/home.css';
 import '../css/reviewFilm.css';
 import banner from '../img/banner.jpg';
 import banner2 from '../img/banner2.jpg';
-import phim2 from '../img/phim2.jpg';
 import {
   Carousel
 } from 'antd';
-import { StarFilled } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilms, getPromotions } from '../redux/data/actions';
 
 
 import { Link } from 'react-router-dom';
-
-const listReview = [
-  {
-    title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
-    movieName: 'Mortal Kombat',
-    rating: '6.5',
-    content:
-      'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim2.jpg?alt=media&token=14f5caa7-49b1-4bac-980d-bb0307e71651',
-  },
-  {
-    title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
-    movieName: 'Mortal Kombat',
-    rating: '6.5',
-    content:
-      'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim2.jpg?alt=media&token=14f5caa7-49b1-4bac-980d-bb0307e71651',
-  },
-  {
-    title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
-    movieName: 'Mortal Kombat',
-    rating: '6.5',
-    content:
-      'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim2.jpg?alt=media&token=14f5caa7-49b1-4bac-980d-bb0307e71651',
-  },
-  {
-    title: 'Mortal Kombat: Kỹ Xảo Mãn Nhãn Nhưng Liệu Có Xứng Tầm Bom Tấn?',
-    movieName: 'Mortal Kombat',
-    rating: '6.5',
-    content:
-      'tuy vẫn còn nhiều khuyết điểm, nhưng vẫn là một tác phẩm giải trí tốt, đủ đem tới trải nghiệm điện ảnh thú vị và đáng để thưởng thức.',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/film-84edf.appspot.com/o/phim2.jpg?alt=media&token=14f5caa7-49b1-4bac-980d-bb0307e71651',
-  },
-];
 
 const Home = () => {
 
@@ -113,77 +72,6 @@ const Home = () => {
         <a href="/" className="btn secondary fl-right">
           Xem thêm
         </a>
-
-        <div className="review-film flex">
-          <div className="col">
-            <div className="title-block">
-              <a href="/">BÌNH LUẬN PHIM</a>
-            </div>
-            {listReview.map((data, index) => (
-              <article className="block flex" key={`cmt${index}`} >
-                <a href="/">
-                  <div>
-                    <img src={phim2} alt="phim"></img>
-                  </div>
-                </a>
-
-                <div className="movie-thum">
-                  <h5>
-                    <a href="/">
-                      [Review]
-                      {data.title}
-                    </a>
-                  </h5>
-                  <div className="rating">
-                    <StarFilled />
-                    <p className="rateNo">
-                      {data.rating}
-                    </p>/10
-                  </div>
-                  <div className="blog-content hidden-xs">
-                    <p>
-                      <b>
-                        <i>{data.movieName}</i>
-                      </b>{' '}
-                      {data.content}
-                    </p>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="col">
-            <div className="title-block">
-              <a href="/">BLOG ĐIỆN ẢNH</a>
-            </div>
-            {listReview.map((data, index) => (
-              <article className="block flex" key={`blog-${index}`}>
-                <a href="/">
-                  <div>
-                    <img src={phim2} alt="phim"></img>
-                  </div>
-                </a>
-                <div className="movie-thum">
-                  <h5>
-                    <a href="/">
-                      [Review]
-                      {data.title}
-                    </a>
-                  </h5>
-                  <div className="blog-content hidden-xs">
-                    <p>
-                      <b>
-                        <i>{data.movieName}</i>
-                      </b>{' '}
-                      {data.content}
-                    </p>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
 
         <div id="#promotion">
           <div className="title-block">
