@@ -16,7 +16,7 @@ const loadingMsg = (task) => {
 
 const openSuccessMsg = (mess) => {
   const args = {
-    message: 'Chúc mừng!!!',
+    message: 'Chúc mừng!',
     description: mess,
     duration: 5,
   };

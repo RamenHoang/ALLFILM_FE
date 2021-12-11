@@ -18,7 +18,7 @@ const openNotification = (mess) => {
   const args = {
     message: 'Thông tin không hợp lệ!!!',
     description: mess,
-    duration: 3,
+    duration: 5,
   };
 
   notification.warning(args);
@@ -26,9 +26,9 @@ const openNotification = (mess) => {
 
 const openRegisterSuccessMsg = (mess) => {
   const args = {
-    message: 'Đăng kí thành công!!!',
+    message: 'Đăng kí thành công.',
     description: mess,
-    duration: 4,
+    duration: 5,
   };
 
   notification.success(args);
@@ -38,7 +38,7 @@ const openLoginSuccessMsg = (mess) => {
   const args = {
     message: 'Đăng nhập thành công.',
     description: `Chào mừng ${mess} đến với AllFilms. Chúc ${mess} một ngày tốt lành!!!`,
-    duration: 3,
+    duration: 5,
   };
 
   notification.success(args);
