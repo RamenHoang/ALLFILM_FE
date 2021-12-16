@@ -129,7 +129,6 @@ function App() {
 
     const username = document.getElementById("register").username.value;
     const password = document.getElementById("register").password.value;
-    const name = document.getElementById("register").name.value;
     const fullname = document.getElementById("register").fullname.value;
     const email = document.getElementById("register").email.value;
     const phone = document.getElementById("register").phone.value;
@@ -137,7 +136,7 @@ function App() {
     dispatch(register({
       username: username,
       password: password,
-      name: name,
+      name: "test",
       fullname: fullname,
       email: email,
       phone: phone
@@ -181,13 +180,13 @@ function App() {
                     >
                       <Form.Item
                         name="username"
-                        rules={[{ required: true, message: 'Nhập tên người dùng của bạn!' }]}
+                        rules={[{ required: true, message: 'Nhập tên tài khoản của bạn.' }]}
                       >
                         <Input name="username" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                       </Form.Item>
                       <Form.Item
                         name="password"
-                        rules={[{ required: true, message: 'Nhập mật khẩu của bạn!' }]}
+                        rules={[{ required: true, message: 'Nhập mật khẩu của bạn.' }]}
                       >
                         <Input
                           name="password"
@@ -216,6 +215,63 @@ function App() {
                       name="register"
                       scrollToFirstError
                     >
+
+                      <Form.Item
+                        name="username"
+                        label="Tên tài khoản"
+                        tooltip="1 đến 64 ký tự, có thể chứa ký tự chữ, số, - và _"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Nhập tên tài khoản của bạn.',
+                            whitespace: true,
+                          },
+                        ]}
+                      >
+                        <Input name="username" />
+                      </Form.Item>
+
+                      <Form.Item
+                        name="password"
+                        label="Mật khẩu"
+                        tooltip="8 đến 64 kí tự, có thể chứa chữ hoa, chữ thường và số"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Nhập mật khẩu của bạn.',
+                          },
+                        ]}
+                        hasFeedback
+                      >
+                        <Input.Password name="password" />
+                      </Form.Item>
+
+                      <Form.Item
+                        name="confirm"
+                        label="Xác nhận lại mật khẩu"                        
+                        tooltip="Nhập lại mật khẩu một lần nữa để xác nhận."
+                        dependencies={['password']}
+                        hasFeedback
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Hãy xác nhận lại mật khẩu.',
+                          },
+                          ({ getFieldValue }) => ({
+                            validator(_, value) {
+                              if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                              }
+
+                              return Promise.reject(new Error('Xác nhận mật khẩu chưa chính xác, vui lòng nhập lại!'));
+                            },
+                          }),
+                        ]}
+                      >
+                        <Input.Password />
+                      </Form.Item>
+
+                      
                       <Form.Item
                         name="email"
                         label="E-mail"
@@ -234,85 +290,18 @@ function App() {
                       </Form.Item>
 
                       <Form.Item
-                        name="password"
-                        label="Mật khẩu"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Nhập mật khẩu của bạn!',
-                          },
-                        ]}
-                        hasFeedback
-                      >
-                        <Input.Password name="password" />
-                      </Form.Item>
-
-                      <Form.Item
-                        name="confirm"
-                        label="Xác nhận lại"
-                        dependencies={['password']}
-                        hasFeedback
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Hãy xác nhận lại mật khẩu!',
-                          },
-                          ({ getFieldValue }) => ({
-                            validator(_, value) {
-                              if (!value || getFieldValue('password') === value) {
-                                return Promise.resolve();
-                              }
-
-                              return Promise.reject(new Error('Mật khẩu xác nhận lại không trùng khớp!!!'));
-                            },
-                          }),
-                        ]}
-                      >
-                        <Input.Password />
-                      </Form.Item>
-
-                      <Form.Item
-                        name="username"
-                        label="Tên người dùng"
-                        tooltip="Tên dùng cho đăng nhập."
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Hãy nhập tên người dùng của bạn!',
-                            whitespace: true,
-                          },
-                        ]}
-                      >
-                        <Input name="username" />
-                      </Form.Item>
-
-                      <Form.Item
                         name="fullname"
-                        label="Họ tên"
+                        label="Họ tên"                        
+                        tooltip="Nhập họ tên của bạn (từ 1 đến 255 ký tự)."
                         rules={[
                           {
                             required: true,
-                            message: 'Hãy nhập họ tên đầy đủ của bạn!',
+                            message: 'Hãy nhập họ tên đầy đủ của bạn.',
                             whitespace: true,
                           },
                         ]}
                       >
                         <Input name="fullname" />
-                      </Form.Item>
-
-                      <Form.Item
-                        name="name"
-                        label="Biệt danh"
-                        tooltip="Mọi người thường gọi bạn là gì?"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Hãy nhập biệt danh của bạn!',
-                            whitespace: true,
-                          },
-                        ]}
-                      >
-                        <Input name="name" />
                       </Form.Item>
 
                       <Form.Item
@@ -330,10 +319,6 @@ function App() {
                             width: '100%',
                           }}
                         />
-                      </Form.Item>
-
-                      <Form.Item name="date-picker" label="Ngày sinh" {...config}>
-                        <DatePicker placeholder="Chọn ngày sinh" />
                       </Form.Item>
 
                       <Form.Item>
