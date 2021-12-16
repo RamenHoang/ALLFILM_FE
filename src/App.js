@@ -182,8 +182,9 @@ function App() {
                         name="username"
                         rules={[{ required: true, message: 'Nhập tên tài khoản của bạn.' }]}
                       >
-                        <Input name="username" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                        <Input name="username" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Nhập tên người dùng." />
                       </Form.Item>
+
                       <Form.Item
                         name="password"
                         rules={[{ required: true, message: 'Nhập mật khẩu của bạn.' }]}
@@ -192,7 +193,7 @@ function App() {
                           name="password"
                           prefix={<LockOutlined className="site-form-item-icon" />}
                           type="password"
-                          placeholder="Password"
+                          placeholder="Nhập mật khẩu của bạn."
                         />
                       </Form.Item>
                       <Form.Item>
@@ -306,7 +307,8 @@ function App() {
 
                       <Form.Item
                         name="phone"
-                        label="Số điện thoại"
+                        label="Số điện thoại"                        
+                        tooltip="Bao gồm 10 ký tự số."
                         rules={[
                           {
                             required: true,
