@@ -16,7 +16,7 @@ import Promotion from './routers/Promotion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import {
-  Modal, Form, Input, Button, Checkbox, Tabs, DatePicker
+  Modal, Form, Input, Button, Checkbox, Tabs
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
@@ -36,8 +36,9 @@ function App() {
   const username = useSelector(state => state.token.username);
   const listSearch = useSelector(state => state.data.listSearch);
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [form] = Form.useForm();
+  const [isModalVisible, setIsModalVisible] = useState(false);  
+  const [formLogin] = Form.useForm();
+  const [formRegister] = Form.useForm();
   const { TabPane } = Tabs;
   const [isModalConfirmVisible, setIsModalConfirmVisible] = useState(false);
 
@@ -85,16 +86,6 @@ function App() {
       promotions.scrollIntoView({ behavior: 'smooth' });
     });
   } 
-  
-  const config = {
-    rules: [
-      {
-        type: 'object',
-        required: false,
-        message: 'Please select time!'
-      }
-    ]
-  };
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -112,6 +103,15 @@ function App() {
     console.log(key);
   }
 
+  const loginCheck = async () => {
+    try {
+      await formLogin.validateFields();
+      loginClick();
+    } catch (errorInfo) {
+      console.log('Failed:', errorInfo);
+    }
+  };
+
   const loginClick = () => {
 
     const name = document.getElementById("normal_login").username.value;
@@ -124,6 +124,15 @@ function App() {
 
     closeModal();
   }
+
+  const registerCheck = async () => {
+    try {
+      await formRegister.validateFields();
+      registerClick();
+    } catch (errorInfo) {
+      console.log('Failed:', errorInfo);
+    }
+  };
 
   const registerClick = () => {
 
@@ -174,20 +183,30 @@ function App() {
                 <Tabs defaultActiveKey="1" onChange={callback}>
                   <TabPane tab="Đăng nhập" key="1">
                     <Form
+                      form={formLogin}
                       name="normal_login"
                       className="login-form"
                       initialValues={{ remember: true }}
                     >
                       <Form.Item
                         name="username"
-                        rules={[{ required: true, message: 'Nhập tên tài khoản của bạn.' }]}
+                        rules={[{ 
+                          required: true, 
+                          message: 'Vui lòng nhập tên tài khoản của bạn.',
+                          whitespace: true, }]}
                       >
                         <Input name="username" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Nhập tên người dùng." />
                       </Form.Item>
 
                       <Form.Item
                         name="password"
-                        rules={[{ required: true, message: 'Nhập mật khẩu của bạn.' }]}
+                        tooltip="8 đến 64 kí tự, có thể chứa chữ hoa, chữ thường và số"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Vui lòng nhập mật khẩu của bạn.',
+                          },
+                        ]}
                       >
                         <Input
                           name="password"
@@ -196,15 +215,16 @@ function App() {
                           placeholder="Nhập mật khẩu của bạn."
                         />
                       </Form.Item>
+
                       <Form.Item>
                         <Form.Item name="remember" valuePropName="checked" noStyle>
-                          <Checkbox name="remember">Ghi nhớ tài khoản này</Checkbox>
+                          <Checkbox name="remember" >Ghi nhớ tài khoản này</Checkbox>
                         </Form.Item>
                       </Form.Item>
 
                       <Form.Item>
                         <Button type="primary" className="login-form-button"
-                          onClick={loginClick}>
+                          onClick={loginCheck}>
                           Đăng nhập
                         </Button>
                       </Form.Item>
@@ -212,7 +232,7 @@ function App() {
                   </TabPane>
                   <TabPane tab="Đăng ký" key="2">
                     <Form
-                      form={form}
+                      form={formRegister}
                       name="register"
                       scrollToFirstError
                     >
@@ -224,7 +244,7 @@ function App() {
                         rules={[
                           {
                             required: true,
-                            message: 'Nhập tên tài khoản của bạn.',
+                            message: 'Vui lòng nhập tên tài khoản của bạn.',
                             whitespace: true,
                           },
                         ]}
@@ -239,10 +259,9 @@ function App() {
                         rules={[
                           {
                             required: true,
-                            message: 'Nhập mật khẩu của bạn.',
+                            message: 'Vui lòng nhập mật khẩu của bạn.',
                           },
-                        ]}
-                        hasFeedback
+                        ]}                        
                       >
                         <Input.Password name="password" />
                       </Form.Item>
@@ -256,14 +275,13 @@ function App() {
                         rules={[
                           {
                             required: true,
-                            message: 'Hãy xác nhận lại mật khẩu.',
+                            message: 'Vui lòng xác nhận lại mật khẩu.',
                           },
                           ({ getFieldValue }) => ({
                             validator(_, value) {
                               if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                               }
-
                               return Promise.reject(new Error('Xác nhận mật khẩu chưa chính xác, vui lòng nhập lại!'));
                             },
                           }),
@@ -283,7 +301,7 @@ function App() {
                           },
                           {
                             required: true,
-                            message: 'Nhập E-mail của bạn!',
+                            message: 'Vui lòng nhập E-mail của bạn.',
                           },
                         ]}
                       >
@@ -297,7 +315,7 @@ function App() {
                         rules={[
                           {
                             required: true,
-                            message: 'Hãy nhập họ tên đầy đủ của bạn.',
+                            message: 'Vui lòng nhập họ tên đầy đủ của bạn.',
                             whitespace: true,
                           },
                         ]}
@@ -312,7 +330,8 @@ function App() {
                         rules={[
                           {
                             required: true,
-                            message: 'Hãy nhập số điện thoại của bạn!',
+                            message: 'Vui lòng nhập số điện thoại của bạn.',
+                            whitespace: true,
                           },
                         ]}
                       >
@@ -324,7 +343,7 @@ function App() {
                       </Form.Item>
 
                       <Form.Item>
-                        <Button type="primary" onClick={registerClick}>
+                        <Button type="primary" onClick={registerCheck}>
                           Đăng ký
                         </Button>
                       </Form.Item>
