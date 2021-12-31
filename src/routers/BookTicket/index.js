@@ -24,7 +24,7 @@ const BookTicket = () => {
   const token = useSelector(state => state.token.token)
 
   const [step, setStep] = useState('1')
-  const [sum, setSum] = useState('0')
+  const [sum, setSum] = useState(0)
   const [countTicket, setCountTicket] = useState(0)
   const [foodDrinks, setFoodDrinks] = useState([])
 
@@ -151,7 +151,7 @@ const BookTicket = () => {
 
         history.push("bookSS")
 
-        setStep(3)
+        setStep('3')
       }
       else {
         alert("Vui lòng chọn đủ chỗ ngồi tương ứng với số vé đã chọn để chuyển sang bước tiếp theo!")
