@@ -26,7 +26,7 @@ const InfoUser = () => {
   useEffect(() => {
     dispatch(getUserInfo(params));
     dispatch(getFilms());
-  });
+  }, []);
 
   const changeInfo = () => {
     let params = {
