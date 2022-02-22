@@ -117,6 +117,9 @@ const BookTicket = () => {
       if (countTicket === 0 ) {
         alert("Vui lòng chọn mua ít nhất 1 vé để chuyển sang bước tiếp theo")
       }
+      else if (countTicket >= 10 ) {
+        alert("Số lượng tối đa cho mỗi loại vé là 10, vui lòng kiểm tra và nhập lại")
+      }
       else {
         setTimeout(displayMap, 500);
         setStep('2')
