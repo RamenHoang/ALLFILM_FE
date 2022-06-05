@@ -343,7 +343,7 @@ const BuyTicket = () => {
                     </Select>
                 </TabPane>
             </Tabs>
-            <a href="/bookTicket" className="btn fl-right">
+            <a href="/book-ticket" className="btn fl-right">
                 MUA VÉ
             </a>
         </div>

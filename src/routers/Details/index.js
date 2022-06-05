@@ -204,7 +204,7 @@ const Details = () => {
                   <p>2D-Phụ đề</p>
                   {data.Sessions.map((data, index) => (
 
-                    <Link to={`/bookTicket/${data.id}`}><Button>{data.startTime}</Button></Link>
+                    <Link to={`/book-ticket/${data.id}`}><Button>{data.startTime}</Button></Link>
                   ))}
                 </div>
               </div>
