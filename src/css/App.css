@@ -22,7 +22,7 @@ a {
 .flex {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .upper {
@@ -114,8 +114,7 @@ a {
   list-style: none;
   color: white;
   line-height: 50px;
-  padding: 0;
-  width: 1300px;
+  padding: 0; 
   margin: auto;
 }
 

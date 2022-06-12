@@ -371,7 +371,7 @@ function App() {
           <div className="black">
             <div className="menu">
               <ul className="flex">
-                <Link to="/">HOME</Link>|<Link to="/selectTicket">MUA VÉ</Link>|<p className="menu_tab" onClick={goToFilms} >PHIM</p>|<p className="menu_tab" onClick={goToPromotions}>KHUYẾN MÃI</p>|<Link to="/member">THÀNH VIÊN</Link>
+                <Link to="/">HOME</Link>|<Link to="/select-ticket">MUA VÉ</Link>|<p className="menu_tab" onClick={goToFilms} >PHIM</p>|<p className="menu_tab" onClick={goToPromotions}>KHUYẾN MÃI</p>|<Link to="/member">THÀNH VIÊN</Link>
               </ul>
             </div>
           </div>
@@ -381,9 +381,9 @@ function App() {
           <Route path="/details/:id" component={Details}></Route>
           <Route path="/actor/:id" component={Actor}></Route>
           <Route path="/director/:id" component={Diretor}></Route>
-          <Route path="/bookTicket/bookSS" exact component={BookSS}></Route>
-          <PrivateRoute path="/bookTicket/:id" exact component={BookTicket}></PrivateRoute>
-          <Route path="/selectTicket" component={SelectTicket}></Route>
+          <Route path="/book-ticket/book-session" exact component={BookSS}></Route>
+          <PrivateRoute path="/book-ticket/:id" exact component={BookTicket}></PrivateRoute>
+          <Route path="/select-ticket" component={SelectTicket}></Route>
           <Route path="/test" component={SelectFilm}></Route>
           <PrivateRoute path="/member" exact component={InfoUser}></PrivateRoute>
           <PrivateRoute path="/promotion/:id" exact component={Promotion}></PrivateRoute>

@@ -27,7 +27,7 @@ const SelectSection = () => {
                   <label>2D -  Phụ đề</label>
                   <div className="time">
                     {listSS[key].map((data, index) => (
-                      <Link to={`/bookTicket/${data.id}`}><Button>{data.startTime.substring(11, 16)}</Button></Link>
+                      <Link to={`/book-ticket/${data.id}`}><Button>{data.startTime.substring(11, 16)}</Button></Link>
                     ))}
                   </div>
                 </div>

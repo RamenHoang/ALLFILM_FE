@@ -33,7 +33,7 @@ const BookTicket = () => {
   useEffect(() => {
     dispatch(getDetailSession(id))
     dispatch(getCategory())
-    dispatch(getFilm(detailSession.filmId))
+    dispatch(getFilm(filmId))
   }, [filmId])
 
   const [fdStr, setFdStr] = useState("")
