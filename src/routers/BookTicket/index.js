@@ -152,7 +152,7 @@ const BookTicket = () => {
         }
         dispatch(bookTicket(params))
 
-        history.push("bookSS")
+        history.push("book-session")
 
         setStep('3')
       }
