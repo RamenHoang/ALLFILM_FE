@@ -66,6 +66,26 @@ h3 {
     .tr-sum{
       color: #f26b38;
     }
+
+    .recovery-booking-film-image-and-name-container {
+      display: flex;
+    }
+
+    .recovery-booking-film-image {
+      width: 5rem;
+    }
+
+    .recovery-booking-film-name {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      margin-left: 5px;
+    }
+
+    .recovery-booking-table-row:hover {
+      background-color: #fdd0bf;
+      transition: 0.3s;
+    }
   }
 
   .content {

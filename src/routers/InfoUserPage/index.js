@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { DetailsWrapper } from './styles';
 import {
   Breadcrumb,
-  Tabs
+  Tabs,
+  Image
 } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -126,13 +127,33 @@ const InfoUser = () => {
             </div>
 
             <table>
-              <tr><th>Thời gian</th><th>Rạp</th><th>Phim</th><th>Tổng tiền</th></tr>
+              <tr>
+                <th>Xuất chiếu</th>
+                <th>Rạp</th>
+                <th>Phim</th>
+                <th>Ghế</th>
+                <th>Đồ ăn/ Thức uống</th>
+                <th>Tổng tiền</th>
+              </tr>
 
               {bookingInfo.map((data, index) => (
-                <tr key={`bookinfo-${index}`}>
+                <tr key={`bookinfo-${index}`} className='recovery-booking-table-row'>
                   <td>{data?.Session?.startTime}</td>
                   <td>{data?.Session?.Cinema?.address}</td>
-                  <td>{data?.Session?.Film?.name}</td>
+                  <td className='recovery-booking-film-image-and-name-container'>
+                    <Image
+                      src={data?.Session?.Film?.poster}
+                      alt={data?.Session?.Film?.name}
+                      className='recovery-booking-film-image'
+                    />
+                    <p className='recovery-booking-film-name'>{data?.Session?.Film?.name}</p>
+                  </td>
+                  <td>{data?.seats}</td>
+                  <td>
+                    <ul>
+                    {data?.FoodDrinks.map(foodDrink => <li>{foodDrink?.name} x {foodDrink?.BookFoodDrink.count}</li>)}
+                    </ul>
+                  </td>
                   <td>{data.fee}</td>
                 </tr>
               ))}
