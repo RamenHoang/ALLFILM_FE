@@ -7,7 +7,7 @@ import {
 } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilms, getUserInfo, editUserInfo, getUserBookingInfo } from '../../redux/data/actions';
+import { getFilms, getUserInfo, editUserInfo, getUserBookingInfo, requestCancelBooking, checkoutTicket } from '../../redux/data/actions';
 import { Link } from 'react-router-dom';
 
 const InfoUser = () => {
@@ -17,6 +17,7 @@ const InfoUser = () => {
   const userInfo = useSelector(state => state.data.userInfo)
   const listFilms = useSelector(state => state.data.films)
   const bookingInfo = useSelector(state => state.data.userBookingInfo)
+  const bookingRequestedRefund = useSelector(state => state.data.bookingRequestedRefund)
 
   let params = {
     headers: {
@@ -66,6 +67,30 @@ const InfoUser = () => {
     else {
       alert("Vui lòng chọn thời gian!!!")
     }
+  }
+
+  const requestCancelBookingHandler = (e) => {
+    const self = e.target;
+
+    let params = {
+      headers: {
+        'accept': 'application/json',
+        'Authorization': `Bearer ${token.access_token}`
+      },
+      bookingId: self.getAttribute('data-booking-id'),
+    };
+
+    dispatch(requestCancelBooking(params));
+  }
+
+  const checkout = (e) => {
+    let params = {
+      id: e.target.getAttribute('data-booking-id'),
+      headers: {
+        'Authorization': `Bearer ${token.access_token}`
+      }
+    }
+    dispatch(checkoutTicket(params))
   }
 
   return (
@@ -133,11 +158,12 @@ const InfoUser = () => {
                 <th>Phim</th>
                 <th>Ghế</th>
                 <th>Đồ ăn/ Thức uống</th>
-                <th>Tổng tiền</th>
+                <th>Tổng tiền (VNĐ)</th>
+                <th></th>
               </tr>
 
               {bookingInfo.map((data, index) => (
-                <tr key={`bookinfo-${index}`} className='recovery-booking-table-row'>
+                <tr key={`bookinfo-${index}`} className='recovery-booking-table-row' data-booking-id={data.id}>
                   <td>{data?.Session?.startTime}</td>
                   <td>{data?.Session?.Cinema?.address}</td>
                   <td className='recovery-booking-film-image-and-name-container'>
@@ -155,6 +181,69 @@ const InfoUser = () => {
                     </ul>
                   </td>
                   <td>{data.fee}</td>
+                  <td>
+                    {(() => {
+                      if (data?.BookingPayments[data?.BookingPayments.length - 1]?.status === 'O') {
+                        return (
+                          <span className="btn change" data-booking-id={data.id} onClick={checkout}>
+                            Thanh toán
+                          </span>
+                        );
+                      }
+
+                      if (data?.BookingPayments[data?.BookingPayments.length - 1]?.status === 'P') {
+                        if (bookingRequestedRefund && Object.keys(bookingRequestedRefund).length === 0 && data?.canCancel) {
+                          return (
+                            <span className="btn change" data-booking-id={data.id} onClick={requestCancelBookingHandler}>
+                              Hủy vé
+                            </span>
+                          );
+                        }
+
+                        if (bookingRequestedRefund && Object.keys(bookingRequestedRefund).length && data?.canCancel) {
+                          return (
+                            <span className="btn-info btn-cursor-default">
+                              Chờ hủy vé
+                            </span>
+                          );
+                        }
+
+                        if (!data?.canCancel) {
+                          return (
+                            <span className="btn-success btn-cursor-default">
+                              Đã thanh toán
+                            </span>
+                          );
+                        }
+
+                        return '';
+                      }
+
+                      if (data?.BookingPayments[data?.BookingPayments.length - 1]?.status === 'R') {
+                        if (!data?.canCancel) {
+                          return (
+                            <span className="btn-success btn-cursor-default">
+                              Đã thanh toán
+                            </span>
+                          );
+                        }
+
+                        return (
+                          <span className="btn-info btn-cursor-default">
+                            Chờ hủy vé
+                          </span>
+                        );
+                      }
+
+                      if (data?.BookingPayments[data?.BookingPayments.length - 1]?.status === 'S') {
+                        return (
+                          <span className="btn-primary btn-cursor-default">
+                            Đã hủy vé
+                          </span>
+                        );
+                      }
+                    })()}
+                  </td>
                 </tr>
               ))}
             </table>

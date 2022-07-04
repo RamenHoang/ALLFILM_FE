@@ -7,7 +7,7 @@ import {
   getUserInfoApi, editUserInfoApi, getUserBookingInfoApi,
   searchFilmApi
 } from '../../api/data'
-import { bookTicketApi, checkoutTicketApi } from '../../api/bookTicket'
+import { bookTicketApi, checkoutTicketApi, requestCancelBookingAPI } from '../../api/bookTicket'
 import { ratingApi } from '../../api/rating'
 import { getPromotionsApi , getPromotionApi, postPromotionApi} from '../../api/promotion'
 
@@ -199,6 +199,18 @@ export const getUserBookingInfo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await getUserBookingInfoApi(payload) 
+      return res.data
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error) 
+    }
+  }
+) 
+
+export const requestCancelBooking = createAsyncThunk(
+  'data/requestCancelBooking',
+  async (payload, thunkAPI) => {
+    try {
+      const res = await requestCancelBookingAPI(payload)
       return res.data
     } catch (error) {
       return thunkAPI.rejectWithValue(error) 

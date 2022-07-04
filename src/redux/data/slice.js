@@ -5,7 +5,8 @@ import {
   getCinema, getSession_BaseFC, bookTicket, checkoutTicket,
   getActor, getDirector, getUserInfo, editUserInfo, getUserBookingInfo,
   postRating,
-  searchFilm, getPromotion, getPromotions, postPromotion
+  searchFilm, getPromotion, getPromotions, postPromotion,
+  requestCancelBooking
 } from './actions'
 import { message, notification} from 'antd';
 
@@ -58,7 +59,8 @@ export const initialState = {
   userInfo: {},
   userBookingInfo: [],
   promotions: [],
-  promotion: {}
+  promotion: {},
+  bookingRequestedRefund: {}
 }
 
 export const { reducer, actions } = createSlice({
@@ -179,6 +181,19 @@ export const { reducer, actions } = createSlice({
       loadingMsg("lấy thông tin vé")
     },
     [bookTicket.rejected]: (state, { payload }) => {
+      state.error = payload
+      hide()
+      readError(payload, openNotification)
+    },
+
+    [requestCancelBooking.fulfilled]: (state, { payload }) => {
+      state.bookingRequestedRefund = payload
+      hide()
+    },
+    [requestCancelBooking.pending]: state => {
+      loadingMsg("Đang xử lý yêu cầu hủy vé")
+    },
+    [requestCancelBooking.rejected]: (state, { payload }) => {
       state.error = payload
       hide()
       readError(payload, openNotification)

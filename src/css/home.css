@@ -156,6 +156,43 @@
     cursor: pointer;
 }
 
+.btn-primary {
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 5px;
+    color: #ffffff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.btn-info {
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 5px;
+    color: #000000;
+    background-color: #d9edf7;
+    border-color: #d9edf7;
+}
+
+.btn-success {
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 5px;
+    color: #ffffff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-cursor-default {
+    cursor: default;
+}
+
 .fl-right {
     float: right;
 }
