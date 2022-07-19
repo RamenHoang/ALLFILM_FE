@@ -153,6 +153,7 @@ const InfoUser = () => {
 
             <table>
               <tr>
+                <th width="100px">Mã số vé</th>
                 <th>Xuất chiếu</th>
                 <th>Rạp</th>
                 <th>Phim</th>
@@ -164,6 +165,7 @@ const InfoUser = () => {
 
               {bookingInfo.map((data, index) => (
                 <tr key={`bookinfo-${index}`} className='recovery-booking-table-row' data-booking-id={data.id}>
+                  <td>{data?.id}</td>
                   <td>{data?.Session?.startTime}</td>
                   <td>{data?.Session?.Cinema?.address}</td>
                   <td className='recovery-booking-film-image-and-name-container'>
@@ -180,7 +182,7 @@ const InfoUser = () => {
                     {data?.FoodDrinks.map(foodDrink => <li>{foodDrink?.name} x {foodDrink?.BookFoodDrink.count}</li>)}
                     </ul>
                   </td>
-                  <td>{data.fee}</td>
+                  <td>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.fee)}</td>
                   <td>
                     {(() => {
                       if (data?.BookingPayments[data?.BookingPayments.length - 1]?.status === 'O') {
