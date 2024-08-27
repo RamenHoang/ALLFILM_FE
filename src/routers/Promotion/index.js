@@ -48,7 +48,7 @@ const Promotion = () => {
             <Button onClick={() => { history.goBack() }}> Quay lại </Button>
           </div>
         </div>
-        <RightPanel></RightPanel>
+        {/* <RightPanel></RightPanel> */}
       </div>
     </PromotionWrapper>
   );

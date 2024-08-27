@@ -194,53 +194,9 @@ const InfoUser = () => {
                       }
 
                       if (data?.BookingPayments[data?.BookingPayments.length - 1]?.status === 'P') {
-                        if (bookingRequestedRefund && Object.keys(bookingRequestedRefund).length === 0 && data?.canCancel) {
-                          return (
-                            <span className="btn change" data-booking-id={data.id} onClick={requestCancelBookingHandler}>
-                              Hủy vé
-                            </span>
-                          );
-                        }
-
-                        if (bookingRequestedRefund && Object.keys(bookingRequestedRefund).length && data?.canCancel) {
-                          return (
-                            <span className="btn-info btn-cursor-default">
-                              Chờ hủy vé
-                            </span>
-                          );
-                        }
-
-                        if (!data?.canCancel) {
-                          return (
-                            <span className="btn-success btn-cursor-default">
-                              Đã thanh toán
-                            </span>
-                          );
-                        }
-
-                        return '';
-                      }
-
-                      if (data?.BookingPayments[data?.BookingPayments.length - 1]?.status === 'R') {
-                        if (!data?.canCancel) {
-                          return (
-                            <span className="btn-success btn-cursor-default">
-                              Đã thanh toán
-                            </span>
-                          );
-                        }
-
                         return (
-                          <span className="btn-info btn-cursor-default">
-                            Chờ hủy vé
-                          </span>
-                        );
-                      }
-
-                      if (data?.BookingPayments[data?.BookingPayments.length - 1]?.status === 'S') {
-                        return (
-                          <span className="btn-primary btn-cursor-default">
-                            Đã hủy vé
+                          <span className="btn-success btn-cursor-default">
+                            Đã thanh toán
                           </span>
                         );
                       }
@@ -284,9 +240,9 @@ const InfoUser = () => {
         </TabPane>
       </Tabs>
 
-      <div className="tabs" id="#phim">
+      {/* <div className="tabs" id="#phim">
         <Link to="/">PHIM ĐANG CHIẾU</Link>
-      </div>
+      </div> */}
 
       <div className="list_films flex upper">
         {listFilms.map((data, index) => (

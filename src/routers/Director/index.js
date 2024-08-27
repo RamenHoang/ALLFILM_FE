@@ -68,7 +68,7 @@ const Director = () => {
             <Button onClick={() => { history.goBack() }}> Quay lại </Button>
           </div>
         </div>
-        <RightPanel></RightPanel>
+        {/* <RightPanel></RightPanel> */}
       </div>
     </DirectorWrapper>
   );

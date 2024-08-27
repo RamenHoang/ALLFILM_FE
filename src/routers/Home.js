@@ -47,10 +47,10 @@ const Home = () => {
       </div>
 
       <div className="container">
-        <div className="tabs" id="#phim">
+        {/* <div className="tabs" id="#phim">
           <a href="/">PHIM ĐANG CHIẾU</a>
           <a href="/">PHIM SẮP CHIẾU</a>
-        </div>
+        </div> */}
 
         <div className="list_films flex upper">
           {listFilms.map((data, index) => (
@@ -69,13 +69,13 @@ const Home = () => {
         </div>
         {/* end list film */}
 
-        <a href="/" className="btn secondary fl-right">
+        {/* <a href="/" className="btn secondary fl-right">
           Xem thêm
-        </a>
+        </a> */}
 
         <div id="#promotion">
           <div className="title-block">
-            <a href="/">TIN KHUYẾN MÃI</a>
+            {/* <a href="/">TIN KHUYẾN MÃI</a> */}
           </div>
           <div className="flex no-space-between">
             {listPromotions.map((data, index) => (

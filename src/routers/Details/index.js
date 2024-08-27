@@ -87,7 +87,7 @@ const Details = () => {
           <Link to="/">Trang chủ</Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          <Link to="/selectTicket">Đặt vé</Link>
+          <Link to="/select-ticket">Đặt vé</Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item>{film.name}</Breadcrumb.Item>
       </Breadcrumb>
@@ -212,7 +212,7 @@ const Details = () => {
           </div>
         </div>
 
-        <RightPanel></RightPanel>
+        {/* <RightPanel></RightPanel> */}
         
       </div>
     </DetailsWrapper>

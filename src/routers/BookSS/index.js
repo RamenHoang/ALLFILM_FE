@@ -76,7 +76,7 @@ const BookSS = () => {
             </div>
           }
         </div>
-        <RightPanel></RightPanel>
+        {/* <RightPanel></RightPanel> */}
       </div>
     </BookSSWrapper >
   );

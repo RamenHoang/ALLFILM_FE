@@ -19,7 +19,7 @@ const SelectSection = () => {
         </h4>
 
         {
-          Object.keys(listSS)?.map(key => {
+          listSS !== undefined ? Object.keys(listSS)?.map(key => {
             return (
               <div className='item'>
                 <p>{key}</p>
@@ -33,7 +33,11 @@ const SelectSection = () => {
                 </div>
               </div>
             )
-          })
+          }) : (
+            <div className='item'>
+                <p>Hiện tại không có suất chiếu cho phim này</p>
+              </div>
+          )
         }
 
       </div>
